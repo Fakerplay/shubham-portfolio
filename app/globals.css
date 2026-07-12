@@ -1,26 +1,136 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@font-face {
+  font-family: 'Exposure';
+  src: local('Exposure Trial VAR'), local('ExposureTrialVAR'), local('Exposure Trial'), local('Exposure'), url('/fonts/ExposureTrialVAR.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Exposure';
+  src: local('Exposure Trial VAR Italic'), local('ExposureTrialVAR-Italic'), local('Exposure Trial Italic'), local('Exposure Italic'), url('/fonts/ExposureTrialVAR-Italic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Exposure", "Exposure Trial VAR", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-serif: "Exposure", "Exposure Trial VAR", Georgia, serif;
+  --font-mono: "Exposure", "Exposure Trial VAR", monospace;
+  --color-background: var(--theme-bg);
+  --color-foreground: var(--theme-text);
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --theme-bg: #F9F9F9;
+  --theme-text: #111111;
+  --font-serif: "Exposure", "Exposure Trial VAR", Georgia, serif;
+  --font-sans: "Exposure", "Exposure Trial VAR", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: "Exposure", "Exposure Trial VAR", monospace;
+  --theme-bg-gradient: none;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root[data-theme="auto"] {
+  --theme-bg: #F9F9F9;
+  --theme-text: #111111;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root[data-theme="morning"] {
+  --theme-bg: #FFFFFF;
+  --theme-text: #2D2A26;
+}
+
+:root[data-theme="day"] {
+  --theme-bg: #FFFFFF;
+  --theme-text: #111111;
+}
+
+:root[data-theme="evening"] {
+  --theme-bg: #E2B5A9;
+  --theme-text: #2D1A19;
+  --theme-bg-gradient: linear-gradient(180deg, #C4A9C8 0%, #E2B5A9 50%, #F7D6C0 100%);
+}
+
+
+:root[data-theme="night"] {
+  --theme-bg: #0b101c;
+  --theme-text: #F9F9F9;
+}
+
+:root[data-theme="aurora"] {
+  --theme-bg: #020706;
+  --theme-text: #e8f5f1;
+}
+
+:root[data-theme="neon"] {
+  --theme-bg: #0c0214;
+  --theme-text: #f7e8f5;
+}
+
+:root[data-theme="matcha"] {
+  --theme-bg: #b8c4bc;
+  --theme-text: #202c25;
+}
+
+
+html {
+  background-color: var(--theme-bg);
+  background-image: var(--theme-bg-gradient);
+  background-attachment: fixed;
+  transition: background-color 0.5s ease;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: transparent;
+  color: var(--theme-text);
+  transition: color 0.5s ease;
 }
+
+@keyframes wobble {
+  0%, 100% {
+    filter: url(#wobble-f1);
+  }
+  25% {
+    filter: url(#wobble-f2);
+  }
+  50% {
+    filter: url(#wobble-f3);
+  }
+  75% {
+    filter: url(#wobble-f4);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* app/page.tsx sets this to opacity-0 to avoid a flash before its GSAP
+     reveal runs, but skips that reveal entirely for reduced-motion users
+     (their motion effect returns early) — force it visible here so content
+     is never left permanently hidden regardless of JS timing. */
+  .featured-project-card {
+    opacity: 1 !important;
+  }
+}
+
