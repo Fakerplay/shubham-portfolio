@@ -119,6 +119,17 @@ This line should replace generic closing language where it fits the existing com
 - Keep metadata natural and factual; do not keyword-stuff or add unverifiable seniority claims.
 - The verified experience and project count may appear in the homepage description if the final sentence remains concise and readable.
 
+### SEO and answer-engine clarity
+
+- Write case-study introductions as self-contained factual summaries that identify the client, Shubham's contribution, the type of work, and the verified outcome.
+- Keep important positioning, capabilities, and project evidence available as visible HTML text rather than relying on imagery or animation alone.
+- Use consistent entity information for Shubham's name, location, experience, disciplines, public profiles, and project roles.
+- Ensure structured data reflects visible page copy and never introduces unsupported claims.
+- Use descriptive project headings, image alternatives, captions, and internal-link labels that make their destination understandable out of context.
+- Add first-person ownership language such as `I led` or `I designed` only when the corresponding responsibility is supported by existing project data.
+- Do not add generic FAQ sections, artificial question headings, unsupported schema types, or special AI-targeted files that do not improve the visitor experience.
+- Optimize first for useful, original, people-first evidence. Search and answer-engine clarity should be a consequence of clear factual writing, not repetitive keyword placement.
+
 ## Language to Avoid
 
 Avoid these patterns throughout the visible site:
@@ -156,4 +167,4 @@ Avoid these patterns throughout the visible site:
 
 ## Success Criteria
 
-The finished portfolio should tell a hiring manager that Shubham has senior judgment and multidisciplinary ownership, tell a founder that he can turn an ambitious idea into a coherent brand experience, and give both audiences a clear next action. It should achieve this with fewer clichés, stronger proof, and no loss of the site's tactile personality.
+The finished portfolio should show a hiring manager that Shubham has impeccable judgment and taste, proven experience, and multidisciplinary ownership. It should show a founder that he can turn an ambitious idea into a coherent brand experience, then give both audiences a clear next action. It should achieve this with fewer clichés, stronger proof, clearer search and answer-engine signals, and no loss of the site's tactile personality.
