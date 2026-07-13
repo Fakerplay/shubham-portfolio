@@ -24,48 +24,23 @@ function FullWidthSlot({
   const [hasError, setHasError] = useState(false);
   const src = `/images/${slug}/${filename}`;
 
+  if (hasError) return null;
+
   return (
     <section className="w-full relative group px-6 md:px-[80px]">
       <div className="w-full relative overflow-hidden rounded-[12px] border border-foreground/15 shadow-xl bg-foreground/[0.015]">
-        {!hasError ? (
-          <Image
-            src={src}
-            alt={caption}
-            width={2560}
-            height={1440}
-            priority={priority}
-            quality={100}
-            unoptimized
-            onError={() => setHasError(true)}
-            sizes="(max-width: 768px) 100vw, calc(100vw - 160px)"
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.01]"
-          />
-        ) : (
-          <div className="w-full aspect-[16/9] md:aspect-[21/9] relative p-8 md:p-16 flex flex-col items-center justify-center font-mono text-xs select-all">
-            <div className="max-w-xl w-full border border-dashed border-foreground/25 bg-background/80 backdrop-blur-md rounded-2xl p-8 md:p-12 flex flex-col items-center text-center gap-4 shadow-xl">
-              <span className="font-semibold tracking-widest uppercase text-foreground/45">
-                EXHIBIT {number} / FULL WIDTH VISUAL SPREAD
-              </span>
-              <div className="w-12 h-12 rounded-full border border-foreground/30 flex items-center justify-center text-foreground/50 text-xl font-light">
-                +
-              </div>
-              <div>
-                <h4 className="font-sans font-semibold text-base text-foreground mb-1">
-                  {caption}
-                </h4>
-                <p className="font-sans text-xs text-foreground/60 leading-relaxed">
-                  Drop your full-width image into your project directory on your computer.
-                </p>
-              </div>
-              <div className="bg-foreground/[0.06] text-foreground font-mono text-xs px-3 py-1.5 rounded select-all">
-                {src}
-              </div>
-              <span className="text-[11px] font-sans text-foreground/40 pt-2 border-t border-foreground/10 w-full">
-                Recommended Resolution: 2560 × 1440 px (Widescreen Full Bleed)
-              </span>
-            </div>
-          </div>
-        )}
+        <Image
+          src={src}
+          alt={caption}
+          width={2560}
+          height={1440}
+          priority={priority}
+          quality={100}
+          unoptimized
+          onError={() => setHasError(true)}
+          sizes="(max-width: 768px) 100vw, calc(100vw - 160px)"
+          className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+        />
       </div>
     </section>
   );
