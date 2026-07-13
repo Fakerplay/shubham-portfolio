@@ -179,10 +179,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full relative z-10 border-t border-foreground/15 mt-auto bg-transparent text-foreground transition-colors duration-500 overflow-hidden select-none pt-16 sm:pt-24 pb-8">
-      {/* Exact WebGL Live Hero Light Leak Canvas Background & Noise */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <LightLeakBackground height="100%" mask={false} />
+    <footer className="w-full relative z-10 border-t border-white/10 mt-auto bg-[#020d08] text-[#F5F5F7] overflow-hidden select-none pt-16 sm:pt-24 pb-8 dark">
+      {/* Dark Premium Green Ambient Glow Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#020d08]">
+        {/* Soft, organic radial glows matching the reference images */}
+        <div className="absolute -top-[300px] left-[15%] w-[800px] h-[600px] rounded-full bg-[#053c25]/30 blur-[140px]" />
+        <div className="absolute -bottom-[200px] right-[10%] w-[600px] h-[600px] rounded-full bg-[#032e1d]/40 blur-[120px]" />
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-emerald-950/20 blur-[180px]" />
       </div>
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10 flex flex-col gap-16 md:gap-24">
@@ -258,7 +261,7 @@ export default function Footer() {
                 </div>
 
                 {/* Click Prompt Badge below envelope */}
-                <div className="mt-7 flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-foreground/[0.04] border border-foreground/10 text-foreground/80 font-mono text-xs uppercase tracking-wider group-hover:bg-foreground/[0.08] group-hover:text-foreground transition-colors duration-300 shadow-none">
+                <div className="mt-7 flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-white/[0.04] border border-white/10 text-white/80 font-mono text-xs uppercase tracking-wider group-hover:bg-white/[0.08] group-hover:text-white transition-colors duration-300 shadow-none">
                   <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
                   <span>Click Folder to Unpack 6 Notes</span>
                 </div>
@@ -281,7 +284,7 @@ export default function Footer() {
                 >
                   <button
                     onClick={() => setIsUnpacked(false)}
-                    className="group font-mono text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full backdrop-blur-xl bg-white/[0.12] dark:bg-white/[0.15] border border-white/25 text-foreground hover:border-amber-400 hover:bg-white/20 transition-[background-color,border-color,transform] duration-300 flex items-center gap-2 shadow-sm active:scale-95"
+                    className="group font-mono text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full backdrop-blur-xl bg-white/[0.12] border border-white/25 text-white hover:border-amber-400 hover:bg-white/20 transition-[background-color,border-color,transform] duration-300 flex items-center gap-2 shadow-sm active:scale-95"
                   >
                     <span className="text-amber-500 transform group-hover:rotate-90 transition-transform duration-300">✕</span>
                     <span>Fold Notes Back Into Folder</span>
@@ -326,34 +329,50 @@ export default function Footer() {
                         tabIndex={0}
                         role="article"
                         aria-label={`Editorial note: ${card.text}`}
-                        className={`group relative w-full sm:w-[320px] md:w-[340px] lg:w-[355px] xl:w-[370px] h-[220px] sm:h-[235px] md:h-[245px] rounded-[20px] sm:rounded-[22px] p-6 sm:p-7 flex flex-col justify-between cursor-pointer flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:rotate-0 backdrop-blur-xl bg-white/[0.03] dark:bg-white/[0.035] border border-white/[0.14] dark:border-white/[0.14] overflow-hidden will-change-transform ${
+                        className={`group relative w-full sm:w-[320px] md:w-[340px] lg:w-[355px] xl:w-[370px] h-[270px] sm:h-[290px] md:h-[310px] rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 flex flex-col justify-between cursor-pointer flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-white/30 focus:rotate-0 backdrop-blur-[24px] bg-white/[0.04] border border-white/[0.18] overflow-hidden will-change-transform ${
                           card.desktopMarginClass
-                        } ${isHovered ? "!z-50 shadow-[0_20px_50px_rgba(0,0,0,0.16)] border-white/30" : "shadow-[0_8px_30px_rgba(0,0,0,0.08),_0_2px_8px_rgba(0,0,0,0.04)]"}`}
+                        } ${isHovered ? "!z-50 shadow-[0_24px_60px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.4)] border-white/30" : "shadow-[0_12px_40px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)]"}`}
                         style={{
                           transformOrigin: "center center",
                           zIndex: isHovered ? 50 : card.zIndex,
                         }}
                       >
-                        {/* 1. Subtle, delicate internal bottom aurora leak (Only transitions opacity cleanly on GPU) */}
-                        <div className={`absolute -bottom-12 inset-x-0 h-28 bg-gradient-to-t ${card.gradientClass} opacity-45 group-hover:opacity-85 blur-[24px] pointer-events-none transition-opacity duration-300 ease-out`} />
+                        {/* 1. Subtle, delicate internal bottom ambient glow (Transitions on GPU) */}
+                        <div className={`absolute -bottom-12 inset-x-0 h-28 bg-gradient-to-t ${card.gradientClass} opacity-20 group-hover:opacity-65 blur-[28px] pointer-events-none transition-opacity duration-300 ease-out`} />
 
-                        {/* 2. Delicate top-left corner light catch (Only transitions opacity on GPU) */}
-                        <div className={`absolute -top-10 -left-10 w-32 h-32 rounded-full bg-gradient-to-br ${card.gradientClass} blur-[26px] pointer-events-none opacity-35 group-hover:opacity-75 transition-opacity duration-300 ease-out`} />
+                        {/* 2. SPECULAR GLARE & LIGHT REFLECTION */}
+                        <div className="absolute inset-0 rounded-[24px] sm:rounded-[28px] bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none" />
 
-                        {/* 3. Pin-sharp specular rim & soft diagonal surface reflection */}
-                        <div className="absolute inset-0 rounded-[20px] sm:rounded-[22px] border border-white/[0.18] pointer-events-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),_inset_0_-1px_1px_rgba(255,255,255,0.1)]" />
-                        <div className="absolute inset-0 rounded-[20px] sm:rounded-[22px] bg-gradient-to-tr from-transparent via-white/[0.07] to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none" />
+                        {/* 3. SUBTLE GRID OVERLAY */}
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none rounded-[24px] sm:rounded-[28px]" />
 
-                        {/* Center Main Serif Copy inside Crystal Glass Lens */}
-                        <div className="flex-1 flex items-center justify-center px-1 py-2 relative z-10">
-                          <p className={`font-serif text-xl sm:text-2xl md:text-[25px] font-normal leading-[1.25] text-center tracking-tight text-[#F5F5F7] dark:text-[#F8F8FA] drop-shadow-[0_1px_3px_rgba(0,0,0,0.2)] transition-colors duration-300 ${card.accentTextClass}`}>
+                        {/* 4. Top Row: Label badge & 5x5 dots matrix representation */}
+                        <div className="flex items-center justify-between w-full relative z-10">
+                          <span className="font-mono text-[9px] font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full bg-white/[0.08] text-white/80 border border-white/10">
+                            {card.label}
+                          </span>
+                          <div className="w-5 h-5 flex flex-wrap gap-[3px] content-start justify-end opacity-25">
+                            {Array.from({ length: 9 }).map((_, i) => (
+                              <span key={i} className="w-[3px] h-[3px] rounded-full bg-white" />
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* 5. Center Divider Pattern (Wave-pattern SVG divider matching reference) */}
+                        <div className="w-full relative z-10 my-1 flex items-center justify-center">
+                          <div className="w-full h-3 opacity-20 bg-[repeat-x] bg-center bg-[size:12px_6px] bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 12 6%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221%22%3E%3Cpath d=%22M0 3 C3 0, 3 6, 6 3 C9 0, 9 6, 12 3%22/%3E%3C/svg%3E')]" />
+                        </div>
+
+                        {/* 6. Center Main Content Copy */}
+                        <div className="flex-1 flex flex-col justify-center relative z-10 text-left px-1">
+                          <p className="font-sans font-medium text-[16px] sm:text-[18px] md:text-[20px] leading-[1.35] tracking-tight text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]">
                             {card.text}
                           </p>
                         </div>
 
-                        {/* Bottom Bar: Frosted Feathery Glass Pill */}
-                        <div className="h-8 flex items-end justify-center overflow-hidden relative z-10">
-                          <span className="font-mono text-xs font-semibold uppercase tracking-wider px-3.5 py-1 rounded-full backdrop-blur-md bg-white/[0.08] dark:bg-white/[0.1] border border-white/20 text-[#F5F5F7] flex items-center gap-1.5 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0 transition-[opacity,transform] duration-300 ease-out whitespace-nowrap shadow-none">
+                        {/* 7. Bottom Bar: Reveal Tag */}
+                        <div className="h-8 flex items-end justify-start relative z-10 w-full">
+                          <span className="font-mono text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-white/10 text-white/90 flex items-center gap-1.5 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-[opacity,transform] duration-300 ease-out whitespace-nowrap shadow-none">
                             <span>↳</span>
                             <span>{card.reveal}</span>
                           </span>
@@ -375,27 +394,27 @@ export default function Footer() {
           viewport={{ once: true, margin: "-60px" }}
           className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6"
         >
-          <div className="flex items-center gap-2.5 mb-6 px-3.5 py-1.5 rounded-full border border-foreground/15 bg-foreground/[0.03]">
+          <div className="flex items-center gap-2.5 mb-6 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/[0.03]">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground/70">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-white/70">
               AVAILABLE FOR Q3 / Q4 PROJECTS
             </span>
           </div>
 
-          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-normal tracking-tight text-foreground leading-[1.04]">
+          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-normal tracking-tight text-white leading-[1.04]">
             Let&rsquo;s make something <br className="hidden sm:inline" />
             <span className="italic font-light">clear</span>, memorable, <br className="hidden sm:inline" />
             and hard to ignore.
           </h2>
 
-          <p className="font-sans text-base sm:text-lg md:text-xl text-foreground/75 font-light max-w-2xl mx-auto mt-8 leading-relaxed">
+          <p className="font-sans text-base sm:text-lg md:text-xl text-white/75 font-light max-w-2xl mx-auto mt-8 leading-relaxed">
             Available for brand systems, web experiences, motion-led visuals, and launch assets.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
             <a
               href={`mailto:${email}`}
-              className="px-8 py-4 sm:py-4.5 rounded-full bg-foreground text-background font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] cursor-pointer flex items-center gap-3 shadow-md"
+              className="px-8 py-4 sm:py-4.5 rounded-full bg-white text-[#020d08] font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] cursor-pointer flex items-center gap-3 shadow-md"
             >
               <span>Start a project</span>
               <span>&rarr;</span>
@@ -403,7 +422,7 @@ export default function Footer() {
 
             <Link
               href="/#work"
-              className="px-8 py-4 sm:py-4.5 rounded-full border border-foreground/20 hover:border-foreground text-foreground font-sans font-medium text-sm sm:text-base transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.98]"
+              className="px-8 py-4 sm:py-4.5 rounded-full border border-white/20 hover:border-white text-white font-sans font-medium text-sm sm:text-base transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.98]"
             >
               View work
             </Link>
@@ -411,7 +430,7 @@ export default function Footer() {
         </motion.div>
 
         {/* 3. BAJGART-INSPIRED ARCHITECTURAL BOTTOM PILL BAR & COPYRIGHT */}
-        <div className="w-full border-t border-foreground/15 pt-8 mt-6">
+        <div className="w-full border-t border-white/10 pt-8 mt-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 text-xs sm:text-sm font-sans">
             
             {/* Left: Social Navigation Pills */}
@@ -420,7 +439,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/shubham-shinde-design/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full border border-foreground/15 hover:border-foreground/60 hover:bg-foreground/[0.04] transition-[color,background-color,border-color] duration-300 text-foreground/80 hover:text-foreground font-medium"
+                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium"
               >
                 LinkedIn
               </a>
@@ -428,7 +447,7 @@ export default function Footer() {
                 href="https://www.behance.net/shubhamshinde"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full border border-foreground/15 hover:border-foreground/60 hover:bg-foreground/[0.04] transition-[color,background-color,border-color] duration-300 text-foreground/80 hover:text-foreground font-medium"
+                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium"
               >
                 Behance
               </a>
@@ -436,24 +455,24 @@ export default function Footer() {
                 href="https://www.instagram.com/5hinde/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full border border-foreground/15 hover:border-foreground/60 hover:bg-foreground/[0.04] transition-[color,background-color,border-color] duration-300 text-foreground/80 hover:text-foreground font-medium"
+                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium"
               >
                 Instagram
               </a>
             </div>
 
             {/* Center: Location & One-Click Copy Email */}
-            <div className="text-center font-normal text-foreground/75 flex flex-wrap items-center justify-center gap-2">
+            <div className="text-center font-normal text-white/75 flex flex-wrap items-center justify-center gap-2">
               <span>Working with clients worldwide &bull;</span>
               <a
                 href={`mailto:${email}`}
-                className="text-foreground hover:underline font-semibold transition-colors"
+                className="text-white hover:underline font-semibold transition-colors"
               >
                 {email}
               </a>
               <button
                 onClick={handleCopyEmail}
-                className="font-mono text-[11px] px-2.5 py-1 rounded-full border border-foreground/20 hover:border-foreground/60 active:scale-[0.97] transition-[border-color,transform] cursor-pointer text-foreground/80 relative overflow-hidden"
+                className="font-mono text-[11px] px-2.5 py-1 rounded-full border border-white/20 hover:border-white/60 active:scale-[0.97] transition-[border-color,transform] cursor-pointer text-white/80 relative overflow-hidden"
                 title="Copy email address"
               >
                 <AnimatePresence mode="popLayout" initial={false}>
@@ -475,14 +494,14 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <a
                 href={`mailto:${email}`}
-                className="px-5 py-2 rounded-full border border-foreground/25 hover:border-foreground text-foreground font-medium flex items-center gap-2 transition-[color,background-color,border-color] duration-300 hover:bg-foreground hover:text-background shadow-2xs"
+                className="px-5 py-2 rounded-full border border-white/25 hover:border-white text-white font-medium flex items-center gap-2 transition-[color,background-color,border-color] duration-300 hover:bg-white hover:text-[#020d08] shadow-2xs"
               >
                 <span>Start a project</span>
                 <span className="font-mono text-base leading-none">+</span>
               </a>
               <button
                 onClick={scrollToTop}
-                className="px-4 py-2 rounded-full border border-foreground/15 hover:border-foreground/60 hover:bg-foreground/[0.04] text-foreground font-medium flex items-center gap-1.5 active:scale-[0.97] transition-[background-color,border-color,transform] duration-300 cursor-pointer"
+                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] text-white font-medium flex items-center gap-1.5 active:scale-[0.97] transition-[background-color,border-color,transform] duration-300 cursor-pointer"
                 aria-label="Scroll to top"
               >
                 <span>&uarr;</span>
@@ -493,9 +512,9 @@ export default function Footer() {
           </div>
 
           {/* Final Studio Copyright Line */}
-          <div className="max-w-7xl mx-auto pt-6 mt-8 border-t border-foreground/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] sm:text-xs font-sans font-light text-foreground/50 text-center sm:text-left">
+          <div className="max-w-7xl mx-auto pt-6 mt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] sm:text-xs font-sans font-light text-white/50 text-center sm:text-left">
             <span>&copy; 2026 Shubham Shinde. Visual storyteller &amp; designer.</span>
-            <span className="italic font-serif text-foreground/45">
+            <span className="italic font-serif text-white/45">
               Taste is not decoration &bull; It is decision-making.
             </span>
           </div>
