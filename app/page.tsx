@@ -9,8 +9,10 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import ServicesShowcase from '@/components/services/ServicesShowcase'
+import dynamic from 'next/dynamic'
 import { EASE_OUT, EASE_IN_OUT } from '@/lib/motion'
+
+const ServicesShowcase = dynamic(() => import('@/components/services/ServicesShowcase'), { ssr: false })
 
 // Register GSAP ScrollTrigger plugin safely in browser environment
 if (typeof window !== "undefined") {
@@ -399,6 +401,7 @@ const ProjectCard = ({
             {video || image?.endsWith(".mp4") || image?.endsWith(".webm") ? (
               <video 
                 src={video || image} 
+                preload="metadata"
                 poster={image?.endsWith(".mp4") || image?.endsWith(".webm") ? undefined : image}
                 autoPlay 
                 loop 

@@ -322,6 +322,7 @@ export default function WorkDetail() {
             {project.video || project.image?.endsWith(".mp4") || project.image?.endsWith(".webm") ? (
               <video 
                 src={project.video || project.image} 
+                preload="metadata"
                 poster={project.image?.endsWith(".mp4") || project.image?.endsWith(".webm") ? undefined : project.image}
                 autoPlay 
                 loop 
