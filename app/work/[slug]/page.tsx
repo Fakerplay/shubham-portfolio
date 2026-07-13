@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { useParams } from "next/navigation";
 import { DETAILED_PROJECTS } from "@/data/projects";
 import ProjectCTA from "@/components/ProjectCTA";
@@ -51,72 +50,9 @@ export default function WorkDetail() {
   const slug = typeof params?.slug === "string" ? params.slug : "";
   const project = DETAILED_PROJECTS[slug];
 
-  const [curatorMode, setCuratorMode] = useState(false);
-  const [customGallery, setCustomGallery] = useState<{ number: string; filename: string; caption: string }[]>([]);
-  const [copied, setCopied] = useState(false);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
-
-  useEffect(() => {
-    if (project?.showcaseGallery) {
-      const saved = localStorage.getItem(`curator_order_${slug}`);
-      if (saved) {
-        try {
-          setCustomGallery(JSON.parse(saved));
-        } catch {
-          setCustomGallery(project.showcaseGallery);
-        }
-      } else {
-        setCustomGallery(project.showcaseGallery);
-      }
-    }
-  }, [slug, project]);
-
-  const moveItem = (idx: number, direction: "up" | "down") => {
-    const targetIdx = direction === "up" ? idx - 1 : idx + 1;
-    if (targetIdx < 0 || targetIdx >= customGallery.length) return;
-    const next = [...customGallery];
-    const temp = next[idx];
-    next[idx] = next[targetIdx];
-    next[targetIdx] = temp;
-    
-    // Re-assign sequential numbers starting from 02
-    const renumbered = next.map((item, i) => ({
-      ...item,
-      number: (i + 2).toString().padStart(2, "0")
-    }));
-    
-    setCustomGallery(renumbered);
-    localStorage.setItem(`curator_order_${slug}`, JSON.stringify(renumbered));
-  };
-
-  const removeItem = (idx: number) => {
-    const next = customGallery.filter((_, i) => i !== idx);
-    const renumbered = next.map((item, i) => ({
-      ...item,
-      number: (i + 2).toString().padStart(2, "0")
-    }));
-    setCustomGallery(renumbered);
-    localStorage.setItem(`curator_order_${slug}`, JSON.stringify(renumbered));
-  };
-
-  const resetOrder = () => {
-    if (project?.showcaseGallery) {
-      setCustomGallery(project.showcaseGallery);
-      localStorage.removeItem(`curator_order_${slug}`);
-    }
-  };
-
-  const copyOrderCode = () => {
-    const code = `    showcaseGallery: [\n` +
-      customGallery.map(item => `      { number: "${item.number}", filename: "${item.filename}", caption: "${item.caption}" }`).join(",\n") +
-      `\n    ],`;
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
-  };
 
   if (!project) {
     return (
@@ -148,61 +84,12 @@ export default function WorkDetail() {
             <span>Back to Featured Work</span>
           </Link>
           <div className="flex items-center gap-4">
-            {project.showcaseGallery && (
-              <button
-                onClick={() => setCuratorMode(!curatorMode)}
-                className={`px-4 py-1.5 rounded-full font-mono text-xs font-semibold active:scale-[0.97] transition-[background-color,color,border-color,box-shadow,transform] duration-300 flex items-center gap-2 border ${
-                  curatorMode 
-                    ? "bg-foreground text-background border-foreground shadow-lg scale-105" 
-                    : "bg-foreground/5 text-foreground/80 border-foreground/15 hover:bg-foreground/10"
-                }`}
-              >
-                <span>Gallery Mode</span>
-                <span className={`w-2 h-2 rounded-full ${curatorMode ? "bg-green-400 animate-pulse" : "bg-foreground/30"}`} />
-              </button>
-            )}
             <span className="hidden md:inline text-xs font-sans font-semibold tracking-widest uppercase text-foreground/45">
               {project.brand} &mdash; Case Study
             </span>
           </div>
         </div>
       </header>
-
-      {/* Floating Curator Dock */}
-      <AnimatePresence>
-        {curatorMode && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            style={{ x: "-50%" }}
-            className="fixed bottom-6 left-1/2 z-50 bg-background/95 backdrop-blur-xl border border-foreground/20 rounded-full px-6 py-3.5 shadow-2xl flex items-center gap-6 max-w-xl w-full justify-between"
-          >
-            <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground">
-                Live Gallery Reordering
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={resetOrder}
-                className="px-3.5 py-1.5 rounded-full font-mono text-xs text-foreground/70 hover:text-foreground hover:bg-foreground/5 active:scale-[0.97] transition-[color,background-color,transform] border border-foreground/10"
-                title="Restore original sequence and all removed images"
-              >
-                Reset &amp; Restore All
-              </button>
-              <button
-                onClick={copyOrderCode}
-                className="px-4 py-1.5 rounded-full bg-foreground text-background font-mono text-xs font-semibold hover:opacity-90 active:scale-[0.97] transition-[opacity,transform] flex items-center gap-1.5 shadow"
-              >
-                <span>{copied ? "✓ Copied TypeScript Config!" : "📋 Copy Order Code"}</span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* BRIEF INTRO SECTION: Title, Specs & Concise Overview */}
       <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-16 md:pt-24 pb-16 flex flex-col gap-12">
@@ -322,47 +209,15 @@ export default function WorkDetail() {
         </section>
 
         {/* Slots 02+: 100% Full Width Immersive Imagery */}
-        {customGallery.length > 0 ? (
-          customGallery.map((slot, idx) => (
-            <div key={slot.filename + idx} className="relative group/curator">
-              {curatorMode && (
-                <div className="sticky top-20 z-40 max-w-7xl mx-auto px-6 md:px-16 -mb-14 pt-4 flex justify-end pointer-events-none">
-                  <div className="pointer-events-auto bg-background/95 backdrop-blur-md border border-foreground/25 rounded-full px-4 py-2 shadow-xl flex items-center gap-3 font-mono text-xs text-foreground">
-                    <span className="font-semibold text-foreground/50">[{slot.number}] {slot.filename}</span>
-                    <div className="h-3 w-px bg-foreground/15" />
-                    <button
-                      onClick={() => moveItem(idx, "up")}
-                      disabled={idx === 0}
-                      className="px-2.5 py-1 rounded-full bg-foreground/5 hover:bg-foreground/15 disabled:opacity-30 disabled:hover:bg-transparent active:scale-[0.97] transition-[background-color,transform] font-bold"
-                      title="Move Up"
-                    >
-                      ▲ Up
-                    </button>
-                    <button
-                      onClick={() => moveItem(idx, "down")}
-                      disabled={idx === customGallery.length - 1}
-                      className="px-2.5 py-1 rounded-full bg-foreground/5 hover:bg-foreground/15 disabled:opacity-30 disabled:hover:bg-transparent active:scale-[0.97] transition-[background-color,transform] font-bold"
-                      title="Move Down"
-                    >
-                      ▼ Down
-                    </button>
-                    <button
-                      onClick={() => removeItem(idx)}
-                      className="px-2.5 py-1 rounded-full bg-red-500/10 hover:bg-red-500/20 text-red-500 active:scale-[0.97] transition-[background-color,transform] font-bold flex items-center gap-1"
-                      title="Remove Image from Sequence"
-                    >
-                      ✕ Remove
-                    </button>
-                  </div>
-                </div>
-              )}
-              <FullWidthSlot
-                number={slot.number}
-                slug={project.slug}
-                filename={slot.filename}
-                caption={slot.caption}
-              />
-            </div>
+        {project.showcaseGallery && project.showcaseGallery.length > 0 ? (
+          project.showcaseGallery.map((slot, idx) => (
+            <FullWidthSlot
+              key={slot.filename + idx}
+              number={slot.number}
+              slug={project.slug}
+              filename={slot.filename}
+              caption={slot.caption}
+            />
           ))
         ) : (
           <>
