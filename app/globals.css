@@ -78,6 +78,51 @@ body {
   transition: color 0.5s ease;
 }
 
+/* Theme-adaptive split-flap boxes */
+.split-flap-box {
+  background-color: #09090b; /* zinc-950 */
+  color: #f4f4f5; /* zinc-100 */
+  border-color: rgba(39, 39, 42, 0.8); /* zinc-800 */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.95), inset 0 -1px 2px rgba(255, 255, 255, 0.06), 0 3px 6px rgba(0, 0, 0, 0.45);
+}
+
+.split-flap-divider {
+  background-color: rgba(9, 9, 11, 0.9);
+  box-shadow: 0 0.5px 0.5px rgba(255, 255, 255, 0.08);
+}
+
+.split-flap-hinge {
+  background-color: rgba(63, 63, 70, 0.9);
+  border-color: #09090b;
+}
+
+/* Switch colors when parent theme is dark (evening, night, aurora, neon) */
+:root[data-theme="evening"] .split-flap-box,
+:root[data-theme="night"] .split-flap-box,
+:root[data-theme="aurora"] .split-flap-box,
+:root[data-theme="neon"] .split-flap-box {
+  background-color: #ffffff;
+  color: #09090b;
+  border-color: #e4e4e7; /* zinc-200 */
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), inset 0 -1px 1px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="evening"] .split-flap-divider,
+:root[data-theme="night"] .split-flap-divider,
+:root[data-theme="aurora"] .split-flap-divider,
+:root[data-theme="neon"] .split-flap-divider {
+  background-color: rgba(228, 228, 231, 0.9);
+  box-shadow: 0 0.5px 0.5px rgba(9, 9, 11, 0.08);
+}
+
+:root[data-theme="evening"] .split-flap-hinge,
+:root[data-theme="night"] .split-flap-hinge,
+:root[data-theme="aurora"] .split-flap-hinge,
+:root[data-theme="neon"] .split-flap-hinge {
+  background-color: rgba(161, 161, 170, 0.9);
+  border-color: #e4e4e7;
+}
+
 @keyframes wobble {
   0%, 100% {
     filter: url(#wobble-f1);

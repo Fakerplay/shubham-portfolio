@@ -55,20 +55,31 @@ const LineReveal = ({ children, delay = 0, reduceMotion = false }: { children: R
 
 // 2. KeywordPill Component (world-class design-led horizontal expanding contrast capsule)
 const KeywordPill = ({ text, delay, reduceMotion = false }: { text: string; delay: number; reduceMotion?: boolean }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "evening" || theme === "night" || theme === "aurora" || theme === "neon";
+
   if (reduceMotion) {
     return (
-      <span className="inline-flex items-center px-3.5 py-0.5 rounded-full border border-foreground/15 bg-black/20 text-2xl md:text-3xl font-serif font-light align-baseline leading-none mx-1 text-foreground/90 relative -top-[0.02em]">
+      <span className={`inline-flex items-center px-3.5 py-0.5 rounded-full border text-2xl md:text-3xl font-serif font-light align-baseline leading-none mx-1 relative -top-[0.02em] ${
+        isDark 
+          ? "border-white/10 bg-white/10 text-white" 
+          : "border-foreground/15 bg-black/5 text-foreground/90"
+      }`}>
         {text}
       </span>
     );
   }
+
+  const borderClass = isDark ? "border-white/10 hover:border-white/30" : "border-foreground/15 hover:border-zinc-700";
+  const bgClass = isDark ? "bg-white/5 hover:bg-white/15" : "bg-foreground/[0.05] hover:bg-zinc-800";
+  const textClass = isDark ? "text-white/80 hover:text-white" : "text-foreground/80 hover:text-white";
 
   return (
     <motion.span
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: delay + 0.25, duration: 0.5, ease: EASE_OUT }}
-      className="group inline-flex items-center px-4 py-1 rounded-full border border-foreground/15 bg-foreground/[0.05] text-foreground/80 hover:text-white hover:bg-zinc-800 hover:border-zinc-700 align-baseline leading-none select-none mx-1.5 cursor-pointer relative -top-[0.02em] transition-[color,background-color,border-color,box-shadow] duration-150 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),_0_1px_2px_rgba(0,0,0,0.02)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),_0_3px_6px_rgba(0,0,0,0.3)]"
+      className={`group inline-flex items-center px-4 py-1 rounded-full border ${borderClass} ${bgClass} ${textClass} align-baseline leading-none select-none mx-1.5 cursor-pointer relative -top-[0.02em] transition-[color,background-color,border-color,box-shadow] duration-150 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),_0_1px_2px_rgba(0,0,0,0.02)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),_0_3px_6px_rgba(0,0,0,0.3)]`}
     >
       <span className="relative z-10 font-serif font-light text-2xl md:text-3xl block transition-[filter] duration-150 group-hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.4)]">
         {text}
@@ -111,18 +122,17 @@ const SplitFlapWord = ({ reduceMotion = false }: { reduceMotion?: boolean }) => 
 
     for (let i = 0; i < final.length; i++) {
       const box = document.createElement("span");
-      box.className = "w-5.5 h-8.5 md:w-6.5 md:h-10.5 flex items-center justify-center border border-zinc-800/80 bg-zinc-950 rounded-sm text-zinc-100 transition-transform duration-150 align-baseline select-none relative overflow-hidden";
+      box.className = "split-flap-box w-5.5 h-8.5 md:w-6.5 md:h-10.5 flex items-center justify-center border rounded-sm transition-[transform,background-color,color,border-color] duration-300 align-baseline select-none relative overflow-hidden";
       box.style.transform = "scaleY(1)";
-      box.style.boxShadow = "inset 0 1px 3px rgba(0,0,0,0.95), inset 0 -1px 2px rgba(255,255,255,0.06), 0 3px 6px rgba(0,0,0,0.45)";
       
       // Structure split-flap card halves, side hinges, and gradient overlays
       box.innerHTML = `
         <span class="char-span relative z-10 font-serif font-bold text-lg md:text-xl">${reduceMotion ? final[i] : "-"}</span>
-        <span class="absolute left-0 right-0 top-[calc(50%-0.5px)] h-[1px] bg-zinc-950/90 shadow-[0_0.5px_0.5px_rgba(255,255,255,0.08)] z-20 pointer-events-none"></span>
-        <span class="absolute left-0 top-1/2 -translate-y-1/2 w-[1.5px] h-[5px] bg-zinc-700/90 border-r border-zinc-950 rounded-r-[1px] z-30 pointer-events-none"></span>
-        <span class="absolute right-0 top-1/2 -translate-y-1/2 w-[1.5px] h-[5px] bg-zinc-700/90 border-l border-zinc-950 rounded-l-[1px] z-30 pointer-events-none"></span>
-        <span class="absolute inset-x-0 top-0 bottom-1/2 bg-gradient-to-b from-black/40 via-transparent to-black/10 z-0 pointer-events-none"></span>
-        <span class="absolute inset-x-0 top-1/2 bottom-0 bg-gradient-to-b from-black/60 to-transparent z-0 pointer-events-none"></span>
+        <span class="split-flap-divider absolute left-0 right-0 top-[calc(50%-0.5px)] h-[1px] z-20 pointer-events-none transition-colors duration-300"></span>
+        <span class="split-flap-hinge absolute left-0 top-1/2 -translate-y-1/2 w-[1.5px] h-[5px] border-r rounded-r-[1px] z-30 pointer-events-none transition-colors duration-300"></span>
+        <span class="split-flap-hinge absolute right-0 top-1/2 -translate-y-1/2 w-[1.5px] h-[5px] border-l rounded-l-[1px] z-30 pointer-events-none transition-colors duration-300"></span>
+        <span class="absolute inset-x-0 top-0 bottom-1/2 bg-gradient-to-b from-black/20 via-transparent to-black/5 z-0 pointer-events-none"></span>
+        <span class="absolute inset-x-0 top-1/2 bottom-0 bg-gradient-to-b from-black/30 to-transparent z-0 pointer-events-none"></span>
       `;
       el.appendChild(box);
 
@@ -181,11 +191,19 @@ const SplitFlapWord = ({ reduceMotion = false }: { reduceMotion?: boolean }) => 
 
 // 4. InteractiveCodeWord Component (compact dark inline code-block style manual flip/split-flap component)
 const InteractiveCodeWord = ({ reduceMotion = false }: { reduceMotion?: boolean }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "evening" || theme === "night" || theme === "aurora" || theme === "neon";
+
   const words = ["sharper", "trusted", "memorable"];
   const [wordIndex, setWordIndex] = useState(0);
 
-  const shadowNormal = "0 6px 15px rgba(0,0,0,0.22), 0 2px 5px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.25), 0 0 8px rgba(255,255,255,0.04)";
-  const shadowHover = "0 12px 24px rgba(0,0,0,0.28), 0 4px 8px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.3), 0 0 12px rgba(255,255,255,0.08)";
+  const shadowNormal = isDark 
+    ? "0 6px 15px rgba(255,255,255,0.06), 0 2px 5px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(0,0,0,0.05)"
+    : "0 6px 15px rgba(0,0,0,0.22), 0 2px 5px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.25), 0 0 8px rgba(255,255,255,0.04)";
+    
+  const shadowHover = isDark
+    ? "0 12px 24px rgba(255,255,255,0.1), 0 4px 8px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(0,0,0,0.05)"
+    : "0 12px 24px rgba(0,0,0,0.28), 0 4px 8px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.3), 0 0 12px rgba(255,255,255,0.08)";
 
   // AnimatePresence below retargets/interrupts cleanly on rapid clicks instead
   // of dropping them, so cycling the word is just a state update.
@@ -200,6 +218,10 @@ const InteractiveCodeWord = ({ reduceMotion = false }: { reduceMotion?: boolean 
     }
   };
 
+  const dynamicBgClass = isDark 
+    ? "bg-white border-zinc-200 text-zinc-950 hover:bg-zinc-100 hover:text-black focus-visible:ring-zinc-950" 
+    : "bg-zinc-900 border-zinc-700/80 text-zinc-300 hover:bg-zinc-850 hover:border-zinc-600/90 hover:text-zinc-50 focus-visible:ring-zinc-400";
+
   return (
     <motion.button
       layout
@@ -212,7 +234,7 @@ const InteractiveCodeWord = ({ reduceMotion = false }: { reduceMotion?: boolean 
         boxShadow: shadowHover
       }}
       transition={{ layout: { duration: 0.25, ease: EASE_OUT }, boxShadow: { duration: 0.2 } }}
-      className="inline-flex items-center justify-center px-3.5 py-0.5 rounded-md bg-zinc-900 border border-zinc-700/80 text-zinc-300 font-mono text-xl md:text-2xl select-none mx-1.5 align-baseline leading-none cursor-pointer transition-colors duration-300 hover:bg-zinc-850 hover:border-zinc-600/90 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:border-zinc-650 focus-visible:bg-zinc-850 h-9 md:h-11.5 group gap-1.5 relative -top-[0.02em]"
+      className={`inline-flex items-center justify-center px-3.5 py-0.5 rounded-md border font-mono text-xl md:text-2xl select-none mx-1.5 align-baseline leading-none cursor-pointer transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 h-9 md:h-11.5 group gap-1.5 relative -top-[0.02em] ${dynamicBgClass}`}
     >
       <span style={{ perspective: 600 }} className="inline-block overflow-hidden">
         <AnimatePresence mode="popLayout" initial={false}>

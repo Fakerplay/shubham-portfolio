@@ -40,15 +40,23 @@ export default function ExpertiseCTA() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 flex-shrink-0 self-start lg:self-end">
           <a
             href={`mailto:${email}`}
-            className="px-8 py-4.5 rounded-full bg-foreground text-background font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,opacity] duration-300 hover:scale-[1.02] hover:opacity-95 shadow-sm active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3 text-center"
+            className="group px-8 py-4 sm:py-4.5 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
           >
             <span>Start a Conversation</span>
-            <span>&rarr;</span>
+            <svg 
+              className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth="2.5"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </a>
 
           <button
             onClick={handleCopyEmail}
-            className="px-6 py-4.5 rounded-full border border-foreground/20 hover:border-foreground/50 text-foreground font-sans font-medium text-sm sm:text-base tracking-wide transition-[background-color,border-color,transform] duration-300 hover:bg-foreground/[0.04] active:scale-[0.97] cursor-pointer flex items-center justify-center gap-2 overflow-hidden"
+            className="px-6 py-4 sm:py-4.5 rounded-full border border-zinc-850 hover:border-zinc-500 text-zinc-300 hover:text-white font-sans font-medium text-sm sm:text-base tracking-wide transition-[background-color,border-color,transform] duration-300 hover:bg-white/[0.04] active:scale-[0.97] cursor-pointer flex items-center justify-center gap-2 overflow-hidden bg-transparent"
           >
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
@@ -62,7 +70,7 @@ export default function ExpertiseCTA() {
                 {copied ? "Email Copied!" : email}
               </motion.span>
             </AnimatePresence>
-            <span className="text-xs text-foreground/45">
+            <span className="text-xs text-zinc-500">
               {copied ? "✓" : "⌘C"}
             </span>
           </button>

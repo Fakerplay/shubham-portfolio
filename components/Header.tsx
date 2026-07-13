@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useMotionTemplate, animate } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -18,6 +18,7 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState("about");
   const [isMuted, setIsMuted] = useState(false);
+  const isScrollingRef = useRef(false);
   const headerY = useMotionValue(0);
   const headerTransform = useMotionTemplate`translateY(${headerY}px)`;
 
@@ -40,6 +41,11 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      
+      if (isScrollingRef.current) {
+        setLastScrollY(currentScrollY);
+        return;
+      }
       
       if (currentScrollY < 10) {
         setIsVisible(true);
@@ -75,7 +81,7 @@ export default function Header() {
       rootMargin: "-25% 0px -55% 0px",
     });
 
-    const sections = ["about", "work", "expertise", "services"];
+    const sections = ["about", "work", "expertise", "services", "notes"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -93,9 +99,14 @@ export default function Header() {
     }
     if (href.startsWith("#")) {
       if (pathname === "/") {
-        const el = document.querySelector(href);
+        const el = document.getElementById(href.replace("#", ""));
         if (el) {
+          isScrollingRef.current = true;
+          setIsVisible(true);
           el.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => {
+            isScrollingRef.current = false;
+          }, 850);
         }
       } else {
         router.push("/" + href);
@@ -109,7 +120,7 @@ export default function Header() {
     { label: "Intro", active: pathname === "/" && activeSection === "about", href: "#about" },
     { label: "Work", active: pathname.startsWith("/work") || (pathname === "/" && activeSection === "work"), href: "/work" },
     { label: "Expertise", active: pathname === "/" && (activeSection === "expertise" || activeSection === "services"), href: "#expertise" },
-    { label: "Notes", active: pathname === "/" && activeSection === "notes", href: "#about" },
+    { label: "Notes", active: pathname === "/" && activeSection === "notes", href: "#notes" },
   ];
 
   return (

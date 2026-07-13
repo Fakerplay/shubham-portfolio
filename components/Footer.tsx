@@ -191,7 +191,7 @@ export default function Footer() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10 flex flex-col gap-16 md:gap-24">
         
         {/* 1. INTERACTIVE FOLDER ENVELOPE / POP-OUT STUDIO NOTES DECK */}
-        <div className="w-full min-h-[440px] sm:min-h-[500px] flex items-center justify-center pt-10 pb-16">
+        <div id="notes" className="w-full min-h-[440px] sm:min-h-[500px] flex items-center justify-center pt-10 pb-16">
           <AnimatePresence mode="wait">
             {!isUnpacked ? (
               /* STATE A: Refined, Tactile Sunset Glass Studio Dossier / Envelope (`!isUnpacked`) */
@@ -298,7 +298,7 @@ export default function Footer() {
                 {/* 6 Popped-Out Fanned Cards (Crystal clear `bg-white/[0.03]`, taut `rounded-[20px] sm:rounded-[22px]`, buttery spring hover) */}
                 <motion.div
                   variants={containerVariants}
-                  className="w-full flex flex-wrap lg:flex-nowrap items-center justify-center gap-6 sm:gap-7 lg:gap-0 px-2 sm:px-4"
+                  className="w-full flex flex-wrap items-center justify-center gap-6 sm:gap-8 px-4 sm:px-8 max-w-[1600px] mx-auto"
                 >
                   {STUDIO_CARDS.map((card) => {
                     const isHovered = activeCardId === card.id;
