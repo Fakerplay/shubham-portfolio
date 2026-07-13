@@ -651,6 +651,20 @@ export default function Home() {
         { value: "100%", label: "Cohesive Visual Identity" },
         { value: "15+", label: "Brand Touchpoints Engineered" }
       ]
+    },
+    {
+      slug: "solace",
+      brand: "Solace",
+      logoColor: "#111111", // Sleek luxury charcoal/black accent
+      year: "2025",
+      title: "Solace: Branding and Identity Design",
+      image: "/images/solace/Solace Cover.png",
+      description: "Crafted a serene, highly sophisticated brand identity and premium packaging design ecosystem for Solace, bridging organic geometry with luxury editorial typography.",
+      tags: ["Brand Identity", "Packaging Design", "Creative Direction", "Visual System"],
+      metrics: [
+        { value: "100%", label: "Cohesive Brand Ecosystem" },
+        { value: "12+", label: "Ecosystem Assets Created" }
+      ]
     }
   ];
 

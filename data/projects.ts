@@ -331,6 +331,70 @@ export const DETAILED_PROJECTS: Record<string, DetailedProject> = {
       }
     ],
     nextProject: {
+      slug: "solace",
+      brand: "Solace",
+      title: "Solace: Branding and Identity Design"
+    }
+  },
+  "solace": {
+    slug: "solace",
+    brand: "Solace",
+    title: "Solace: Branding and Identity Design",
+    subtitle: "Crafting a serene, modern brand identity, custom typographic guidelines, and a premium visual narrative for luxury wellness and lifestyle products.",
+    year: "2025",
+    role: "Lead Brand & Packaging Designer",
+    timeline: "3 Months",
+    client: "Solace Lifestyle & Wellness Co.",
+    image: "/images/solace/Solace Cover.png",
+    showcaseGallery: [
+      { number: "02", filename: "Solace Main Cover.png", caption: "Solace Core Visual Emblem & Brand Identity Concept" },
+      { number: "03", filename: "Solace Main Cover-1.png", caption: "Premium Product Packaging & Design Language Application" },
+      { number: "04", filename: "Solace Main Cover-2.png", caption: "Editorial Typography Grid & Curated Lifestyle Storyboard" },
+      { number: "05", filename: "Solace Main Cover-3.png", caption: "Social Media Storytelling Layout & Visual Asset Collection" },
+      { number: "06", filename: "Solace Main Cover-4.png", caption: "Holistic Design Guidelines & Future Horizon Rollout" }
+    ],
+    tags: ["Brand Identity", "Packaging Design", "Creative Direction", "Visual System"],
+    metrics: [
+      { value: "100%", label: "Cohesive Brand Ecosystem" },
+      { value: "12+", label: "Ecosystem Assets Created" }
+    ],
+    overview: "Solace required a clean, organic, yet highly sophisticated brand identity that evokes calm, luxury, and premium quality. By blending precise custom editorial serif typography with light, airy structural layouts and earthy packaging design details, we created a distinctive visual signature designed to scale seamlessly across print, physical packaging, and digital viewports.",
+    chapters: [
+      {
+        number: "01",
+        title: "Serenity & Spatial Balance",
+        subtitle: "Translating organic calm into custom visual architecture",
+        content: [
+          "A premium lifestyle brand must command presence through quiet confidence. We constructed the Solace visual signature around spacious layouts, fine-ruled grids, and a primary high-contrast monochrome palette.",
+          "The resulting system balances contemporary minimal geometry with historical typographic weight, creating an immediate feeling of premium quality."
+        ],
+        highlightMetric: {
+          value: "12+",
+          label: "Ecosystem Assets Created",
+          description: "Cohesive brand architecture across premium glass bottles, custom paper box sets, and digital storefront spreads."
+        }
+      },
+      {
+        number: "02",
+        title: "Tactile Packaging & Material Selection",
+        subtitle: "Bringing the brand to life on premium textured cardstock",
+        content: [
+          "We designed a complete stationery and packaging system featuring organic glass packaging, custom cardstock boxes, and blind debossed visual labels.",
+          "Every tactile touchpoint uses a restrained typographic hierarchy and ample breathing room to highlight the raw materiality of the products."
+        ],
+        image: "/images/solace/Solace Main Cover-1.png"
+      },
+      {
+        number: "03",
+        title: "Editorial Guidelines & Future Roadmap",
+        subtitle: "Maintaining brand governance at scale",
+        content: [
+          "To ensure Solace remains cohesive as it scales, we established a strict design system matrix specifying custom letterform spacing, image filtering formulas, and grid guidelines.",
+          "From large-format campaigns to social media stories, the brand speaks with one clear, confident, and highly refined voice."
+        ]
+      }
+    ],
+    nextProject: {
       slug: "daulat-finvest",
       brand: "Daulat Finvest",
       title: "Wealth management crafted around your portfolio"
