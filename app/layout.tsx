@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/ThemeContext'
 import LightLeakBackground from '@/components/LightLeakBackground'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { Analytics } from '@vercel/analytics/react'
 
 const exposure = localFont({
   src: [
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Global Monumental Footer */}
           <Footer />
           
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
