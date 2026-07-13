@@ -751,54 +751,6 @@ export default function Home() {
         {/* SECTION 3: CORE CAPABILITIES & SERVICES SHOWCASE (Full Width Aligned Below Work Section) */}
         <ServicesShowcase />
 
-        {/* SECTION 4: IMAGE GALLERY CAROUSEL (Infinite Marquee) */}
-        <section className="w-full pt-16 pb-20 relative select-none">
-          {/* Full bleed container trick breaking out of the max-w-4xl parent constraint */}
-          <div className="w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden flex cursor-ew-resize">
-            
-            {/* The infinite scrolling track */}
-            <div className="animate-marquee hover:[animation-play-state:paused] flex items-center min-w-max transition-transform will-change-transform" style={{ animationDuration: '40s' }}>
-              {/* Group 1 */}
-              <div className="flex gap-4 md:gap-8 pr-4 md:pr-8 items-center flex-shrink-0">
-                <div className="relative h-48 md:h-80 w-64 md:w-[420px] rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/brand-identity.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-40 md:w-64 rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/liverpool_3d.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-72 md:w-[480px] rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/project-1-cover.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-48 md:w-80 rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/movies_3d.jpg" alt="Gallery" fill className="object-cover grayscale" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-64 md:w-[380px] rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/games_3d.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-              </div>
-
-              {/* Group 2 */}
-              <div className="flex gap-4 md:gap-8 pr-4 md:pr-8 items-center flex-shrink-0">
-                <div className="relative h-48 md:h-80 w-64 md:w-[420px] rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/brand-identity.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-40 md:w-64 rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/liverpool_3d.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-72 md:w-[480px] rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/project-1-cover.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-48 md:w-80 rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/movies_3d.jpg" alt="Gallery" fill className="object-cover grayscale" quality={100} unoptimized />
-                </div>
-                <div className="relative h-48 md:h-80 w-64 md:w-[380px] rounded-2xl overflow-hidden flex-shrink-0 border border-foreground/10 shadow-sm">
-                  <Image src="/images/games_3d.jpg" alt="Gallery" fill className="object-cover" quality={100} unoptimized />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
       </div>
     </div>
   )
