@@ -192,19 +192,24 @@ export default function Footer() {
         
         {/* 1. INTERACTIVE FOLDER ENVELOPE / POP-OUT STUDIO NOTES DECK */}
         <div className="w-full min-h-[440px] sm:min-h-[500px] flex items-center justify-center pt-10 pb-16">
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {!isUnpacked ? (
               /* STATE A: Refined, Tactile Sunset Glass Studio Dossier / Envelope (`!isUnpacked`) */
               <motion.div
                 key="envelope-folder"
                 initial={{ opacity: 0, scale: 0.88, y: 30 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{
                   opacity: 0,
-                  scale: 1.06,
-                  y: 45,
-                  rotate: -2.5,
-                  transition: { duration: 0.32, ease: EASE_OUT },
+                  scale: 0.88,
+                  y: 30,
+                  transition: { duration: 0.25, ease: "easeOut" },
+                }}
+                transition={{
+                  type: "spring",
+                  damping: 20,
+                  stiffness: 150,
+                  mass: 0.8
                 }}
                 whileHover={
                   shouldReduceMotion
@@ -220,7 +225,6 @@ export default function Footer() {
                     ? {}
                     : { scale: 0.96, transition: { duration: 0.15 } }
                 }
-                viewport={{ once: true }}
                 onClick={() => setIsUnpacked(true)}
                 tabIndex={0}
                 role="button"
