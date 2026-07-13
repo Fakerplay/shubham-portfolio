@@ -224,7 +224,7 @@ export default function LightLeakBackground({
       .forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.0);
       cv.width = window.innerWidth * dpr; cv.height = window.innerHeight * dpr;
       gl.viewport(0, 0, cv.width, cv.height);
     };
@@ -240,11 +240,13 @@ export default function LightLeakBackground({
     };
     window.addEventListener("mousemove", onMove);
 
-    let raf: number;
+    let isVisible = false;
+    let raf: number | null = null;
     const cur = { base: [...palRef.current.base], sun: [...palRef.current.sun] };
     const lerp = (a: number, b: number, t: number) => a + (b-a)*t;
 
     const frame = (now: number) => {
+      if (!isVisible) return;
       const tgt = palRef.current;
       energy *= 0.96;
       mx2 = lerp(mx2, mx, 0.12); my2 = lerp(my2, my, 0.12);
@@ -259,9 +261,31 @@ export default function LightLeakBackground({
       gl.drawArrays(gl.TRIANGLES, 0, 3);
       raf = requestAnimationFrame(frame);
     };
-    raf = requestAnimationFrame(frame);
 
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); window.removeEventListener("mousemove", onMove); };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const nextVisible = entry.isIntersecting;
+        if (nextVisible && !isVisible) {
+          isVisible = true;
+          raf = requestAnimationFrame(frame);
+        } else if (!nextVisible && isVisible) {
+          isVisible = false;
+          if (raf) {
+            cancelAnimationFrame(raf);
+            raf = null;
+          }
+        }
+      });
+    }, { threshold: 0.01 });
+
+    observer.observe(cv);
+
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      observer.disconnect();
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMove);
+    };
   }, []);
 
   return (
