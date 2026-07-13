@@ -50,15 +50,23 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
         <div className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full lg:w-auto flex-shrink-0 relative z-10">
           <a
             href={`mailto:${email}?subject=Project%20Discovery%20Call`}
-            className="group/btn inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-sans font-semibold text-sm tracking-wide transition-[transform,opacity] duration-300 shadow-md hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]"
+            className="group/btn inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
           >
             <span>Book a 30-Min Discovery Call</span>
-            <span className="transition-transform duration-300 group-hover/btn:translate-x-1 sm:inline">&rarr;</span>
+            <svg 
+              className="w-4 h-4 text-emerald-400 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth="2.5"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </a>
 
           <button
             onClick={handleCopyEmail}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-foreground/[0.05] hover:bg-foreground/[0.1] border border-foreground/15 text-foreground font-mono text-xs tracking-wider uppercase transition-colors duration-300 cursor-pointer overflow-hidden"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-zinc-800 hover:border-zinc-500 text-zinc-300 hover:text-white font-mono text-xs tracking-wider uppercase transition-[background-color,border-color,transform] duration-300 hover:bg-white/[0.04] active:scale-[0.97] cursor-pointer overflow-hidden bg-transparent"
           >
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span

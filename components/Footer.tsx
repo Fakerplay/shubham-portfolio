@@ -418,10 +418,18 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
             <a
               href={`mailto:${email}`}
-              className="px-8 py-4 sm:py-4.5 rounded-full bg-white text-[#020d08] font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] cursor-pointer flex items-center gap-3 shadow-md"
+              className="group px-8 py-4 sm:py-4.5 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
             >
               <span>Start a project</span>
-              <span>&rarr;</span>
+              <svg 
+                className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform duration-300" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                strokeWidth="2.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
             </a>
 
             <Link
@@ -498,10 +506,10 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <a
                 href={`mailto:${email}`}
-                className="px-5 py-2 rounded-full border border-white/25 hover:border-white text-white font-medium flex items-center gap-2 transition-[color,background-color,border-color] duration-300 hover:bg-white hover:text-[#020d08] shadow-2xs"
+                className="group px-5 py-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 text-white font-medium flex items-center gap-2 transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.98] shadow-2xs"
               >
                 <span>Start a project</span>
-                <span className="font-mono text-base leading-none">+</span>
+                <span className="font-mono text-base leading-none text-emerald-400 group-hover:scale-125 transition-transform duration-300">+</span>
               </a>
               <button
                 onClick={scrollToTop}
