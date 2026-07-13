@@ -1,26 +1,10 @@
 @import "tailwindcss";
 @config "../tailwind.config.ts";
 
-@font-face {
-  font-family: 'Exposure';
-  src: local('Exposure Trial VAR'), local('ExposureTrialVAR'), local('Exposure Trial'), local('Exposure'), url('/fonts/ExposureTrialVAR.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Exposure';
-  src: local('Exposure Trial VAR Italic'), local('ExposureTrialVAR-Italic'), local('Exposure Trial Italic'), local('Exposure Italic'), url('/fonts/ExposureTrialVAR-Italic.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-
 @theme {
-  --font-sans: "Exposure", "Exposure Trial VAR", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", system-ui, sans-serif;
-  --font-serif: "Exposure", "Exposure Trial VAR", Georgia, serif;
-  --font-mono: "Exposure", "Exposure Trial VAR", monospace;
+  --font-sans: var(--font-exposure), -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-serif: var(--font-exposure), Georgia, serif;
+  --font-mono: var(--font-exposure), monospace;
   --color-background: var(--theme-bg);
   --color-foreground: var(--theme-text);
 }
@@ -28,9 +12,9 @@
 :root {
   --theme-bg: #F9F9F9;
   --theme-text: #111111;
-  --font-serif: "Exposure", "Exposure Trial VAR", Georgia, serif;
-  --font-sans: "Exposure", "Exposure Trial VAR", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", system-ui, sans-serif;
-  --font-mono: "Exposure", "Exposure Trial VAR", monospace;
+  --font-serif: var(--font-exposure), Georgia, serif;
+  --font-sans: var(--font-exposure), -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: var(--font-exposure), monospace;
   --theme-bg-gradient: none;
 }
 

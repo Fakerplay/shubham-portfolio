@@ -7,17 +7,10 @@ import { useTheme } from '@/components/ThemeContext'
 import { playClickSound } from '@/utils/audio'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import dynamic from 'next/dynamic'
 import { EASE_OUT, EASE_IN_OUT } from '@/lib/motion'
 
 const ServicesShowcase = dynamic(() => import('@/components/services/ServicesShowcase'), { ssr: false })
-
-// Register GSAP ScrollTrigger plugin safely in browser environment
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const getPuneHour = () => {
   try {
@@ -524,45 +517,57 @@ export default function Home() {
       return () => mediaQuery.removeEventListener("change", listener)
     }
 
-    // GSAP ScrollTrigger intersection observers to sync sidebar navigation
-    const sections = ["about", "work"];
-    const triggers: ScrollTrigger[] = [];
+    // Dynamic import GSAP and ScrollTrigger in client-side runtime
+    Promise.all([
+      import("gsap"),
+      import("gsap/ScrollTrigger")
+    ]).then(([gsapModule, scrollTriggerModule]) => {
+      const gsap = gsapModule.gsap;
+      const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+      
+      gsap.registerPlugin(ScrollTrigger);
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) {
-        const trigger = ScrollTrigger.create({
-          trigger: el,
-          start: "top 45%",
-          end: "bottom 45%",
-          onEnter: () => setActiveSection(id),
-          onEnterBack: () => setActiveSection(id),
-        });
-        triggers.push(trigger);
-      }
-    });
+      // GSAP ScrollTrigger intersection observers to sync sidebar navigation
+      const sections = ["about", "work"];
 
-    // Staggered reveal for Selected Projects cards
-    gsap.fromTo(
-      ".featured-project-card",
-      { y: 55, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.85,
-        stagger: 0.08,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "#work",
-          start: "top 75%",
-          toggleActions: "play none none none"
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 45%",
+            end: "bottom 45%",
+            onEnter: () => setActiveSection(id),
+            onEnterBack: () => setActiveSection(id),
+          });
         }
-      }
-    );
+      });
+
+      // Staggered reveal for Selected Projects cards
+      gsap.fromTo(
+        ".featured-project-card",
+        { y: 55, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          stagger: 0.08,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: "#work",
+            start: "top 75%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    });
 
     return () => {
       mediaQuery.removeEventListener("change", listener);
-      triggers.forEach(t => t.kill());
+      // Clean up all dynamically created ScrollTriggers
+      import("gsap/ScrollTrigger").then((m) => {
+        m.ScrollTrigger.getAll().forEach(t => t.kill());
+      });
     };
   }, []);
 
