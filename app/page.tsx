@@ -600,7 +600,7 @@ export default function Home() {
       title: "Wealth management crafted around your portfolio",
       video: "/videos/daulat-cover.mp4",
       image: "/images/project-1-cover.jpg",
-      description: "Designed a premium wealth management platform tailored for high-net-worth individuals, focusing on elegant portfolio tracking and secure digital advisory.",
+      description: "Designed a clearer wealth management experience for portfolio tracking, performance, and advisor communication.",
       tags: ["Website Design", "Development", "Fintech"],
       metrics: [
         { value: "4.5x", label: "Portfolio Growth" },
@@ -615,7 +615,7 @@ export default function Home() {
       title: "Solaris: Fintech Branding & Creative Direction",
       video: "/videos/solaris-2.mp4",
       image: "/images/solaris-cover.png",
-      description: "Crafted the complete brand identity, 3D visual language, and creative direction for Solaris—a next-generation fintech platform illuminating financial clarity through radiant, crystalline aesthetics.",
+      description: "Built the Solaris identity across brand, 3D, digital, and investor communications.",
       tags: ["Brand Identity", "Creative Direction", "3D Visuals", "Fintech"],
       metrics: [
         { value: "3.8x", label: "Brand Engagement" },
@@ -630,7 +630,7 @@ export default function Home() {
       title: "Optiv: Branding and Logo Design",
       video: "/videos/Cover_Optiv_1080.mp4",
       image: "/images/optiv/About.png",
-      description: "Architected a distinctive brand identity, cohesive logo ecosystem, and comprehensive visual language for Optiv, bridging technological capability with human-centric clarity.",
+      description: "Created a scalable Optiv identity across logo, digital, physical, and campaign touchpoints.",
       tags: ["Brand Identity", "Logo Design", "Visual System", "Creative Direction"],
       metrics: [
         { value: "100%", label: "Cohesive Identity System" },
@@ -645,7 +645,7 @@ export default function Home() {
       title: "Studio Vistara: Branding",
       video: "/videos/studio-vistara-1.mp4",
       image: "/images/studio-vistara-cover.png",
-      description: "Crafted an ethereal, highly tactile brand identity, architectural typography matrix, and bespoke stationery ecosystem for modern spatial design.",
+      description: "Translated Studio Vistara’s spatial sensibility into a tactile, adaptable identity system.",
       tags: ["Brand Identity", "Typography System", "Stationery & Packaging", "Creative Direction"],
       metrics: [
         { value: "100%", label: "Cohesive Visual Identity" },
@@ -737,6 +737,9 @@ export default function Home() {
           <div className="w-full px-6 md:px-16 lg:px-24">
             <div className="max-w-7xl mx-auto w-full">
               <h2 className="font-sans text-3xl md:text-5xl text-foreground font-semibold tracking-tight">Featured Work</h2>
+              <p className="mt-3 font-sans text-sm md:text-base text-foreground/60 tracking-tight">
+                7+ years across brand, web &amp; motion <span aria-hidden="true">&middot;</span> 50+ projects delivered
+              </p>
             </div>
           </div>
 

@@ -25,14 +25,8 @@ export default function ExpertiseCTA() {
         
         {/* Left Side: Editorial CTA Headline */}
         <div className="flex flex-col gap-4 max-w-3xl">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-sans font-semibold text-xs tracking-widest uppercase text-foreground/50">
-              INITIATE ENGAGEMENT
-            </span>
-          </div>
           <h3 className="font-sans text-3xl sm:text-5xl md:text-6xl font-semibold text-foreground tracking-tight leading-[1.08]">
-            Have an ambitious vision? Let&rsquo;s craft digital excellence together.
+            Building a team or building a brand? Let&rsquo;s talk.
           </h3>
         </div>
 
@@ -80,7 +74,7 @@ export default function ExpertiseCTA() {
 
       {/* Bottom Minimalist Footer Strip of the Section */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-sans text-foreground/45 uppercase tracking-widest pt-4">
-        <span>Available for Q3 / Q4 Sprints &bull; Remote & Worldwide</span>
+        <span>Available for select projects and roles &bull; Remote &amp; worldwide</span>
         <button
           onClick={handleScrollToTop}
           className="hover:text-foreground transition-colors duration-300 cursor-pointer flex items-center gap-1.5"

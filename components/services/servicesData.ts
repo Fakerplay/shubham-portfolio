@@ -44,7 +44,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     number: "03",
     title: "Immersive 3D & Motion Direction",
     subtitle: "Kinetic typography, 3D spatial environments, and dynamic storytelling.",
-    overview: "Adding depth, emotion, and tactile responsiveness to digital touchpoints through state-of-the-art 3D product modeling, micro-interaction choreography, and cinematic motion design.",
+    overview: "Adding depth, emotion, and tactile response to digital touchpoints through 3D modeling, interaction choreography, and cinematic motion design.",
     deliverables: [
       "3D Product Modeling",
       "WebGL & Motion Systems",

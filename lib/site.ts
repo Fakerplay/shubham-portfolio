@@ -2,7 +2,7 @@ export const SITE_URL = "https://ssspace.vercel.app";
 export const SITE_NAME = "Shubham Shinde";
 export const SITE_TITLE = "Shubham Shinde | Brand, Web & Motion Designer";
 export const SITE_DESCRIPTION =
-  "Portfolio of Shubham Shinde, a Pune-based visual storyteller creating brand identities, websites, motion design, and launch visuals for startups and growing brands.";
+  "Portfolio of Shubham Shinde, a Pune-based brand, web and motion designer with 7+ years of experience across 50+ projects for founders and creative teams.";
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/shubham-shinde-design/",
@@ -18,8 +18,8 @@ export function absoluteUrl(path = "/") {
 
 export function projectSeoDescription(project: {
   brand: string;
-  title: string;
-  tags: string[];
+  role: string;
+  subtitle: string;
 }) {
-  return `${project.brand} case study by Shubham Shinde: ${project.title}. Work across ${project.tags.join(", ")}.`;
+  return `${project.brand} case study by Shubham Shinde, ${project.role}. ${project.subtitle}`;
 }

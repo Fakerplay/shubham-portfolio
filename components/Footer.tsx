@@ -392,9 +392,9 @@ export default function Footer() {
           className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6"
         >
           <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-normal tracking-tight text-white leading-[1.04]">
-            Let&rsquo;s make something <br className="hidden sm:inline" />
-            <span className="italic font-light">clear</span>, memorable, <br className="hidden sm:inline" />
-            and hard to ignore.
+            Building a team or <br className="hidden sm:inline" />
+            building a brand? <br className="hidden sm:inline" />
+            <span className="italic font-light">Let&rsquo;s talk.</span>
           </h2>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
@@ -402,7 +402,7 @@ export default function Footer() {
               href={`mailto:${email}`}
               className="group px-8 py-4 sm:py-4.5 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
             >
-              <span>Start a project</span>
+              <span>Start a conversation</span>
               <svg 
                 className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform duration-300" 
                 fill="none" 
@@ -457,7 +457,7 @@ export default function Footer() {
 
             {/* Center: Location & One-Click Copy Email */}
             <div className="text-center font-normal text-white/75 flex flex-wrap items-center justify-center gap-2">
-              <span>Working with clients worldwide &bull;</span>
+              <span>Based in Pune &bull; Working worldwide &bull;</span>
               <a
                 href={`mailto:${email}`}
                 className="text-white hover:underline font-semibold transition-colors"
@@ -490,7 +490,7 @@ export default function Footer() {
                 href={`mailto:${email}`}
                 className="group px-5 py-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 text-white font-medium flex items-center gap-2 transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.98] shadow-2xs"
               >
-                <span>Start a project</span>
+                <span>Email Shubham</span>
                 <span className="font-mono text-base leading-none text-emerald-400 group-hover:scale-125 transition-transform duration-300">+</span>
               </a>
               <button
@@ -507,7 +507,7 @@ export default function Footer() {
 
           {/* Final Studio Copyright Line */}
           <div className="max-w-7xl mx-auto pt-6 mt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] sm:text-xs font-sans font-light text-white/50 text-center sm:text-left">
-            <span>&copy; 2026 Shubham Shinde. Visual storyteller &amp; designer.</span>
+            <span>&copy; 2026 Shubham Shinde. Brand, web &amp; motion designer.</span>
             <span className="italic font-serif text-white/45">
               Taste is not decoration &bull; It is decision-making.
             </span>

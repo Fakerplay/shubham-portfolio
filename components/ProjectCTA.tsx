@@ -36,23 +36,23 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
         <div className="flex flex-col gap-6 max-w-xl relative z-10">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-foreground/[0.05] border border-foreground/15 text-xs font-mono text-foreground/80 w-fit">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="uppercase tracking-wider">Available for New Collaborations</span>
+            <span className="uppercase tracking-wider">Available for select projects and roles</span>
           </div>
           <h3 className="font-serif text-3xl md:text-5xl font-light leading-[1.2] tracking-tight text-foreground">
-            Inspired by what you see? <br className="hidden sm:inline" />Let’s craft your next chapter.
+            Need a designer who can carry an idea <br className="hidden sm:inline" />from direction to delivery?
           </h3>
           <p className="font-serif text-lg md:text-xl text-foreground/75 leading-relaxed font-light">
-            Whether you need a full-scale brand identity, immersive motion design, or a state-of-the-art web platform, I collaborate with visionary founders and product teams worldwide.
+            I work with founders and creative teams across brand identity, web, motion, and launch.
           </p>
         </div>
 
         {/* Right Side: Action Trigger Buttons */}
         <div className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full lg:w-auto flex-shrink-0 relative z-10">
           <a
-            href={`mailto:${email}?subject=Project%20Discovery%20Call`}
+            href={`mailto:${email}?subject=Portfolio%20enquiry`}
             className="group/btn inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
           >
-            <span>Book a 30-Min Discovery Call</span>
+            <span>Discuss a project</span>
             <svg 
               className="w-4 h-4 text-emerald-400 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
               fill="none" 
@@ -77,7 +77,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
                 transition={{ duration: 0.15, ease: "easeOut" }}
                 className="inline-block"
               >
-                {copied ? "✓ Email Copied!" : `Copy Email (${email})`}
+                {copied ? "Email copied ✓" : `Copy email (${email})`}
               </motion.span>
             </AnimatePresence>
           </button>
@@ -88,7 +88,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
       {nextProject && (
         <div className="pt-8 border-t border-foreground/15 flex flex-col gap-6">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-foreground/50">
-            CONTINUE EXPLORING
+            MORE WORK
           </span>
 
           <Link
@@ -98,7 +98,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
               <div>
                 <span className="font-sans font-medium text-xs md:text-sm uppercase tracking-wider text-foreground/60 block mb-2">
-                  Next Case Study
+                  View next project
                 </span>
                 <h4 className="font-serif text-3xl md:text-5xl font-light text-foreground group-hover/next:translate-x-2 transition-transform duration-500">
                   {nextProject.brand} <span className="text-foreground/40 font-sans text-2xl md:text-4xl">&mdash; {nextProject.title}</span>

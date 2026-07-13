@@ -31,7 +31,7 @@ const ALL_PROJECTS: ProjectItem[] = [
     category: ["All Projects", "Fintech & Wealth", "UI/UX & Systems", "Creative Direction"],
     video: "/videos/daulat-cover.mp4",
     image: "/images/daulat-thumb.jpg",
-    description: "Reimagined India's premier boutique wealth management firm with an authoritative, crystalline digital interface, robust financial dashboards, and seamless investor touchpoints.",
+    description: "Designed a clearer wealth management experience for portfolio tracking, performance, and advisor communication.",
     tags: ["Product Design", "UI/UX Systems", "Wealth Management", "Creative Direction"],
     metrics: [
       { value: "4.5x", label: "Portfolio Growth" },
@@ -47,7 +47,7 @@ const ALL_PROJECTS: ProjectItem[] = [
     category: ["All Projects", "Fintech & Wealth", "Brand Identity", "Creative Direction"],
     video: "/videos/solaris-2.mp4",
     image: "/images/solaris-cover.png",
-    description: "Crafted the complete brand identity, 3D visual language, and creative direction for Solaris—a next-generation fintech platform illuminating financial clarity through radiant, crystalline aesthetics.",
+    description: "Built the Solaris identity across brand, 3D, digital, and investor communications.",
     tags: ["Brand Identity", "Creative Direction", "3D Visuals", "Fintech"],
     metrics: [
       { value: "3.8x", label: "Brand Engagement" },
@@ -63,7 +63,7 @@ const ALL_PROJECTS: ProjectItem[] = [
     category: ["All Projects", "Brand Identity", "Creative Direction"],
     video: "/videos/Cover_Optiv_1080.mp4",
     image: "/images/optiv/About.png",
-    description: "Architected a distinctive brand identity, cohesive logo ecosystem, and comprehensive visual language for Optiv, bridging technological capability with human-centric clarity.",
+    description: "Created a scalable Optiv identity across logo, digital, physical, and campaign touchpoints.",
     tags: ["Brand Identity", "Logo Design", "Visual System", "Creative Direction"],
     metrics: [
       { value: "100%", label: "Cohesive Identity System" },
@@ -79,7 +79,7 @@ const ALL_PROJECTS: ProjectItem[] = [
     category: ["All Projects", "Brand Identity", "Creative Direction"],
     video: "/videos/studio-vistara-1.mp4",
     image: "/images/studio-vistara-cover.png",
-    description: "Crafted an ethereal, highly tactile brand identity, architectural typography matrix, and bespoke stationery ecosystem for modern spatial design.",
+    description: "Translated Studio Vistara’s spatial sensibility into a tactile, adaptable identity system.",
     tags: ["Brand Identity", "Typography System", "Stationery & Packaging", "Creative Direction"],
     metrics: [
       { value: "100%", label: "Cohesive Visual Identity" },
@@ -110,8 +110,8 @@ export default function WorkPage() {
       <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 flex flex-col gap-8 mb-16">
         <div className="flex flex-col gap-4">
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground leading-[1.05]">
-            Crafting Digital &amp; <br className="hidden sm:inline" />
-            <span className="italic font-normal text-foreground/90">Spatial Ecosystems.</span>
+            Selected Work Across <br className="hidden sm:inline" />
+            <span className="italic font-normal text-foreground/90">Brand, Web &amp; Motion.</span>
           </h1>
         </div>
         {/* 2. Interactive Category Filter Bar */}

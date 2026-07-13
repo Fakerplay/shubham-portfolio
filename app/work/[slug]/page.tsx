@@ -157,7 +157,7 @@ export default function WorkDetail() {
                     : "bg-foreground/5 text-foreground/80 border-foreground/15 hover:bg-foreground/10"
                 }`}
               >
-                <span>🎛️ Curator Studio Mode</span>
+                <span>Gallery Mode</span>
                 <span className={`w-2 h-2 rounded-full ${curatorMode ? "bg-green-400 animate-pulse" : "bg-foreground/30"}`} />
               </button>
             )}
@@ -380,7 +380,7 @@ export default function WorkDetail() {
             <FullWidthSlot number="13" slug={project.slug} filename="13-full.jpg" caption="Micro-Interaction Details & Iconography" />
             <FullWidthSlot number="14" slug={project.slug} filename="14-full.jpg" caption="Design Asset Production & 3D Renderings" />
             <FullWidthSlot number="15" slug={project.slug} filename="15-full.jpg" caption="Executive Deck & Client Presentation Spread" />
-            <FullWidthSlot number="16" slug={project.slug} filename="16-full.jpg" caption="Grand Finale & Future Horizon Concept" />
+            <FullWidthSlot number="16" slug={project.slug} filename="16-full.jpg" caption="Final Concept & Project Direction" />
           </>
         )}
 
