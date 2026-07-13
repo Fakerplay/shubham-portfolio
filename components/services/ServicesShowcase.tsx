@@ -30,9 +30,6 @@ export default function ServicesShowcase() {
           
           {/* Clean Section Header (Consistent with Featured Work & About) */}
           <div className="flex flex-col gap-3 pb-8 border-b border-foreground/15">
-            <span className="font-sans font-medium text-xs tracking-widest uppercase text-foreground/50">
-              EXPERTISE / FOCUS
-            </span>
             <h2 className="font-sans text-3xl md:text-5xl text-foreground font-semibold tracking-tight">
               Core Capabilities
             </h2>

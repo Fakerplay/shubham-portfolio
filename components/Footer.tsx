@@ -256,18 +256,11 @@ export default function Footer() {
                       <span className="text-sm sm:text-base font-bold">✦</span>
                     </div>
 
-                    {/* Main Folder Title & Subtitle */}
+                    {/* Main Folder Title */}
                     <div className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]">
                       <h3 className="font-serif text-3xl sm:text-4xl md:text-[42px] font-normal tracking-tight">Studio Notes</h3>
-                      <p className="font-mono text-[11px] sm:text-xs text-white/85 uppercase tracking-widest mt-1">Design Beliefs & Quirks (06)</p>
                     </div>
                   </div>
-                </div>
-
-                {/* Click Prompt Badge below envelope */}
-                <div className="mt-7 flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-white/[0.04] border border-white/10 text-white/80 font-mono text-xs uppercase tracking-wider group-hover:bg-white/[0.08] group-hover:text-white transition-colors duration-300 shadow-none">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-                  <span>Click Folder to Unpack 6 Notes</span>
                 </div>
               </motion.div>
             ) : (
@@ -398,22 +391,11 @@ export default function Footer() {
           viewport={{ once: true, margin: "-60px" }}
           className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6"
         >
-          <div className="flex items-center gap-2.5 mb-6 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/[0.03]">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-white/70">
-              AVAILABLE FOR Q3 / Q4 PROJECTS
-            </span>
-          </div>
-
           <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-normal tracking-tight text-white leading-[1.04]">
             Let&rsquo;s make something <br className="hidden sm:inline" />
             <span className="italic font-light">clear</span>, memorable, <br className="hidden sm:inline" />
             and hard to ignore.
           </h2>
-
-          <p className="font-sans text-base sm:text-lg md:text-xl text-white/75 font-light max-w-2xl mx-auto mt-8 leading-relaxed">
-            Available for brand systems, web experiences, motion-led visuals, and launch assets.
-          </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
             <a

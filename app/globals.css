@@ -78,6 +78,16 @@ body {
   transition: color 0.5s ease;
 }
 
+.mobileNavDock {
+  bottom: calc(0.5rem + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
+  }
+}
+
 /* Theme-adaptive split-flap boxes */
 .split-flap-box {
   background-color: #09090b; /* zinc-950 */
@@ -154,12 +164,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* app/page.tsx sets this to opacity-0 to avoid a flash before its GSAP
-     reveal runs, but skips that reveal entirely for reduced-motion users
-     (their motion effect returns early) — force it visible here so content
-     is never left permanently hidden regardless of JS timing. */
+  /* Keep project content fully visible even if the preference changes while
+     a motion-enhanced session is already mounted. */
   .featured-project-card {
     opacity: 1 !important;
+    transform: none !important;
   }
 }
-

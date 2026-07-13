@@ -389,7 +389,7 @@ interface ProjectProps {
 
 // 6. ProjectCard Component (Full-Width Cinematic Cover Showcase with Editorial Hierarchy)
 const ProjectCard = ({ 
-  slug, brand, year, title, description, image, video, metrics, tags, index, total, reduceMotion = false 
+  slug, brand, title, image, video, metrics, tags
 }: ProjectProps) => {
   return (
     <div className="w-full px-6 md:px-16 lg:px-24 flex flex-col group select-none">
@@ -450,15 +450,10 @@ const ProjectCard = ({
 
         {/* Bottom Editorial Content & Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 pt-2 items-start">
-          {/* Left Column: Authoritative Editorial Body Text / Quote + Project Categories */}
+          {/* Left Column: Project Categories */}
           <div className="lg:col-span-7 flex flex-col justify-between h-full gap-8">
-            <p className="text-lg md:text-2xl font-sans font-normal text-foreground/80 leading-[1.6]">
-              &ldquo;{description}&rdquo;
-            </p>
-
             {tags && tags.length > 0 && (
               <div className="flex flex-col gap-2 pt-5 border-t border-foreground/15">
-                <span className="text-xs font-sans font-medium uppercase tracking-wider text-foreground/50">Disciplines &amp; Scope</span>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-base md:text-lg font-sans font-normal text-foreground/90 tracking-tight">
                   {tags.map((tag: string, idx: number) => (
                     <span key={idx} className="inline-flex items-center gap-x-3">
@@ -521,7 +516,6 @@ export default function Home() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
-  const [activeSection, setActiveSection] = useState("about")
 
   useEffect(() => {
     setMounted(true)
@@ -539,57 +533,56 @@ export default function Home() {
       return () => mediaQuery.removeEventListener("change", listener)
     }
 
-    // Dynamic import GSAP and ScrollTrigger in client-side runtime
+    let cancelled = false;
+    let clearMotion = () => {};
+
+    // Motion progressively enhances content that is already visible in HTML.
     Promise.all([
       import("gsap"),
       import("gsap/ScrollTrigger")
     ]).then(([gsapModule, scrollTriggerModule]) => {
+      if (cancelled) return;
+
       const gsap = gsapModule.gsap;
       const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
-      
       gsap.registerPlugin(ScrollTrigger);
+      const cards = Array.from(document.querySelectorAll<HTMLElement>(".featured-project-card"));
+      const tweens = cards.flatMap((card) => {
+        // Never hide a card a visitor has already reached while GSAP was loading.
+        if (card.getBoundingClientRect().top <= window.innerHeight * 0.9) return [];
 
-      // GSAP ScrollTrigger intersection observers to sync sidebar navigation
-      const sections = ["about", "work"];
-
-      sections.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) {
-          ScrollTrigger.create({
-            trigger: el,
-            start: "top 45%",
-            end: "bottom 45%",
-            onEnter: () => setActiveSection(id),
-            onEnterBack: () => setActiveSection(id),
-          });
-        }
-      });
-
-      // Staggered reveal for Selected Projects cards
-      gsap.fromTo(
-        ".featured-project-card",
-        { y: 55, opacity: 0 },
-        {
+        // Keep a visible floor so a large scroll jump never lands on a blank screen.
+        gsap.set(card, { y: 55, opacity: 0.4 });
+        return [gsap.to(card, {
           y: 0,
           opacity: 1,
           duration: 0.85,
-          stagger: 0.08,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: "#work",
-            start: "top 75%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
+            trigger: card,
+            start: "top 82%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        })];
+      });
+
+      ScrollTrigger.refresh();
+      clearMotion = () => {
+        tweens.forEach((tween) => tween.kill());
+        gsap.set(cards, { clearProps: "opacity,transform" });
+      };
+    }).catch(() => {
+      document.querySelectorAll<HTMLElement>(".featured-project-card").forEach((card) => {
+        card.style.removeProperty("opacity");
+        card.style.removeProperty("transform");
+      });
     });
 
     return () => {
+      cancelled = true;
       mediaQuery.removeEventListener("change", listener);
-      // Clean up all dynamically created ScrollTriggers
-      import("gsap/ScrollTrigger").then((m) => {
-        m.ScrollTrigger.getAll().forEach(t => t.kill());
-      });
+      clearMotion();
     };
   }, []);
 
@@ -760,7 +753,10 @@ export default function Home() {
                         width={logo.width} 
                         height={logo.height} 
                         className={`${logo.className} w-auto object-contain pointer-events-none select-none`} 
-                        style={{ filter: isDark ? "brightness(0) invert(1)" : "brightness(0)" }} 
+                        style={{
+                          filter: isDark ? "brightness(0) invert(1)" : "brightness(0)",
+                          width: "auto",
+                        }}
                       />
                     </div>
                   ))}
@@ -771,7 +767,7 @@ export default function Home() {
           
           <div className="flex flex-col gap-36 md:gap-48 mt-4">
             {projects.map((proj, idx) => (
-              <div key={idx} className={`featured-project-card opacity-0 flex flex-col ${idx < projects.length - 1 ? 'border-b border-foreground/10 pb-32 md:pb-44' : ''}`}>
+              <div key={idx} className={`featured-project-card flex flex-col ${idx < projects.length - 1 ? 'border-b border-foreground/10 pb-32 md:pb-44' : ''}`}>
                 <ProjectCard {...proj} index={idx + 1} total={projects.length} reduceMotion={reduceMotion} />
               </div>
             ))}

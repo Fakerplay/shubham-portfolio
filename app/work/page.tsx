@@ -109,19 +109,11 @@ export default function WorkPage() {
       {/* 1. Hero Header & Editorial Introduction */}
       <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 flex flex-col gap-8 mb-16">
         <div className="flex flex-col gap-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-foreground/[0.04] border border-foreground/15 text-xs font-mono text-foreground/70 w-fit">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="uppercase tracking-widest font-semibold">Selected Works Archive</span>
-          </div>
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground leading-[1.05]">
             Crafting Digital &amp; <br className="hidden sm:inline" />
             <span className="italic font-normal text-foreground/90">Spatial Ecosystems.</span>
           </h1>
         </div>
-        <p className="max-w-2xl text-lg md:text-xl font-sans text-foreground/75 leading-[1.6]">
-          A curated portfolio of high-impact brand architectures, cinematic 3D visual systems, and authoritative financial platforms designed with precision and luminous clarity.
-        </p>
-
         {/* 2. Interactive Category Filter Bar */}
         <div className="flex flex-wrap items-center gap-2 pt-6 border-t border-foreground/10">
           {CATEGORIES.map((cat) => {
@@ -221,12 +213,7 @@ export default function WorkPage() {
                 {/* Bottom Editorial Content & Stats */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 pt-2 items-start">
                   <div className="lg:col-span-7 flex flex-col justify-between h-full gap-8">
-                    <p className="text-lg md:text-2xl font-sans font-normal text-foreground/80 leading-[1.6]">
-                      &ldquo;{project.description}&rdquo;
-                    </p>
-
                     <div className="flex flex-col gap-2 pt-5 border-t border-foreground/15">
-                      <span className="text-xs font-sans font-medium uppercase tracking-wider text-foreground/50">Disciplines &amp; Scope</span>
                       <div className="flex flex-wrap gap-2 pt-1">
                         {project.tags.map((tag, tIdx) => (
                           <span 

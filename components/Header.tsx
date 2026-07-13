@@ -15,10 +15,13 @@ export default function Header() {
   const pathname = usePathname() || "/";
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [isMuted, setIsMuted] = useState(false);
   const isScrollingRef = useRef(false);
+  const lastScrollYRef = useRef(0);
+  const programmaticScrollFrameRef = useRef<number | null>(null);
+  const programmaticScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerY = useMotionValue(0);
   const headerTransform = useMotionTemplate`translateY(${headerY}px)`;
 
@@ -41,26 +44,43 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setIsMobileNavVisible(currentScrollY >= 260);
       
       if (isScrollingRef.current) {
-        setLastScrollY(currentScrollY);
+        lastScrollYRef.current = currentScrollY;
         return;
       }
+
+      const delta = currentScrollY - lastScrollYRef.current;
+      if (Math.abs(delta) < 6 && currentScrollY >= 10) return;
       
       if (currentScrollY < 10) {
         setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
+      } else if (delta > 0 && currentScrollY > 80) {
         setIsVisible(false);
-      } else if (currentScrollY < lastScrollY) {
+      } else if (delta < 0) {
         setIsVisible(true);
       }
       
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
+    lastScrollYRef.current = window.scrollY;
+    setIsMobileNavVisible(window.scrollY >= 260);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (programmaticScrollFrameRef.current !== null) {
+        cancelAnimationFrame(programmaticScrollFrameRef.current);
+      }
+      if (programmaticScrollTimeoutRef.current !== null) {
+        clearTimeout(programmaticScrollTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Drive the header's show/hide transform off the main thread via a motion value
   useEffect(() => {
@@ -101,12 +121,44 @@ export default function Header() {
       if (pathname === "/") {
         const el = document.getElementById(href.replace("#", ""));
         if (el) {
+          if (programmaticScrollFrameRef.current !== null) {
+            cancelAnimationFrame(programmaticScrollFrameRef.current);
+          }
+          if (programmaticScrollTimeoutRef.current !== null) {
+            clearTimeout(programmaticScrollTimeoutRef.current);
+          }
+
           isScrollingRef.current = true;
           setIsVisible(true);
           el.scrollIntoView({ behavior: "smooth" });
-          setTimeout(() => {
+
+          let previousScrollY = window.scrollY;
+          let stableFrames = 0;
+          let hasMoved = Math.abs(el.getBoundingClientRect().top) < 120;
+          const finishProgrammaticScroll = () => {
             isScrollingRef.current = false;
-          }, 850);
+            programmaticScrollFrameRef.current = null;
+            if (programmaticScrollTimeoutRef.current !== null) {
+              clearTimeout(programmaticScrollTimeoutRef.current);
+              programmaticScrollTimeoutRef.current = null;
+            }
+          };
+          const watchScroll = () => {
+            const currentScrollY = window.scrollY;
+            const movement = Math.abs(currentScrollY - previousScrollY);
+            if (movement >= 0.5) hasMoved = true;
+            stableFrames = hasMoved && movement < 0.5 ? stableFrames + 1 : 0;
+            previousScrollY = currentScrollY;
+
+            if (stableFrames >= 4) {
+              finishProgrammaticScroll();
+              return;
+            }
+            programmaticScrollFrameRef.current = requestAnimationFrame(watchScroll);
+          };
+
+          programmaticScrollFrameRef.current = requestAnimationFrame(watchScroll);
+          programmaticScrollTimeoutRef.current = setTimeout(finishProgrammaticScroll, 1800);
         }
       } else {
         router.push("/" + href);
@@ -239,7 +291,11 @@ export default function Header() {
       </motion.header>
 
       {/* 2. Mobile Center Bottom Tactile Navigation */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 select-none pointer-events-auto w-auto max-w-[92vw] md:hidden">
+      <div className={`mobileNavDock fixed left-1/2 -translate-x-1/2 z-50 select-none w-auto max-w-[92vw] md:hidden transition-[opacity,transform] duration-300 ${
+        isMobileNavVisible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-6 pointer-events-none'
+      }`}>
         <nav 
           className="relative bg-zinc-900 border border-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_12px_28px_rgba(0,0,0,0.5)] rounded-xl p-1 flex gap-1"
           style={{
