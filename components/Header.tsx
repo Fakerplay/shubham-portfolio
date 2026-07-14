@@ -101,7 +101,7 @@ export default function Header() {
       rootMargin: "-25% 0px -55% 0px",
     });
 
-    const sections = ["about", "work", "expertise", "services", "notes"];
+    const sections = ["about", "work", "capabilities", "services", "contact"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -169,10 +169,10 @@ export default function Header() {
   };
 
   const navItems = [
-    { label: "Intro", active: pathname === "/" && activeSection === "about", href: "#about" },
-    { label: "Work", active: pathname.startsWith("/work") || (pathname === "/" && activeSection === "work"), href: "/work" },
-    { label: "Expertise", active: pathname === "/" && (activeSection === "expertise" || activeSection === "services"), href: "#expertise" },
-    { label: "Notes", active: pathname === "/" && activeSection === "notes", href: "#notes" },
+    { label: "Work", mobileLabel: "Work", active: pathname.startsWith("/work") || (pathname === "/" && activeSection === "work"), href: "/work" },
+    { label: "Capabilities", mobileLabel: "Skills", active: pathname === "/" && (activeSection === "capabilities" || activeSection === "services"), href: "#capabilities" },
+    { label: "About", mobileLabel: "About", active: pathname === "/" && activeSection === "about", href: "#about" },
+    { label: "Contact", mobileLabel: "Contact", active: pathname === "/" && activeSection === "contact", href: "#contact" },
   ];
 
   return (
@@ -328,7 +328,7 @@ export default function Header() {
               }`}>
                 0{idx + 1}
               </span>
-              <span className="font-semibold hidden min-[420px]:inline">{item.label}</span>
+              <span className="font-semibold text-[10px]">{item.mobileLabel}</span>
 
               {/* Glowing vertical LED lens slot */}
               <div className="flex items-center justify-center pl-0.5 select-none">

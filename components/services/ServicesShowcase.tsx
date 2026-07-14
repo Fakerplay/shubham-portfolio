@@ -11,7 +11,7 @@ export default function ServicesShowcase() {
 
   return (
     <section
-      id="expertise"
+      id="capabilities"
       className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 py-20 md:py-32 border-y border-foreground/10 bg-background overflow-hidden select-none z-10"
     >
       {/* Subtle, restrained micro-grain texture overlay (matching editorial tactile feel without color flashing) */}
