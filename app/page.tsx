@@ -780,13 +780,12 @@ export default function Home() {
         </section>
 
         {/* SECTION 2.5: EXPERIENCE SECTION (Editorial Timeline Ledger) */}
-        <section id="experience" className="w-full py-24 px-6 md:px-16 lg:px-24 border-t border-foreground/10">
-          <div className="max-w-7xl mx-auto w-full flex flex-col gap-12 md:gap-16">
+        <section id="experience" className="w-full py-24 border-t border-foreground/10">
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 w-full flex flex-col gap-12 md:gap-16">
             
             {/* Header */}
             <div className="flex flex-col">
-              <span className="font-mono text-xs uppercase tracking-widest text-foreground/50">02 / Ledger</span>
-              <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight mt-3">Experience</h2>
+              <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight">Experience</h2>
             </div>
 
             {/* Timeline Rows */}
@@ -861,7 +860,7 @@ export default function Home() {
                 onClick={() => playClickSound(0.12)}
                 className="group btn-secondary px-6 py-3 rounded-full font-sans font-medium text-sm tracking-wide transition-all flex items-center gap-2 active:scale-[0.98] cursor-pointer"
               >
-                <span>View LinkedIn</span>
+                <span>LinkedIn</span>
                 <span className="text-current transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">&nearr;</span>
               </a>
             </div>
