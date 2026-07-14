@@ -25,7 +25,8 @@ export default function ServicesAccordion() {
             {/* Trigger Row (Pure Sans Font matching Work Section) */}
             <button
               onClick={() => toggleAccordion(service.id)}
-              className="w-full py-10 md:py-14 flex flex-col md:flex-row md:items-center justify-between gap-6 text-left group cursor-pointer focus:outline-none"
+              className="w-full py-10 md:py-14 flex flex-col md:flex-row md:items-center justify-between gap-6 text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50 focus-visible:ring-inset rounded-sm"
+              aria-expanded={isOpen}
             >
               <div className="flex items-baseline gap-6 md:gap-12">
                 <span className="font-sans font-medium text-xs md:text-sm tracking-widest text-foreground/45 group-hover:text-foreground/80 transition-colors">

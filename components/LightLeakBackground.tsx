@@ -241,12 +241,22 @@ export default function LightLeakBackground({
     window.addEventListener("mousemove", onMove);
 
     let isVisible = false;
+    let pageVisible = document.visibilityState === "visible";
+    let reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
     let raf: number | null = null;
+    let lastFrame = 0;
     const cur = { base: [...palRef.current.base], sun: [...palRef.current.sun] };
     const lerp = (a: number, b: number, t: number) => a + (b-a)*t;
 
     const frame = (now: number) => {
-      if (!isVisible) return;
+      if (!isVisible || !pageVisible) return;
+      if (mobileQuery.matches && !reduceMotion && now - lastFrame < 1000 / 30) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+      lastFrame = now;
       const tgt = palRef.current;
       energy *= 0.96;
       mx2 = lerp(mx2, mx, 0.12); my2 = lerp(my2, my, 0.12);
@@ -259,21 +269,42 @@ export default function LightLeakBackground({
       gl.uniform3fv(U.u_base, new Float32Array(cur.base));
       gl.uniform3fv(U.u_sun, new Float32Array(cur.sun));
       gl.drawArrays(gl.TRIANGLES, 0, 3);
-      raf = requestAnimationFrame(frame);
+      raf = reduceMotion ? null : requestAnimationFrame(frame);
     };
+
+    const stopLoop = () => {
+      if (raf !== null) cancelAnimationFrame(raf);
+      raf = null;
+    };
+
+    const startLoop = () => {
+      stopLoop();
+      if (isVisible && pageVisible) raf = requestAnimationFrame(frame);
+    };
+
+    const onVisibilityChange = () => {
+      pageVisible = document.visibilityState === "visible";
+      if (pageVisible) startLoop();
+      else stopLoop();
+    };
+
+    const onMotionPreferenceChange = (event: MediaQueryListEvent) => {
+      reduceMotion = event.matches;
+      startLoop();
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    reducedMotionQuery.addEventListener("change", onMotionPreferenceChange);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const nextVisible = entry.isIntersecting;
         if (nextVisible && !isVisible) {
           isVisible = true;
-          raf = requestAnimationFrame(frame);
+          startLoop();
         } else if (!nextVisible && isVisible) {
           isVisible = false;
-          if (raf) {
-            cancelAnimationFrame(raf);
-            raf = null;
-          }
+          stopLoop();
         }
       });
     }, { threshold: 0.01 });
@@ -281,10 +312,12 @@ export default function LightLeakBackground({
     observer.observe(cv);
 
     return () => {
-      if (raf) cancelAnimationFrame(raf);
+      stopLoop();
       observer.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      reducedMotionQuery.removeEventListener("change", onMotionPreferenceChange);
     };
   }, []);
 

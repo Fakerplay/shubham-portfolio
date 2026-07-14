@@ -27,12 +27,12 @@ const inter = Inter({
 const exposure = localFont({
   src: [
     {
-      path: '../public/fonts/ExposureTrialVAR.ttf',
+      path: '../public/fonts/ExposureTrialVAR.woff2',
       weight: '100 900',
       style: 'normal',
     },
     {
-      path: '../public/fonts/ExposureTrialVAR-Italic.ttf',
+      path: '../public/fonts/ExposureTrialVAR-Italic.woff2',
       weight: '100 900',
       style: 'italic',
     }

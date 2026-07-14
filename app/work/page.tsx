@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProjectCTA from "@/components/ProjectCTA";
 import { EASE_OUT } from "@/lib/motion";
+import LazyVideo from "@/components/LazyVideo";
 
 interface ProjectItem {
   slug: string;
@@ -119,7 +120,7 @@ export default function WorkPage() {
   );
 
   return (
-    <main className="w-full flex flex-col items-center pt-32 pb-24 text-foreground selection:bg-emerald-500/20 selection:text-emerald-400">
+    <div className="w-full flex flex-col items-center pt-32 pb-24 text-foreground selection:bg-emerald-500/20 selection:text-emerald-400">
       
       {/* 1. Hero Header & Editorial Introduction */}
       <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 flex flex-col gap-8 mb-16">
@@ -180,24 +181,19 @@ export default function WorkPage() {
                   </span>
                 </div>
 
-                <Link href={`/work/${project.slug}`} className="hover:opacity-85 transition-opacity">
+                <Link href={`/work/${project.slug}`} prefetch={false} className="hover:opacity-85 transition-opacity">
                   <h2 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
                     {project.title}
                   </h2>
                 </Link>
 
                 {/* Centerpiece: Full-Width Cinematic Cover Showcase */}
-                <Link href={`/work/${project.slug}`} className="block w-full">
+                <Link href={`/work/${project.slug}`} prefetch={false} className="block w-full">
                   <div className="relative w-full aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden border border-foreground/15 shadow-2xl bg-foreground/[0.02]">
                     {project.video || project.image?.endsWith(".mp4") || project.image?.endsWith(".webm") ? (
-                      <video 
-                        src={project.video || project.image} 
-                        preload="metadata"
+                      <LazyVideo
+                        src={project.video || project.image}
                         poster={project.image?.endsWith(".mp4") || project.image?.endsWith(".webm") ? undefined : project.image}
-                        autoPlay 
-                        loop 
-                        muted 
-                        playsInline 
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
                       />
                     ) : (
@@ -205,9 +201,8 @@ export default function WorkPage() {
                         src={project.image} 
                         alt={project.title} 
                         fill 
-                        quality={100} 
-                        unoptimized 
-                        sizes="100vw" 
+                        quality={85}
+                        sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1280px) calc(100vw - 128px), 1280px"
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
                       />
                     )}
@@ -274,6 +269,6 @@ export default function WorkPage() {
         />
       </div>
 
-    </main>
+    </div>
   );
 }

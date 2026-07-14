@@ -9,6 +9,7 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { EASE_OUT, EASE_IN_OUT } from '@/lib/motion'
+import LazyVideo from '@/components/LazyVideo'
 
 const ServicesShowcase = dynamic(() => import('@/components/services/ServicesShowcase'), { ssr: false })
 
@@ -403,7 +404,7 @@ const ProjectCard = ({
             </span>
           </div>
 
-          <Link href={`/work/${slug}`} className="hover:opacity-85 transition-opacity">
+          <Link href={`/work/${slug}`} prefetch={false} className="hover:opacity-85 transition-opacity">
             <h3 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
               {title}
             </h3>
@@ -411,17 +412,12 @@ const ProjectCard = ({
         </div>
 
         {/* Centerpiece: Full-Width Cinematic Cover Showcase */}
-        <Link href={`/work/${slug}`} className="block w-full">
+        <Link href={`/work/${slug}`} prefetch={false} className="block w-full">
           <div className="relative w-full aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden border border-foreground/15 shadow-2xl bg-foreground/[0.02]">
             {video || image?.endsWith(".mp4") || image?.endsWith(".webm") ? (
-              <video 
-                src={video || image} 
-                preload="metadata"
+              <LazyVideo
+                src={video || image}
                 poster={image?.endsWith(".mp4") || image?.endsWith(".webm") ? undefined : image}
-                autoPlay 
-                loop 
-                muted 
-                playsInline 
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
               />
             ) : (
@@ -429,9 +425,8 @@ const ProjectCard = ({
                 src={image} 
                 alt={title} 
                 fill 
-                quality={100} 
-                unoptimized 
-                sizes="100vw" 
+                quality={85}
+                sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1280px) calc(100vw - 128px), 1280px"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
               />
             )}
@@ -535,52 +530,67 @@ export default function Home() {
 
     let cancelled = false;
     let clearMotion = () => {};
+    let motionStarted = false;
 
-    // Motion progressively enhances content that is already visible in HTML.
-    Promise.all([
-      import("gsap"),
-      import("gsap/ScrollTrigger")
-    ]).then(([gsapModule, scrollTriggerModule]) => {
-      if (cancelled) return;
+    const startProjectMotion = () => {
+      if (motionStarted || cancelled) return;
+      motionStarted = true;
 
-      const gsap = gsapModule.gsap;
-      const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
-      gsap.registerPlugin(ScrollTrigger);
-      const cards = Array.from(document.querySelectorAll<HTMLElement>(".featured-project-card"));
-      const tweens = cards.flatMap((card) => {
-        // Never hide a card a visitor has already reached while GSAP was loading.
-        if (card.getBoundingClientRect().top <= window.innerHeight * 0.9) return [];
+      // Load the heavier scroll-animation runtime only as the work section approaches.
+      Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger")
+      ]).then(([gsapModule, scrollTriggerModule]) => {
+        if (cancelled) return;
 
-        // Keep a visible floor so a large scroll jump never lands on a blank screen.
-        gsap.set(card, { y: 55, opacity: 0.4 });
-        return [gsap.to(card, {
-          y: 0,
-          opacity: 1,
-          duration: 0.85,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 82%",
-            toggleActions: "play none none none",
-            once: true,
-          },
-        })];
+        const gsap = gsapModule.gsap;
+        const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+        const cards = Array.from(document.querySelectorAll<HTMLElement>(".featured-project-card"));
+        const tweens = cards.flatMap((card) => {
+          // Never hide a card a visitor has already reached while GSAP was loading.
+          if (card.getBoundingClientRect().top <= window.innerHeight * 0.9) return [];
+
+          // Keep a visible floor so a large scroll jump never lands on a blank screen.
+          gsap.set(card, { y: 55, opacity: 0.4 });
+          return [gsap.to(card, {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 82%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          })];
+        });
+
+        ScrollTrigger.refresh();
+        clearMotion = () => {
+          tweens.forEach((tween) => tween.kill());
+          gsap.set(cards, { clearProps: "opacity,transform" });
+        };
+      }).catch(() => {
+        document.querySelectorAll<HTMLElement>(".featured-project-card").forEach((card) => {
+          card.style.removeProperty("opacity");
+          card.style.removeProperty("transform");
+        });
       });
+    };
 
-      ScrollTrigger.refresh();
-      clearMotion = () => {
-        tweens.forEach((tween) => tween.kill());
-        gsap.set(cards, { clearProps: "opacity,transform" });
-      };
-    }).catch(() => {
-      document.querySelectorAll<HTMLElement>(".featured-project-card").forEach((card) => {
-        card.style.removeProperty("opacity");
-        card.style.removeProperty("transform");
-      });
-    });
+    const workSection = document.getElementById("work");
+    const workObserver = new IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting) return;
+      workObserver.disconnect();
+      startProjectMotion();
+    }, { rootMargin: "400px 0px" });
+    if (workSection) workObserver.observe(workSection);
 
     return () => {
       cancelled = true;
+      workObserver.disconnect();
       mediaQuery.removeEventListener("change", listener);
       clearMotion();
     };

@@ -4,11 +4,20 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { EASE_OUT } from "@/lib/motion";
 
+interface Weather {
+  temp: number;
+  description: string;
+  emoji: string;
+}
+
+const WEATHER_CACHE_KEY = "portfolio-pune-weather";
+const WEATHER_CACHE_TTL = 15 * 60 * 1000;
+
 export default function LocalTime() {
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState<string>("");
   const [isHovered, setIsHovered] = useState(false);
-  const [weather, setWeather] = useState<{ temp: number; description: string; emoji: string } | null>(null);
+  const [weather, setWeather] = useState<Weather | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -25,14 +34,40 @@ export default function LocalTime() {
     };
 
     updateTime();
-    const interval = setInterval(updateTime, 1000);
+    const interval = setInterval(updateTime, 60_000);
 
-    // Fetch live Pune weather coordinates from Open-Meteo
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=18.5204&longitude=73.8567&current_weather=true")
-      .then((res) => res.json())
-      .then((data) => {
-        const temp = Math.round(data.current_weather.temperature);
-        const code = data.current_weather.weathercode;
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!isHovered || weather) return;
+
+    const controller = new AbortController();
+
+    const fetchWeather = () => {
+      try {
+        const cached = sessionStorage.getItem(WEATHER_CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached) as { expiresAt: number; value: Weather };
+          if (parsed.expiresAt > Date.now()) {
+            setWeather(parsed.value);
+            return;
+          }
+        }
+      } catch {
+        sessionStorage.removeItem(WEATHER_CACHE_KEY);
+      }
+
+      fetch("https://api.open-meteo.com/v1/forecast?latitude=18.5204&longitude=73.8567&current_weather=true", {
+        signal: controller.signal,
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Weather unavailable");
+          return res.json();
+        })
+        .then((data) => {
+          const temp = Math.round(data.current_weather.temperature);
+          const code = data.current_weather.weathercode;
         
         let description = "Clear Skies";
         let emoji = "☀️";
@@ -44,15 +79,29 @@ export default function LocalTime() {
         else if (code >= 80 && code <= 82) { description = "Rain Showers"; emoji = "🌦️"; }
         else if (code >= 95 && code <= 99) { description = "Thunderstorms"; emoji = "⛈️"; }
         
-        setWeather({ temp, description, emoji });
-      })
-      .catch(() => {
-        // Fallback default
-        setWeather({ temp: 28, description: "Monsoon Breeze", emoji: "🌦️" });
+          const value = { temp, description, emoji };
+          setWeather(value);
+          try {
+            sessionStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify({
+              expiresAt: Date.now() + WEATHER_CACHE_TTL,
+              value,
+            }));
+          } catch {
+            // Weather remains available even if browser storage is disabled.
+          }
+        })
+        .catch((error: unknown) => {
+          if (error instanceof DOMException && error.name === "AbortError") return;
+          setWeather({ temp: 28, description: "Monsoon Breeze", emoji: "🌦️" });
       });
+    };
 
-    return () => clearInterval(interval);
-  }, []);
+    fetchWeather();
+
+    return () => {
+      controller.abort();
+    };
+  }, [isHovered, weather]);
 
   if (!mounted) {
     return (
@@ -67,6 +116,10 @@ export default function LocalTime() {
       className="relative cursor-help w-[68px] text-right"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
+      tabIndex={0}
+      aria-label={`Local time in Pune: ${time}. Focus to load current weather.`}
     >
       <span className="font-mono text-foreground opacity-60 font-medium hover:opacity-100 transition-opacity duration-300 block">
         {time}

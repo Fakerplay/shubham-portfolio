@@ -263,7 +263,7 @@ export default function Header() {
             {/* Audio Mute/Unmute toggle widget */}
             <button
               onClick={toggleMute}
-              className="p-1.5 rounded-md hover:bg-foreground/5 active:scale-[0.97] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus:outline-none"
+              className="min-w-11 min-h-11 flex items-center justify-center rounded-md hover:bg-foreground/5 active:scale-[0.97] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60"
               title={isMuted ? "Unmute clicks" : "Mute clicks"}
               aria-label={isMuted ? "Unmute clicks" : "Mute clicks"}
             >
@@ -352,7 +352,7 @@ export default function Header() {
             key={idx}
             href={item.href}
             onClick={(e) => handleNavClick(e, item.href)}
-            className="group relative flex items-center justify-center w-6 h-6 focus:outline-none"
+            className="group relative flex items-center justify-center w-11 h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 rounded-full"
             title={`Scroll to ${item.label}`}
           >
             <div className={`rounded-full transition-[width,height,background-color,box-shadow,opacity,transform] duration-300 ${

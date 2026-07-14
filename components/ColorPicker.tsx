@@ -22,7 +22,7 @@ export default function ColorPicker() {
           <button
             key={t.value}
             onClick={() => setTheme(t.value)}
-            className={`w-3.5 h-3.5 rounded-full border border-foreground/15 transition-all duration-300 relative cursor-pointer hover:scale-125 focus:outline-none ${
+            className={`w-11 h-11 -m-3.5 rounded-full border-[15px] border-transparent bg-clip-padding transition-all duration-300 relative cursor-pointer hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
               isActive 
                 ? "ring-1 ring-foreground ring-offset-1 ring-offset-background scale-110" 
                 : "opacity-80 hover:opacity-100"

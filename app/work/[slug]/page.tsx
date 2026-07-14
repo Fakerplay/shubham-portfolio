@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { DETAILED_PROJECTS } from "@/data/projects";
 import ProjectCTA from "@/components/ProjectCTA";
+import LazyVideo from "@/components/LazyVideo";
 
 function FullWidthSlot({
   number,
@@ -34,8 +35,7 @@ function FullWidthSlot({
           width={2560}
           height={1440}
           priority={priority}
-          quality={100}
-          unoptimized
+          quality={85}
           onError={() => setHasError(true)}
           sizes="(max-width: 768px) 100vw, calc(100vw - 160px)"
           className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.01]"
@@ -72,7 +72,7 @@ export default function WorkDetail() {
   }
 
   return (
-    <main className="min-h-screen w-full bg-background text-foreground selection:bg-foreground selection:text-background pb-32">
+    <div className="min-h-screen w-full bg-background text-foreground selection:bg-foreground selection:text-background pb-32">
       {/* Top Sticky Bar */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-foreground/10 px-6 md:px-16 lg:px-24 py-5 transition-colors">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -182,14 +182,10 @@ export default function WorkDetail() {
         <section className="w-full relative group px-6 md:px-[80px]">
           <div className="w-full relative overflow-hidden rounded-[12px] border border-foreground/15 shadow-xl bg-foreground/[0.015]">
             {project.video || project.image?.endsWith(".mp4") || project.image?.endsWith(".webm") ? (
-              <video 
-                src={project.video || project.image} 
-                preload="metadata"
+              <LazyVideo
+                src={project.video || project.image}
                 poster={project.image?.endsWith(".mp4") || project.image?.endsWith(".webm") ? undefined : project.image}
-                autoPlay 
-                loop 
-                muted 
-                playsInline 
+                priorityMargin="100px 0px"
                 className="w-full h-auto block" 
               />
             ) : (
@@ -199,8 +195,7 @@ export default function WorkDetail() {
                 width={2560}
                 height={1440}
                 priority
-                quality={100} 
-                unoptimized 
+                quality={85}
                 sizes="(max-width: 768px) 100vw, calc(100vw - 160px)" 
                 className="w-full h-auto block" 
               />
@@ -243,6 +238,6 @@ export default function WorkDetail() {
 
       {/* POST-SHOWCASE CTA & NEXT PROJECT PREVIEW */}
       <ProjectCTA nextProject={project.nextProject} />
-    </main>
+    </div>
   );
 }

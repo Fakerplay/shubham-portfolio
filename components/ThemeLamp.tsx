@@ -34,7 +34,7 @@ export default function ThemeLamp() {
   return (
     <button
       onClick={handleToggle}
-      className="relative text-foreground hover:opacity-85 active:scale-[0.97] transition-[opacity,transform] focus:outline-none p-1 flex items-center justify-center cursor-pointer"
+      className="relative min-w-11 min-h-11 text-foreground hover:opacity-85 active:scale-[0.97] transition-[opacity,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 rounded-md flex items-center justify-center cursor-pointer"
       title={isNight ? "Turn on lights (Day)" : "Turn off lights (Night)"}
       aria-label={isNight ? "Turn on lights (Day)" : "Turn off lights (Night)"}
     >
