@@ -1,4 +1,5 @@
 import localFont from 'next/font/local'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeContext'
 import LightLeakBackground from '@/components/LightLeakBackground'
@@ -16,6 +17,12 @@ import {
   SOCIAL_LINKS,
   absoluteUrl,
 } from '@/lib/site'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 const exposure = localFont({
   src: [
@@ -149,7 +156,7 @@ const profileJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={exposure.variable}>
+    <html lang="en" suppressHydrationWarning className={`${exposure.variable} ${inter.variable}`}>
       <body className="font-sans antialiased min-h-screen flex flex-col selection:bg-zinc-800 selection:text-white transition-colors duration-500">
         <StructuredData id="portfolio-profile-data" data={profileJsonLd} />
         <ThemeProvider>

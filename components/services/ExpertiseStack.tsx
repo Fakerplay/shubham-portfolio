@@ -91,7 +91,7 @@ export default function ExpertiseStack({ onHoverService }: ExpertiseStackProps) 
             <span className="font-sans font-semibold text-xs tracking-widest uppercase text-foreground/60">
               CUSTOM ENGAGEMENT SPEC
             </span>
-            <h3 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground tracking-tight leading-[1.1]">
+            <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-foreground tracking-tight leading-[1.1]">
               Configured Architecture
             </h3>
             <p className="font-sans text-lg md:text-2xl text-foreground/80 font-normal leading-[1.6]">

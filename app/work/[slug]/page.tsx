@@ -57,7 +57,7 @@ export default function WorkDetail() {
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center select-none">
-        <h1 className="text-4xl font-sans font-semibold text-foreground mb-4">Case Study Not Found</h1>
+        <h1 className="text-4xl font-serif font-light text-foreground mb-4">Case Study Not Found</h1>
         <p className="text-foreground/70 mb-8 max-w-md">
           We couldn&apos;t find the requested project showcase. It may have been archived or moved.
         </p>
@@ -108,7 +108,7 @@ export default function WorkDetail() {
             )}
           </div>
 
-          <h1 className="font-sans font-semibold text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05] max-w-5xl">
+          <h1 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05] max-w-5xl">
             {project.title}
           </h1>
 

@@ -31,7 +31,7 @@ export default function ServicesAccordion() {
                 <span className="font-sans font-medium text-xs md:text-sm tracking-widest text-foreground/45 group-hover:text-foreground/80 transition-colors">
                   {service.number}
                 </span>
-                <h3 className="font-sans text-2xl md:text-4xl lg:text-5xl font-semibold text-foreground group-hover:translate-x-2 transition-transform duration-500 leading-tight tracking-tight">
+                <h3 className="font-serif text-2xl md:text-4xl lg:text-5xl font-normal text-foreground group-hover:translate-x-2 transition-transform duration-500 leading-tight tracking-tight">
                   {service.title}
                 </h3>
               </div>

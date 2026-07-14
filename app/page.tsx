@@ -404,7 +404,7 @@ const ProjectCard = ({
           </div>
 
           <Link href={`/work/${slug}`} className="hover:opacity-85 transition-opacity">
-            <h3 className="font-sans font-semibold text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
+            <h3 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
               {title}
             </h3>
           </Link>
@@ -750,7 +750,7 @@ export default function Home() {
           {/* Perfectly Aligned Section Header */}
           <div className="w-full px-6 md:px-16 lg:px-24">
             <div className="max-w-7xl mx-auto w-full">
-              <h2 className="font-sans text-3xl md:text-5xl text-foreground font-semibold tracking-tight">Featured Work</h2>
+              <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight">Featured Work</h2>
               <p className="mt-3 font-sans text-sm md:text-base text-foreground/60 tracking-tight">
                 7+ years across brand, web &amp; motion <span aria-hidden="true">&middot;</span> 50+ projects delivered
               </p>

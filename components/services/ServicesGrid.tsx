@@ -23,7 +23,7 @@ export default function ServicesGrid() {
               </span>
             </div>
 
-            <h3 className="font-sans text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground leading-[1.2] tracking-tight group-hover:translate-x-1.5 transition-transform duration-500">
+            <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl font-normal text-foreground leading-[1.2] tracking-tight group-hover:translate-x-1.5 transition-transform duration-500">
               {service.title}
             </h3>
 

@@ -25,7 +25,7 @@ export default function ExpertiseCTA() {
         
         {/* Left Side: Editorial CTA Headline */}
         <div className="flex flex-col gap-4 max-w-3xl">
-          <h3 className="font-sans text-3xl sm:text-5xl md:text-6xl font-semibold text-foreground tracking-tight leading-[1.08]">
+          <h3 className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-foreground tracking-tight leading-[1.08]">
             Building a team or building a brand? Let&rsquo;s talk.
           </h3>
         </div>

@@ -89,7 +89,7 @@ export default function ServicesMarquee() {
             <span className="font-sans font-medium text-xs tracking-widest uppercase text-foreground/45">
               {currentService.tag}
             </span>
-            <h3 className="font-sans text-3xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-[1.12] tracking-tight">
+            <h3 className="font-serif text-3xl md:text-5xl lg:text-6xl font-normal text-foreground leading-[1.12] tracking-tight">
               {currentService.title}
             </h3>
             <p className="font-sans text-base md:text-xl text-foreground/80 font-normal leading-[1.6]">

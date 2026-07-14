@@ -211,7 +211,7 @@ export default function ExpertisePillar({ onHoverService, activeService }: Exper
                   </span>
                 </div>
 
-                <h3 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground tracking-tight leading-[1.1] break-words">
+                <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-foreground tracking-tight leading-[1.1] break-words">
                   {current.title}
                 </h3>
 

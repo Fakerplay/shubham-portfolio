@@ -181,7 +181,7 @@ export default function WorkPage() {
                 </div>
 
                 <Link href={`/work/${project.slug}`} className="hover:opacity-85 transition-opacity">
-                  <h2 className="font-sans font-semibold text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
+                  <h2 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
                     {project.title}
                   </h2>
                 </Link>
