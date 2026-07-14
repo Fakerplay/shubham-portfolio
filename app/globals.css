@@ -171,3 +171,46 @@ body {
     transform: none !important;
   }
 }
+
+/* Surface Context Custom Controls for contrast alignment */
+[data-surface="light"] {
+  --btn-primary-bg: #111111;
+  --btn-primary-text: #ffffff;
+  --btn-primary-border: #111111;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: #111111;
+  --btn-secondary-border: rgba(17, 17, 17, 0.25);
+  --btn-secondary-hover-bg: #111111;
+  --btn-secondary-hover-text: #ffffff;
+}
+
+[data-surface="dark"] {
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #111111;
+  --btn-primary-border: #ffffff;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: #ffffff;
+  --btn-secondary-border: rgba(255, 255, 255, 0.25);
+  --btn-secondary-hover-bg: #ffffff;
+  --btn-secondary-hover-text: #111111;
+}
+
+/* Button utility classes referencing surface context variables */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: 1px solid var(--btn-primary-border);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: 1px solid var(--btn-secondary-border);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover-bg);
+  color: var(--btn-secondary-hover-text);
+  border-color: var(--btn-secondary-hover-bg);
+}

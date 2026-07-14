@@ -14,16 +14,25 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return 'night'
   }
 
+  const getSurfaceFromTheme = (t: string): string => {
+    if (t === 'morning' || t === 'day' || t === 'matcha') return 'light'
+    return 'dark'
+  }
+
   useEffect(() => {
     localStorage.removeItem('theme') // Clear legacy override locks
     const autoTheme = getThemeFromTime()
     setTheme(autoTheme)
+    const surface = getSurfaceFromTheme(autoTheme)
     document.documentElement.setAttribute('data-theme', autoTheme)
+    document.documentElement.setAttribute('data-surface', surface)
   }, [])
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme)
+    const surface = getSurfaceFromTheme(newTheme)
     document.documentElement.setAttribute('data-theme', newTheme)
+    document.documentElement.setAttribute('data-surface', surface)
   }
 
   return (

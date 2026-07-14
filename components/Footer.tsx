@@ -181,7 +181,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full relative z-10 border-t border-white/10 mt-auto bg-[#020d08] text-[#F5F5F7] overflow-hidden select-none pt-16 sm:pt-24 pb-8 dark">
+    <footer data-surface="dark" className="w-full relative z-10 border-t border-white/10 mt-auto bg-[#020d08] text-[#F5F5F7] overflow-hidden select-none pt-16 sm:pt-24 pb-8 dark">
       {/* Dark Premium Green Ambient Glow Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#020d08]">
         {/* Soft, organic radial glows matching the reference images */}
@@ -402,11 +402,11 @@ export default function Footer() {
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
               <a
                 href={`mailto:${email}`}
-                className="group px-8 py-4 sm:py-4.5 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
+                className="group btn-primary px-8 py-4 sm:py-4.5 rounded-full font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center"
               >
                 <span>Start a conversation</span>
                 <svg 
-                  className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform duration-300" 
+                  className="w-4 h-4 text-current transform group-hover:translate-x-1 transition-transform duration-300" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor" 
@@ -418,7 +418,7 @@ export default function Footer() {
 
               <Link
                 href="/#work"
-                className="px-8 py-4 sm:py-4.5 rounded-full border border-white/20 hover:border-white text-white font-sans font-medium text-sm sm:text-base transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.98]"
+                className="btn-secondary px-8 py-4 sm:py-4.5 rounded-full font-sans font-medium text-sm sm:text-base transition-[transform,box-shadow,background-color,border-color] duration-300 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
               >
                 View work
               </Link>

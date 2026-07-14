@@ -1,7 +1,8 @@
-"use strict";
+"use client";
 
 import React from "react";
 import Link from "next/link";
+import { useTheme } from "./ThemeContext";
 
 interface ProjectCTAProps {
   nextProject?: {
@@ -12,13 +13,16 @@ interface ProjectCTAProps {
 }
 
 export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "night" || theme === "aurora" || theme === "neon";
+  const surface = isDark ? "dark" : "light";
   const email = "shubhamshinde52@gmail.com";
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-20 pb-28 flex flex-col gap-20">
       
       {/* High-Impact Post-Showcase CTA Box (Matching Hero Section Aesthetic) */}
-      <div className="relative overflow-hidden rounded-[32px] bg-foreground/[0.03] border border-foreground/15 p-8 md:p-16 text-foreground shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group transition-colors duration-500">
+      <div data-surface={surface} className="relative overflow-hidden rounded-[32px] bg-foreground/[0.03] border border-foreground/15 p-8 md:p-16 text-foreground shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group transition-colors duration-500">
         {/* Subtle Ambient Glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl pointer-events-none group-hover:bg-foreground/10 transition-colors duration-700" />
 
@@ -37,11 +41,11 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
         <div className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full lg:w-auto flex-shrink-0 relative z-10">
           <a
             href={`mailto:${email}?subject=Discuss%20a%20project`}
-            className="group/btn inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)] text-center"
+            className="group/btn btn-primary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] cursor-pointer text-center"
           >
             <span>Discuss a project</span>
             <svg 
-              className="w-4 h-4 text-emerald-400 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
+              className="w-4 h-4 text-current transform group-hover/btn:translate-x-1 transition-transform duration-300" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor" 
@@ -53,11 +57,11 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
 
           <a
             href={`mailto:${email}?subject=Talk%20about%20a%20role`}
-            className="group/btn inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full border border-zinc-850 hover:border-zinc-500 text-zinc-300 hover:text-white font-sans font-medium text-sm tracking-wide transition-[background-color,border-color,transform] duration-300 hover:bg-white/[0.04] active:scale-[0.97] cursor-pointer overflow-hidden bg-transparent text-center"
+            className="group/btn btn-secondary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-medium text-sm tracking-wide transition-[background-color,border-color,transform] duration-300 active:scale-[0.97] cursor-pointer overflow-hidden text-center"
           >
             <span>Talk about a role</span>
             <svg 
-              className="w-4 h-4 text-zinc-400 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
+              className="w-4 h-4 text-current transform group-hover/btn:translate-x-1 transition-transform duration-300" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor" 
