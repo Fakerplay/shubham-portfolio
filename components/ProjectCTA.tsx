@@ -1,9 +1,7 @@
 "use strict";
-"use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectCTAProps {
   nextProject: {
@@ -14,15 +12,7 @@ interface ProjectCTAProps {
 }
 
 export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
-  const [copied, setCopied] = useState(false);
   const email = "shubhamshinde52@gmail.com";
-
-  const handleCopyEmail = (e: React.MouseEvent) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-20 pb-28 flex flex-col gap-20">
@@ -39,18 +29,15 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
             <span className="uppercase tracking-wider">Available for select projects and roles</span>
           </div>
           <h3 className="font-serif text-3xl md:text-5xl font-light leading-[1.2] tracking-tight text-foreground">
-            Need a designer who can carry an idea <br className="hidden sm:inline" />from direction to delivery?
+            Building a team or building a brand? Let&rsquo;s talk.
           </h3>
-          <p className="font-serif text-lg md:text-xl text-foreground/75 leading-relaxed font-light">
-            I work with founders and creative teams across brand identity, web, motion, and launch.
-          </p>
         </div>
 
-        {/* Right Side: Action Trigger Buttons */}
+        {/* Right Side: Action Trigger Buttons (Branched Audiences) */}
         <div className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full lg:w-auto flex-shrink-0 relative z-10">
           <a
-            href={`mailto:${email}?subject=Portfolio%20enquiry`}
-            className="group/btn inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
+            href={`mailto:${email}?subject=Discuss%20a%20project`}
+            className="group/btn inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)] text-center"
           >
             <span>Discuss a project</span>
             <svg 
@@ -64,23 +51,21 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
             </svg>
           </a>
 
-          <button
-            onClick={handleCopyEmail}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-zinc-800 hover:border-zinc-500 text-zinc-300 hover:text-white font-mono text-xs tracking-wider uppercase transition-[background-color,border-color,transform] duration-300 hover:bg-white/[0.04] active:scale-[0.97] cursor-pointer overflow-hidden bg-transparent"
+          <a
+            href={`mailto:${email}?subject=Talk%20about%20a%20role`}
+            className="group/btn inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full border border-zinc-850 hover:border-zinc-500 text-zinc-300 hover:text-white font-sans font-medium text-sm tracking-wide transition-[background-color,border-color,transform] duration-300 hover:bg-white/[0.04] active:scale-[0.97] cursor-pointer overflow-hidden bg-transparent text-center"
           >
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={copied ? "copied" : "copy"}
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.15, ease: "easeOut" }}
-                className="inline-block"
-              >
-                {copied ? "Email copied ✓" : `Copy email (${email})`}
-              </motion.span>
-            </AnimatePresence>
-          </button>
+            <span>Talk about a role</span>
+            <svg 
+              className="w-4 h-4 text-zinc-400 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth="2.5"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
         </div>
       </div>
 
