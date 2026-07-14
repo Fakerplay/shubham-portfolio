@@ -188,9 +188,9 @@ export default function Header() {
   };
 
   const navItems = [
+    { label: "About", mobileLabel: "About", active: pathname === "/" && activeSection === "about", href: "#about" },
     { label: "Work", mobileLabel: "Work", active: pathname.startsWith("/work") || (pathname === "/" && activeSection === "work"), href: "/work" },
     { label: "Capabilities", mobileLabel: "Skills", active: pathname === "/" && (activeSection === "capabilities" || activeSection === "services"), href: "#capabilities" },
-    { label: "About", mobileLabel: "About", active: pathname === "/" && activeSection === "about", href: "#about" },
     { label: "Contact", mobileLabel: "Contact", active: pathname === "/" && activeSection === "contact", href: "#contact" },
   ];
 
