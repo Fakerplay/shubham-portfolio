@@ -19,69 +19,36 @@ export interface ExpertiseItem {
 export const EXPERTISE_ITEMS: ExpertiseItem[] = [
   {
     number: "01",
-    title: "Brand Identity",
-    category: "Identity Systems",
+    title: "Brand Systems",
+    category: "Identity & Strategy",
     color: "#f43f5e",
     gradient: "radial-gradient(ellipse 90% 70% at 30% 50%, rgba(244, 63, 94, 0.15) 0%, rgba(244, 63, 94, 0.08) 35%, rgba(244, 63, 94, 0.03) 65%, rgba(244, 63, 94, 0) 100%)",
-    overview: "Distinctive identity systems built to be recognized, remembered, and used across every touchpoint.",
+    overview: "Distinctive brand and visual systems built to explain ambitious ideas, establish credibility, and scale across every touchpoint.",
     stats: "Strategy to Guidelines • Built to Scale",
     skills: ["Design Tokens", "Typography Systems", "Logo Systems", "Brand Guidelines"],
     technologies: ["Figma Variables", "Typography Hierarchy", "Design Systems", "Vector Design"]
   },
   {
     number: "02",
-    title: "Website Design",
-    category: "Digital Experiences",
+    title: "Digital Experiences",
+    category: "Product & Web Design",
     color: "#10b981",
     gradient: "radial-gradient(ellipse 90% 70% at 30% 50%, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 35%, rgba(16, 185, 129, 0.03) 65%, rgba(16, 185, 129, 0) 100%)",
-    overview: "Editorial, responsive websites where story, usability, and expression work as one.",
-    stats: "From Figma to Launch • Responsive by Design",
+    overview: "Editorial, high-performance websites and product interfaces where clear information hierarchy meets calm, purposeful interaction.",
+    stats: "Concept to Launch • User-Centered Flow",
     skills: ["Information Architecture", "Responsive Grids", "Design Systems", "Accessible Interfaces"],
     technologies: ["Next.js 16", "Tailwind CSS", "Figma Variables", "Design Systems"]
   },
   {
     number: "03",
-    title: "Creative Direction",
-    category: "Direction & Systems",
-    color: "#f59e0b",
-    gradient: "radial-gradient(ellipse 90% 70% at 30% 50%, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.08) 35%, rgba(245, 158, 11, 0.03) 65%, rgba(245, 158, 11, 0) 100%)",
-    overview: "One clear creative idea carried from positioning through campaigns, products, and launch.",
-    stats: "Concept to Production • One Coherent Direction",
-    skills: ["Art Direction", "Sprint Leadership", "Visual Storytelling", "System Governance"],
-    technologies: ["Design Systems", "Typography Hierarchy", "Figma Variables"]
-  },
-  {
-    number: "04",
-    title: "Motion Design",
-    category: "Motion & Interaction",
+    title: "Motion & Launch",
+    category: "Motion & WebGL",
     color: "#a855f7",
     gradient: "radial-gradient(ellipse 90% 70% at 70% 50%, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.08) 35%, rgba(168, 85, 247, 0.03) 65%, rgba(168, 85, 247, 0) 100%)",
-    overview: "Motion systems that add meaning, rhythm, and recall without getting in the way.",
-    stats: "Interaction to Campaign • Designed with Restraint",
-    skills: ["Motion Systems", "WebGL", "Transitions", "Micro-Interactions"],
-    technologies: ["GSAP ScrollTrigger", "WebGL Shaders", "React Three Fiber", "Kinetic Curves"]
-  },
-  {
-    number: "05",
-    title: "No-Code Development",
-    category: "Design to Launch",
-    color: "#14b8a6",
-    gradient: "radial-gradient(ellipse 90% 70% at 70% 50%, rgba(20, 184, 166, 0.15) 0%, rgba(20, 184, 166, 0.08) 35%, rgba(20, 184, 166, 0.03) 65%, rgba(20, 184, 166, 0) 100%)",
-    overview: "High-fidelity websites built and shipped with scalable CMS foundations and responsive performance.",
-    stats: "Design to Launch • CMS Ready",
-    skills: ["Framer Production", "Webflow Systems", "CMS Architecture", "SEO Optimization"],
-    technologies: ["No-Code Framer", "Tailwind CSS", "Design Systems"]
-  },
-  {
-    number: "06",
-    title: "AI Experiences",
-    category: "Human-Centered AI",
-    color: "#d946ef",
-    gradient: "radial-gradient(ellipse 90% 70% at 70% 50%, rgba(217, 70, 239, 0.15) 0%, rgba(217, 70, 239, 0.08) 35%, rgba(217, 70, 239, 0.03) 65%, rgba(217, 70, 239, 0) 100%)",
-    overview: "Practical AI interfaces and workflows shaped around real user needs, clear feedback, and useful outcomes.",
-    stats: "Useful by Design • Human in the Loop",
-    skills: ["AI Workflows", "LLM Integration", "Conversation Design", "Interactive Prototyping"],
-    technologies: ["OpenAI & Claude APIs", "Next.js 16", "Tailwind CSS", "Kinetic Curves"]
+    overview: "Motion systems, WebGL backgrounds, and launch-ready interactive web experiences built with modern no-code platforms and AI development methods.",
+    stats: "Supporting Methods: No-Code & AI",
+    skills: ["Motion Graphics", "Interactive Shaders", "Framer Production", "AI Workflows & APIs"],
+    technologies: ["Framer & Webflow", "Claude & OpenAI APIs", "WebGL", "GSAP ScrollTrigger"]
   }
 ];
 
@@ -222,7 +189,7 @@ export default function ExpertisePillar({ onHoverService, activeService }: Exper
 
               {/* Bottom Subtle Indicator */}
               <div className="pt-6 border-t border-foreground/10 flex items-center justify-between text-xs font-sans text-foreground/45 uppercase tracking-widest">
-                <span>Core Discipline {current.number} / 06</span>
+                <span>Core Discipline {current.number} / 03</span>
                 <span className="font-semibold text-foreground/70" style={{ color: current.color }}>Active Specification &bull;</span>
               </div>
             </motion.div>

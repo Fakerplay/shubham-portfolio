@@ -12,8 +12,8 @@ interface ExpertiseMatrixProps {
 export default function ExpertiseMatrix({ onHoverService, activeService }: ExpertiseMatrixProps) {
   return (
     <div className="w-full flex flex-col">
-      {/* 2-Column Editorial Focus Ledger (Restrained & Architectural) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-1 sm:gap-y-3">
+      {/* 1-Column Editorial Focus Ledger (Restrained & Architectural) */}
+      <div className="flex flex-col border-t border-foreground/15">
         {EXPERTISE_ITEMS.map((item) => {
           const isServiceHovered = activeService?.title === item.title;
           const isDimmed = activeService && !isServiceHovered;

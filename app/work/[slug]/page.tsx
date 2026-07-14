@@ -119,20 +119,6 @@ export default function WorkDetail() {
       {/* Hero Header Area */}
       <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-16 md:pt-24 pb-8 flex flex-col gap-8">
         <div className="flex flex-col gap-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="font-sans font-semibold tracking-wider text-sm md:text-base uppercase text-foreground">
-              {project.brand}
-            </span>
-            {project.year && (
-              <>
-                <span className="text-foreground/30">&bull;</span>
-                <span className="text-sm font-sans font-medium text-foreground/60">
-                  {project.year}
-                </span>
-              </>
-            )}
-          </div>
-
           <h1 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05] max-w-5xl">
             {project.title}
           </h1>

@@ -381,7 +381,7 @@ interface ProjectProps {
   description: string;
   image: string;
   video?: string;
-  metrics: { value: string; label: string }[];
+  outcome: string;
   tags?: string[];
   index?: number;
   total?: number;
@@ -390,7 +390,7 @@ interface ProjectProps {
 
 // 6. ProjectCard Component (Full-Width Cinematic Cover Showcase with Editorial Hierarchy)
 const ProjectCard = ({ 
-  slug, brand, title, image, video, metrics, tags
+  slug, brand, title, image, video, outcome, tags
 }: ProjectProps) => {
   return (
     <div className="w-full px-6 md:px-16 lg:px-24 flex flex-col group select-none">
@@ -436,7 +436,7 @@ const ProjectCard = ({
             {/* Sleek floating interactive badge */}
             <div className="absolute bottom-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none">
               <div className="px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-md text-white font-sans text-xs font-medium tracking-wide border border-white/20 flex items-center gap-2 shadow-lg">
-                <span>View Case Study</span>
+                <span>View case study</span>
                 <span>&rarr;</span>
               </div>
             </div>
@@ -461,20 +461,16 @@ const ProjectCard = ({
             )}
           </div>
 
-          {/* Right Column: ROI Metrics + Action */}
+          {/* Right Column: Qualitative Outcome + Action */}
           <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col justify-between lg:justify-start gap-8 border-t lg:border-t-0 lg:border-l border-foreground/10 pt-6 lg:pt-0 lg:pl-12">
-            <div className="flex gap-12 sm:gap-16">
-              {metrics.map((metric: { value: string; label: string }, idx: number) => (
-                <div key={idx} className="flex flex-col">
-                  <span className="text-3xl md:text-5xl font-sans text-foreground font-semibold tracking-tight">{metric.value}</span>
-                  <span className="text-[11px] font-sans font-medium uppercase tracking-widest text-foreground/50 mt-2">{metric.label}</span>
-                </div>
-              ))}
+            <div className="flex flex-col gap-1 border-l-2 border-emerald-500/80 pl-4">
+              <span className="text-[11px] font-sans font-medium uppercase tracking-widest text-foreground/50 mb-1">Outcome</span>
+              <span className="text-xl md:text-2xl font-sans text-foreground font-medium tracking-tight leading-[1.3]">{outcome}</span>
             </div>
 
             <div className="pt-2">
               <Link href={`/work/${slug}`} className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 hover:border-foreground bg-transparent hover:bg-foreground hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color] duration-300 cursor-pointer">
-                <span>Explore Case Study</span>
+                <span>View case study</span>
                 <span className="transition-transform duration-300 group-hover/btn:translate-x-1">&rarr;</span>
               </Link>
             </div>
@@ -612,69 +608,54 @@ export default function Home() {
       image: "/images/project-1-cover.jpg",
       description: "Designed a clearer wealth management experience for portfolio tracking, performance, and advisor communication.",
       tags: ["Website Design", "Development", "Fintech"],
-      metrics: [
-        { value: "4.5x", label: "Portfolio Growth" },
-        { value: "94%", label: "Platform Adoption" }
-      ]
+      outcome: "Unified digital wealth experience"
     },
     {
       slug: "solaris",
       brand: "Solaris",
       logoColor: "#f59e0b", // Radiant amber gold
       year: "2024 - 2025",
-      title: "Solaris: Fintech Branding & Creative Direction",
+      title: "A fintech identity shaped by light, precision, and possibility",
       video: "/videos/solaris-2.mp4",
       image: "/images/solaris-cover.png",
       description: "Built the Solaris identity across brand, 3D, digital, and investor communications.",
       tags: ["Brand Identity", "Creative Direction", "3D Visuals", "Fintech"],
-      metrics: [
-        { value: "3.8x", label: "Brand Engagement" },
-        { value: "45+", label: "Visual Assets Created" }
-      ]
+      outcome: "Unified brand-to-product visual system"
     },
     {
       slug: "optiv",
       brand: "Optiv",
       logoColor: "#6366f1", // Sleek indigo/violet architectural tone
       year: "2025",
-      title: "Optiv: Branding and Logo Design",
+      title: "Making complex technology feel clear and approachable",
       video: "/videos/Cover_Optiv_1080.mp4",
       image: "/images/optiv/About.png",
       description: "Created a scalable Optiv identity across logo, digital, physical, and campaign touchpoints.",
       tags: ["Brand Identity", "Logo Design", "Visual System", "Creative Direction"],
-      metrics: [
-        { value: "100%", label: "Cohesive Identity System" },
-        { value: "16+", label: "Brand Touchpoints Engineered" }
-      ]
+      outcome: "Scalable cross-channel identity system"
     },
     {
       slug: "studio-vistara",
       brand: "Studio Vistara",
       logoColor: "#a8a29e", // Warm stone & earthy architectural tone
       year: "2025 - Present",
-      title: "Studio Vistara: Branding",
+      title: "An architectural identity built from structure, material, and calm",
       video: "/videos/studio-vistara-1.mp4",
       image: "/images/studio-vistara-cover.png",
       description: "Translated Studio Vistara’s spatial sensibility into a tactile, adaptable identity system.",
       tags: ["Brand Identity", "Typography System", "Stationery & Packaging", "Creative Direction"],
-      metrics: [
-        { value: "100%", label: "Cohesive Visual Identity" },
-        { value: "15+", label: "Brand Touchpoints Engineered" }
-      ]
+      outcome: "Cohesive tactile and digital identity"
     },
     {
       slug: "solace",
       brand: "Solace",
       logoColor: "#111111", // Sleek luxury charcoal/black accent
       year: "2025",
-      title: "Solace: Branding and Identity Design",
+      title: "Quiet confidence for a modern wellness brand",
       image: "/images/solace/Solace Cover.png",
       description: "Crafted a serene, highly sophisticated brand identity and premium packaging design ecosystem for Solace, bridging organic geometry with luxury editorial typography.",
       tags: ["Brand Identity", "Packaging Design", "Creative Direction", "Visual System"],
-      metrics: [
-        { value: "100%", label: "Cohesive Brand Ecosystem" },
-        { value: "12+", label: "Ecosystem Assets Created" }
-      ]
+      outcome: "Scalable packaging and brand system"
     }
   ];
 

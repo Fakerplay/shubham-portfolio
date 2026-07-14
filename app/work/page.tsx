@@ -19,7 +19,7 @@ interface ProjectItem {
   video?: string;
   description: string;
   tags: string[];
-  metrics: { value: string; label: string }[];
+  outcome: string;
 }
 
 const ALL_PROJECTS: ProjectItem[] = [
@@ -28,79 +28,64 @@ const ALL_PROJECTS: ProjectItem[] = [
     brand: "Daulat Finvest",
     logoColor: "#10b981", // Emerald accent
     year: "2026",
-    title: "Daulat Finvest: Wealth Management Platform",
+    title: "Wealth management crafted around your portfolio",
     category: ["All Projects", "Fintech & Wealth", "UI/UX & Systems", "Creative Direction"],
     video: "/videos/daulat-cover.mp4",
     image: "/images/daulat-thumb.jpg",
     description: "Designed a clearer wealth management experience for portfolio tracking, performance, and advisor communication.",
     tags: ["Product Design", "UI/UX Systems", "Wealth Management", "Creative Direction"],
-    metrics: [
-      { value: "4.5x", label: "Portfolio Growth" },
-      { value: "94%", label: "Platform Adoption" }
-    ]
+    outcome: "Unified digital wealth experience"
   },
   {
     slug: "solaris",
     brand: "Solaris",
     logoColor: "#f59e0b", // Radiant amber gold
     year: "2024 - 2025",
-    title: "Solaris: Fintech Branding & Creative Direction",
+    title: "A fintech identity shaped by light, precision, and possibility",
     category: ["All Projects", "Fintech & Wealth", "Brand Identity", "Creative Direction"],
     video: "/videos/solaris-2.mp4",
     image: "/images/solaris-cover.png",
     description: "Built the Solaris identity across brand, 3D, digital, and investor communications.",
     tags: ["Brand Identity", "Creative Direction", "3D Visuals", "Fintech"],
-    metrics: [
-      { value: "3.8x", label: "Brand Engagement" },
-      { value: "45+", label: "Visual Assets Created" }
-    ]
+    outcome: "Unified brand-to-product visual system"
   },
   {
     slug: "optiv",
     brand: "Optiv",
     logoColor: "#6366f1", // Sleek indigo/violet architectural tone
     year: "2025",
-    title: "Optiv: Branding and Logo Design",
+    title: "Making complex technology feel clear and approachable",
     category: ["All Projects", "Brand Identity", "Creative Direction"],
     video: "/videos/Cover_Optiv_1080.mp4",
     image: "/images/optiv/About.png",
     description: "Created a scalable Optiv identity across logo, digital, physical, and campaign touchpoints.",
     tags: ["Brand Identity", "Logo Design", "Visual System", "Creative Direction"],
-    metrics: [
-      { value: "100%", label: "Cohesive Identity System" },
-      { value: "16+", label: "Brand Touchpoints Engineered" }
-    ]
+    outcome: "Scalable cross-channel identity system"
   },
   {
     slug: "studio-vistara",
     brand: "Studio Vistara",
     logoColor: "#a8a29e", // Warm stone & earthy architectural tone
     year: "2025 - Present",
-    title: "Studio Vistara: Branding",
+    title: "An architectural identity built from structure, material, and calm",
     category: ["All Projects", "Brand Identity", "Creative Direction"],
     video: "/videos/studio-vistara-1.mp4",
     image: "/images/studio-vistara-cover.png",
     description: "Translated Studio Vistara’s spatial sensibility into a tactile, adaptable identity system.",
     tags: ["Brand Identity", "Typography System", "Stationery & Packaging", "Creative Direction"],
-    metrics: [
-      { value: "100%", label: "Cohesive Visual Identity" },
-      { value: "15+", label: "Brand Touchpoints Engineered" }
-    ]
+    outcome: "Cohesive tactile and digital identity"
   },
   {
     slug: "solace",
     brand: "Solace",
     logoColor: "#111111", // Sleek luxury charcoal/black accent
     year: "2025",
-    title: "Solace: Branding and Identity Design",
+    title: "Quiet confidence for a modern wellness brand",
     category: ["All Projects", "Brand Identity", "Creative Direction"],
     image: "/images/solace/Solace Cover.png",
     description: "Crafted a serene, highly sophisticated brand identity and premium packaging design ecosystem for Solace, bridging organic geometry with luxury editorial typography.",
     tags: ["Brand Identity", "Packaging Design", "Creative Direction", "Visual System"],
-    metrics: [
-      { value: "100%", label: "Cohesive Brand Ecosystem" },
-      { value: "12+", label: "Ecosystem Assets Created" }
-    ]
+    outcome: "Scalable packaging and brand system"
   }
 ];
 
@@ -237,18 +222,16 @@ export default function WorkPage() {
                     </div>
                   </div>
 
-                  {/* Right Column: Key Metrics */}
+                  {/* Right Column: Qualitative Outcome */}
                   <div className="lg:col-span-5 flex flex-row lg:flex-col justify-end lg:justify-start gap-8 lg:gap-10 pt-4 lg:pt-0 border-t lg:border-t-0 border-foreground/15">
-                    {project.metrics.map((metric, mIdx) => (
-                      <div key={mIdx} className="flex flex-col gap-1 border-l-2 border-emerald-500/80 pl-4">
-                        <span className="font-mono text-3xl md:text-5xl font-bold tracking-tight text-foreground">
-                          {metric.value}
-                        </span>
-                        <span className="font-sans text-xs md:text-sm font-medium uppercase tracking-wider text-foreground/60">
-                          {metric.label}
-                        </span>
-                      </div>
-                    ))}
+                    <div className="flex flex-col gap-1 border-l-2 border-emerald-500/80 pl-4 text-left">
+                      <span className="font-sans text-[11px] font-medium uppercase tracking-widest text-foreground/50">
+                        Outcome
+                      </span>
+                      <span className="font-sans text-xl md:text-2xl font-medium tracking-tight text-foreground leading-[1.3]">
+                        {project.outcome}
+                      </span>
+                    </div>
                   </div>
                 </div>
 

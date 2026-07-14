@@ -40,29 +40,32 @@ export default function Header() {
     }
   };
 
-  // Scroll visibility logic (top header hides/shows)
+  // Scroll visibility logic (top header hides/shows, bottom dock hides on scroll down)
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsMobileNavVisible(currentScrollY >= 260);
+      
+      // Mobile bottom dock is visible if scrolled past 260px AND scrolling up
+      const scrollingUp = currentScrollY < lastScrollYRef.current;
+      const isPastThreshold = currentScrollY >= 260;
+      setIsMobileNavVisible(isPastThreshold && (scrollingUp || currentScrollY < 300));
       
       if (isScrollingRef.current) {
         lastScrollYRef.current = currentScrollY;
         return;
       }
-
-      const delta = currentScrollY - lastScrollYRef.current;
-      if (Math.abs(delta) < 6 && currentScrollY >= 10) return;
       
-      if (currentScrollY < 10) {
-        setIsVisible(true);
-      } else if (delta > 0 && currentScrollY > 80) {
-        setIsVisible(false);
-      } else if (delta < 0) {
-        setIsVisible(true);
+      const b = currentScrollY - lastScrollYRef.current;
+      if (Math.abs(b) >= 6 || currentScrollY < 10) {
+        if (currentScrollY < 10) {
+          setIsVisible(true);
+        } else if (b > 0 && currentScrollY > 80) {
+          setIsVisible(false);
+        } else if (b < 0) {
+          setIsVisible(true);
+        }
+        lastScrollYRef.current = currentScrollY;
       }
-      
-      lastScrollYRef.current = currentScrollY;
     };
 
     lastScrollYRef.current = window.scrollY;
@@ -279,7 +282,7 @@ export default function Header() {
             {/* Audio Mute/Unmute toggle widget */}
             <button
               onClick={toggleMute}
-              className="min-w-11 min-h-11 flex items-center justify-center rounded-md hover:bg-foreground/5 active:scale-[0.97] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60"
+              className={`min-w-11 min-h-11 flex items-center justify-center rounded-md hover:bg-foreground/5 active:scale-[0.97] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 ${pathname.startsWith("/work/") ? "hidden md:flex" : "flex"}`}
               title={isMuted ? "Unmute clicks" : "Mute clicks"}
               aria-label={isMuted ? "Unmute clicks" : "Mute clicks"}
             >
@@ -298,9 +301,13 @@ export default function Header() {
             </button>
 
             <ThemeLamp />
-            <div className="h-4 w-[1px] bg-foreground/10" />
-            <LocalTime />
-            <ThemeDropdown />
+            <div className={`h-4 w-[1px] bg-foreground/10 ${pathname.startsWith("/work/") ? "hidden md:block" : "block"}`} />
+            <div className={pathname.startsWith("/work/") ? "hidden md:block" : "block"}>
+              <LocalTime />
+            </div>
+            <div className={pathname.startsWith("/work/") ? "hidden md:block" : "block"}>
+              <ThemeDropdown />
+            </div>
           </div>
 
         </div>
