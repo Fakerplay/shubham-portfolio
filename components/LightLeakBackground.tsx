@@ -224,7 +224,8 @@ export default function LightLeakBackground({
       .forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.0);
+      const isMobile = window.innerWidth < 768;
+      const dpr = isMobile ? 0.5 : Math.min(window.devicePixelRatio || 1, 1.0);
       cv.width = window.innerWidth * dpr; cv.height = window.innerHeight * dpr;
       gl.viewport(0, 0, cv.width, cv.height);
     };

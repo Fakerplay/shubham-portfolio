@@ -157,6 +157,9 @@ const profileJsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${exposure.variable} ${inter.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://api.open-meteo.com" />
+      </head>
       <body className="font-sans antialiased min-h-screen flex flex-col selection:bg-zinc-800 selection:text-white transition-colors duration-500">
         <StructuredData id="portfolio-profile-data" data={profileJsonLd} />
         <ThemeProvider>
