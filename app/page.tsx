@@ -172,18 +172,12 @@ const SplitFlapWord = ({ reduceMotion = false }: { reduceMotion?: boolean }) => 
 
   useEffect(() => {
     triggerEffect();
-    
-    // Only cycle the scramble animation loop on desktop devices to optimize mobile CPU/battery usage
-    if (reduceMotion || (typeof window !== "undefined" && window.innerWidth < 768)) {
-      return;
-    }
-
-    const loopInterval = setInterval(triggerEffect, 8500);
+    const loopInterval = setInterval(triggerEffect, 6500); // loop flip scramble every 6.5s
     return () => {
       clearInterval(loopInterval);
       activeIntervals.current.forEach((interval) => clearInterval(interval));
     };
-  }, [triggerEffect, reduceMotion]);
+  }, [triggerEffect]);
 
   return (
     <span
