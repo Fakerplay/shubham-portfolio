@@ -171,3 +171,49 @@ body {
     transform: none !important;
   }
 }
+
+/* Hardware-accelerated CSS animated background ambient blobs */
+@keyframes float-blob-1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(8%, -15%) scale(1.15);
+  }
+  66% {
+    transform: translate(-10%, 10%) scale(0.9);
+  }
+}
+
+@keyframes float-blob-2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-12%, 12%) scale(1.25);
+  }
+}
+
+@keyframes float-blob-3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  40% {
+    transform: translate(15%, -8%) scale(0.85);
+  }
+}
+
+.animate-blob-1 {
+  animation: float-blob-1 25s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-blob-2 {
+  animation: float-blob-2 20s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-blob-3 {
+  animation: float-blob-3 30s infinite ease-in-out;
+  will-change: transform;
+}
