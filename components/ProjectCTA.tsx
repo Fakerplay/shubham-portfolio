@@ -1,8 +1,5 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { useTheme } from "./ThemeContext";
 
 interface ProjectCTAProps {
   nextProject?: {
@@ -13,16 +10,13 @@ interface ProjectCTAProps {
 }
 
 export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
-  const { theme } = useTheme();
-  const isDark = theme === "night" || theme === "aurora" || theme === "neon";
-  const surface = isDark ? "dark" : "light";
   const email = "shubhamshinde52@gmail.com";
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-20 pb-28 flex flex-col gap-20">
       
       {/* High-Impact Post-Showcase CTA Box (Matching Hero Section Aesthetic) */}
-      <div data-surface={surface} className="relative overflow-hidden rounded-[32px] bg-foreground/[0.03] border border-foreground/15 p-8 md:p-16 text-foreground shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group transition-colors duration-500">
+      <div className="relative overflow-hidden rounded-[32px] bg-foreground/[0.03] border border-foreground/15 p-8 md:p-16 text-foreground shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group transition-colors duration-500">
         {/* Subtle Ambient Glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl pointer-events-none group-hover:bg-foreground/10 transition-colors duration-700" />
 

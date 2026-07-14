@@ -731,8 +731,9 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+      </div>
 
-        {/* SECTION 2: WORK (Selected Featured Projects inside Subtle Surface Band) */}
+      {/* SECTION 2: WORK (Selected Featured Projects inside Subtle Surface Band) */}
         <section id="work" className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 py-24 md:py-32 bg-foreground/[0.025] dark:bg-white/[0.025] border-y border-foreground/10 flex flex-col gap-16 md:gap-24">
           
           {/* Perfectly Aligned Section Header */}
@@ -781,11 +782,11 @@ export default function Home() {
 
         {/* SECTION 2.5: EXPERIENCE SECTION (Editorial Timeline Ledger) */}
         <section id="experience" className="w-full py-24 border-t border-foreground/10">
-          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 w-full flex flex-col gap-12 md:gap-16">
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 w-full flex flex-col gap-12">
             
             {/* Header */}
             <div className="flex flex-col">
-              <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight">Experience</h2>
+              <h2 className="font-sans font-bold text-xs uppercase tracking-widest text-foreground/40 mb-4">Experience</h2>
             </div>
 
             {/* Timeline Rows */}
@@ -824,44 +825,38 @@ export default function Home() {
               ].map((exp, idx) => (
                 <div 
                   key={idx} 
-                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-8 border-b border-foreground/10 gap-2 md:gap-4 hover:bg-foreground/[0.01] transition-colors duration-300 px-2 rounded-lg"
+                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-10 border-b border-foreground/10 gap-2 md:gap-4 font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase text-foreground/85"
                 >
-                  <div className="col-span-12 md:col-span-4 font-serif text-xl md:text-2xl text-foreground font-light">
-                    {exp.company}
-                  </div>
-                  <div className="col-span-12 md:col-span-5 font-sans text-base text-foreground/60 md:pl-2">
-                    {exp.role}
-                  </div>
-                  <div className="col-span-12 md:col-span-3 text-left md:text-right font-mono text-sm text-foreground/45">
+                  {/* Year */}
+                  <div className="col-span-12 md:col-span-3 font-mono tracking-normal text-foreground/50">
                     {exp.years}
                   </div>
-                  <div className="col-span-12 font-sans text-base text-foreground/85 leading-relaxed mt-2.5">
+                  {/* Company */}
+                  <div className="col-span-12 md:col-span-4 font-bold text-foreground">
+                    {exp.company}
+                  </div>
+                  {/* Role */}
+                  <div className="col-span-12 md:col-span-5 text-left md:text-right text-foreground/60">
+                    {exp.role}
+                  </div>
+                  {/* Description */}
+                  <div className="col-span-12 md:col-start-4 md:col-span-9 font-sans text-sm md:text-base font-normal tracking-normal text-foreground/75 leading-relaxed mt-4 normal-case select-text">
                     {exp.description}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Editorial Footer Links */}
-            <div className="flex flex-wrap gap-4 pt-4">
+            {/* Editorial Footer Link */}
+            <div className="pt-8">
               <a 
                 href="/resume.pdf" 
                 download 
                 onClick={() => playClickSound(0.12)}
-                className="group btn-secondary px-6 py-3 rounded-full font-sans font-medium text-sm tracking-wide transition-all flex items-center gap-2 active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center gap-2 font-sans font-medium text-sm text-foreground/60 hover:text-foreground transition-colors duration-300 border-b border-foreground/20 hover:border-foreground/60 pb-0.5"
               >
-                <span>Download CV</span>
-                <span className="text-current transition-transform duration-300 group-hover:translate-y-0.5">&darr;</span>
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/shubham-shinde-design/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                onClick={() => playClickSound(0.12)}
-                className="group btn-secondary px-6 py-3 rounded-full font-sans font-medium text-sm tracking-wide transition-all flex items-center gap-2 active:scale-[0.98] cursor-pointer"
-              >
-                <span>LinkedIn</span>
-                <span className="text-current transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">&nearr;</span>
+                <span>Download résumé</span>
+                <span className="text-[10px]">&darr;</span>
               </a>
             </div>
 
@@ -871,7 +866,6 @@ export default function Home() {
         {/* SECTION 3: CORE CAPABILITIES & SERVICES SHOWCASE (Full Width Aligned Below Work Section) */}
         <ServicesShowcase />
 
-      </div>
     </div>
   )
 }
