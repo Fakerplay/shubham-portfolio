@@ -88,6 +88,14 @@ export default function WorkDetail() {
   const group2 = gallery.slice(group1End, group2End);
   const group3 = gallery.slice(group2End);
 
+  // Format scope tags as lowercase/sentence-case comma-separated line
+  const scopeLine = project.tags.map(tag => {
+    const t = tag.trim().toLowerCase();
+    // Keep 3d uppercase
+    if (t === "3d visuals") return "3D visuals";
+    return t;
+  }).join(", ");
+
   return (
     <div className="min-h-screen w-full bg-background text-foreground selection:bg-foreground selection:text-background pb-32">
       {/* Top Sticky Bar */}
@@ -101,8 +109,8 @@ export default function WorkDetail() {
             <span>Back to Featured Work</span>
           </Link>
           <div className="flex items-center gap-4">
-            <span className="hidden md:inline text-xs font-sans font-semibold tracking-widest uppercase text-foreground/45">
-              {project.brand} &mdash; Case Study
+            <span className="hidden md:inline text-xs font-sans font-semibold tracking-normal text-foreground/45">
+              {project.brand}
             </span>
           </div>
         </div>
@@ -132,55 +140,37 @@ export default function WorkDetail() {
           <p className="text-xl md:text-2xl font-sans font-normal text-foreground/75 leading-[1.5] max-w-4xl select-text">
             {project.subtitle}
           </p>
-
-          {project.liveUrl && (
-            <div className="pt-2">
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow] duration-300 shadow-lg hover:scale-[1.02] active:scale-[0.98] w-fit"
-              >
-                <span>Visit Live Website</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-1 inline-block">↗</span>
-              </a>
-            </div>
-          )}
         </div>
 
-        {/* Specs Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-y border-foreground/15">
-          <div>
-            <span className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-foreground/45 mb-1.5">Client</span>
-            <span className="text-base font-sans font-medium text-foreground">{project.client}</span>
+        {/* Factual Metadata Row */}
+        <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-12 md:gap-y-4 py-8 border-y border-foreground/15 text-[15px] font-sans font-normal text-foreground/85">
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/45">Client &mdash;</span>
+            <span className="text-foreground">{project.client}</span>
           </div>
-          <div>
-            <span className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-foreground/45 mb-1.5">Role</span>
-            <span className="text-base font-sans font-medium text-foreground">{project.role}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/45">Role &mdash;</span>
+            <span className="text-foreground">{project.role}</span>
           </div>
-          <div>
-            <span className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-foreground/45 mb-1.5">Timeline</span>
-            <span className="text-base font-sans font-medium text-foreground">{project.timeline}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/45">Timeline &mdash;</span>
+            <span className="text-foreground">{project.timeline}</span>
           </div>
-          <div>
-            <span className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-foreground/45 mb-1.5">Outcome</span>
-            <span className="text-base font-sans font-semibold text-foreground">{project.outcome}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/45">Outcome &mdash;</span>
+            <span className="text-foreground">{project.outcome}</span>
           </div>
         </div>
 
-        {/* Project Setup: Context, Challenge, Shubham's Responsibility */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-16 pt-8 pb-12">
-          <div className="flex flex-col gap-3">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-foreground/50 font-semibold">01 / Context</h4>
-            <p className="font-sans text-base md:text-[17px] text-foreground/80 leading-[1.6] select-text">{project.context}</p>
+        {/* Combined Opening Narrative & Scope Line */}
+        <div className="max-w-4xl pt-4 pb-8 flex flex-col gap-6">
+          <div className="flex flex-col gap-6 text-lg md:text-xl font-sans font-light text-foreground/85 leading-relaxed select-text">
+            <p>{project.context}</p>
+            <p>{project.challenge}</p>
+            <p>{project.responsibility}</p>
           </div>
-          <div className="flex flex-col gap-3">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-foreground/50 font-semibold">02 / Challenge</h4>
-            <p className="font-sans text-base md:text-[17px] text-foreground/80 leading-[1.6] select-text">{project.challenge}</p>
-          </div>
-          <div className="flex flex-col gap-3">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-emerald-500 font-bold">03 / Responsibility</h4>
-            <p className="font-sans text-base md:text-[17px] text-foreground/80 leading-[1.6] select-text">{project.responsibility}</p>
+          <div className="text-[14px] md:text-[15px] font-sans font-medium text-foreground/50 border-t border-foreground/10 pt-6 select-text">
+            {scopeLine}
           </div>
         </div>
       </div>
@@ -216,10 +206,6 @@ export default function WorkDetail() {
         {/* Group 1 & Decision 01 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span className="font-mono text-xs uppercase tracking-widest text-foreground/50 font-bold">Decision 01</span>
-            </div>
             <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision01.title}</h3>
             <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision01.text}</p>
           </div>
@@ -233,10 +219,6 @@ export default function WorkDetail() {
         {/* Group 2 & Decision 02 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span className="font-mono text-xs uppercase tracking-widest text-foreground/50 font-bold">Decision 02</span>
-            </div>
             <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision02.title}</h3>
             <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision02.text}</p>
           </div>
@@ -250,10 +232,6 @@ export default function WorkDetail() {
         {/* Group 3 & Decision 03 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span className="font-mono text-xs uppercase tracking-widest text-foreground/50 font-bold">Decision 03</span>
-            </div>
             <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision03.title}</h3>
             <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision03.text}</p>
           </div>
@@ -266,11 +244,9 @@ export default function WorkDetail() {
 
       </div>
 
-      {/* Outcome Stated Qualitatively */}
-      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-16 pb-8 border-t border-foreground/15 mt-20 flex flex-col gap-4">
-        <span className="font-mono text-xs uppercase tracking-widest text-foreground/45 font-semibold">Outcome</span>
-        <h3 className="font-serif text-3xl md:text-4xl text-foreground font-light tracking-tight">Delivered System</h3>
-        <p className="font-sans text-lg md:text-xl text-foreground/80 leading-[1.6] max-w-4xl select-text font-light">{project.outcomeDetails}</p>
+      {/* Outcome Stated Qualitatively as a Closing Paragraph (No generic labels) */}
+      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-16 pb-8 border-t border-foreground/15 mt-20 select-text">
+        <p className="font-sans text-lg md:text-xl text-foreground/80 leading-[1.6] max-w-4xl font-light">{project.outcomeDetails}</p>
       </div>
 
       {/* Footer / Shared CTA */}
