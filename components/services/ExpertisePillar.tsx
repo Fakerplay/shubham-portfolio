@@ -45,10 +45,10 @@ export const EXPERTISE_ITEMS: ExpertiseItem[] = [
     category: "Motion & WebGL",
     color: "#a855f7",
     gradient: "radial-gradient(ellipse 90% 70% at 70% 50%, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.08) 35%, rgba(168, 85, 247, 0.03) 65%, rgba(168, 85, 247, 0) 100%)",
-    overview: "Motion systems, WebGL backgrounds, and launch-ready interactive web experiences built with modern no-code platforms and AI development methods.",
-    stats: "Supporting Methods: No-Code & AI",
-    skills: ["Motion Graphics", "Interactive Shaders", "Framer Production", "AI Workflows & APIs"],
-    technologies: ["Framer & Webflow", "Claude & OpenAI APIs", "WebGL", "GSAP ScrollTrigger"]
+    overview: "Motion systems, WebGL backgrounds, 3D visual environments, and production websites delivered with modern no-code platforms and AI development workflows.",
+    stats: "Supporting Methods: AI, No-Code, 3D & Prototyping",
+    skills: ["Motion Graphics", "3D Web Environments", "No-Code Development", "AI Prototyping"],
+    technologies: ["Framer & Webflow", "Three.js / Spline", "AI Tools & APIs", "Figma Prototyping"]
   }
 ];
 

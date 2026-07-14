@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import LightLeakBackground from "@/components/LightLeakBackground";
 import { EASE_OUT } from "@/lib/motion";
@@ -99,6 +100,7 @@ const STUDIO_CARDS: StudioCard[] = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname() || "/";
   const [copied, setCopied] = useState(false);
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
   const [isUnpacked, setIsUnpacked] = useState(false);
@@ -383,45 +385,46 @@ export default function Footer() {
           </AnimatePresence>
         </div>
 
-        {/* 2. MONUMENTAL SERIF ANCHOR HEADLINE & CTAS (Centered Studio Presence) */}
-        <motion.div
-          variants={headlineVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6"
-        >
-          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-normal tracking-tight text-white leading-[1.04]">
-            Building a team or <br className="hidden sm:inline" />
-            building a brand? <br className="hidden sm:inline" />
-            <span className="italic font-light">Let&rsquo;s talk.</span>
-          </h2>
+        {!pathname.startsWith("/work") && (
+          <motion.div
+            variants={headlineVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6"
+          >
+            <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-normal tracking-tight text-white leading-[1.04]">
+              Building a team or <br className="hidden sm:inline" />
+              building a brand? <br className="hidden sm:inline" />
+              <span className="italic font-light">Let&rsquo;s talk.</span>
+            </h2>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
-            <a
-              href={`mailto:${email}`}
-              className="group px-8 py-4 sm:py-4.5 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
-            >
-              <span>Start a conversation</span>
-              <svg 
-                className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform duration-300" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor" 
-                strokeWidth="2.5"
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
+              <a
+                href={`mailto:${email}`}
+                className="group px-8 py-4 sm:py-4.5 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </a>
+                <span>Start a conversation</span>
+                <svg 
+                  className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform duration-300" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
 
-            <Link
-              href="/#work"
-              className="px-8 py-4 sm:py-4.5 rounded-full border border-white/20 hover:border-white text-white font-sans font-medium text-sm sm:text-base transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.98]"
-            >
-              View work
-            </Link>
-          </div>
-        </motion.div>
+              <Link
+                href="/#work"
+                className="px-8 py-4 sm:py-4.5 rounded-full border border-white/20 hover:border-white text-white font-sans font-medium text-sm sm:text-base transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.98]"
+              >
+                View work
+              </Link>
+            </div>
+          </motion.div>
+        )}
 
         {/* 3. BAJGART-INSPIRED ARCHITECTURAL BOTTOM PILL BAR & COPYRIGHT */}
         <div className="w-full border-t border-white/10 pt-8 mt-6">

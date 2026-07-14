@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 interface ProjectCTAProps {
-  nextProject: {
+  nextProject?: {
     slug: string;
     brand: string;
     title: string;

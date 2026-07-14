@@ -192,7 +192,7 @@ export default function WorkDetail() {
         {/* Group 1 & Decision 01 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision01.title}</h3>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision01.title}</h2>
             <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision01.text}</p>
           </div>
           <div className="w-full flex flex-col gap-6 md:gap-8">
@@ -205,7 +205,7 @@ export default function WorkDetail() {
         {/* Group 2 & Decision 02 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision02.title}</h3>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision02.title}</h2>
             <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision02.text}</p>
           </div>
           <div className="w-full flex flex-col gap-6 md:gap-8">
@@ -218,7 +218,7 @@ export default function WorkDetail() {
         {/* Group 3 & Decision 03 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision03.title}</h3>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision03.title}</h2>
             <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision03.text}</p>
           </div>
           <div className="w-full flex flex-col gap-6 md:gap-8">

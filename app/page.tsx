@@ -445,10 +445,10 @@ const ProjectCard = ({
 
         {/* Bottom Editorial Content & Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 pt-2 items-start">
-          {/* Left Column: Project Categories */}
-          <div className="lg:col-span-7 flex flex-col justify-between h-full gap-8">
+          {/* Left Column: Project Categories & Qualitative Outcome */}
+          <div className="lg:col-span-7 flex flex-col justify-between h-full gap-5">
             {tags && tags.length > 0 && (
-              <div className="flex flex-col gap-2 pt-5 border-t border-foreground/15">
+              <div className="flex flex-col gap-3 pt-5 border-t border-foreground/15">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-base md:text-lg font-sans font-normal text-foreground/90 tracking-tight">
                   {tags.map((tag: string, idx: number) => (
                     <span key={idx} className="inline-flex items-center gap-x-3">
@@ -457,23 +457,20 @@ const ProjectCard = ({
                     </span>
                   ))}
                 </div>
+                {/* Qualitative Outcome supporting line */}
+                <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide">
+                  {outcome}
+                </div>
               </div>
             )}
           </div>
 
-          {/* Right Column: Qualitative Outcome + Action */}
-          <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col justify-between lg:justify-start gap-8 border-t lg:border-t-0 lg:border-l border-foreground/10 pt-6 lg:pt-0 lg:pl-12">
-            <div className="flex flex-col gap-1 border-l-2 border-emerald-500/80 pl-4">
-              <span className="text-[11px] font-sans font-medium uppercase tracking-widest text-foreground/50 mb-1">Outcome</span>
-              <span className="text-xl md:text-2xl font-sans text-foreground font-medium tracking-tight leading-[1.3]">{outcome}</span>
-            </div>
-
-            <div className="pt-2">
-              <Link href={`/work/${slug}`} className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 hover:border-foreground bg-transparent hover:bg-foreground hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color] duration-300 cursor-pointer">
-                <span>View case study</span>
-                <span className="transition-transform duration-300 group-hover/btn:translate-x-1">&rarr;</span>
-              </Link>
-            </div>
+          {/* Right Column: Action Only */}
+          <div className="lg:col-span-5 flex flex-col justify-center items-start lg:items-end border-t lg:border-t-0 lg:border-l border-foreground/10 pt-6 lg:pt-5 lg:pl-12">
+            <Link href={`/work/${slug}`} className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 hover:border-foreground bg-transparent hover:bg-foreground hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color] duration-300 cursor-pointer">
+              <span>View case study</span>
+              <span className="transition-transform duration-300 group-hover/btn:translate-x-1">&rarr;</span>
+            </Link>
           </div>
         </div>
 

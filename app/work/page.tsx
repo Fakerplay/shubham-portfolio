@@ -207,8 +207,8 @@ export default function WorkPage() {
 
                 {/* Bottom Editorial Content & Stats */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 pt-2 items-start">
-                  <div className="lg:col-span-7 flex flex-col justify-between h-full gap-8">
-                    <div className="flex flex-col gap-2 pt-5 border-t border-foreground/15">
+                  <div className="lg:col-span-7 flex flex-col justify-between h-full gap-5">
+                    <div className="flex flex-col gap-3 pt-5 border-t border-foreground/15">
                       <div className="flex flex-wrap gap-2 pt-1">
                         {project.tags.map((tag, tIdx) => (
                           <span 
@@ -219,20 +219,15 @@ export default function WorkPage() {
                           </span>
                         ))}
                       </div>
+                      {/* Qualitative Outcome supporting line */}
+                      <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-left">
+                        {project.outcome}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Right Column: Qualitative Outcome */}
-                  <div className="lg:col-span-5 flex flex-row lg:flex-col justify-end lg:justify-start gap-8 lg:gap-10 pt-4 lg:pt-0 border-t lg:border-t-0 border-foreground/15">
-                    <div className="flex flex-col gap-1 border-l-2 border-emerald-500/80 pl-4 text-left">
-                      <span className="font-sans text-[11px] font-medium uppercase tracking-widest text-foreground/50">
-                        Outcome
-                      </span>
-                      <span className="font-sans text-xl md:text-2xl font-medium tracking-tight text-foreground leading-[1.3]">
-                        {project.outcome}
-                      </span>
-                    </div>
-                  </div>
+                  {/* Right Column: Clean empty spacing */}
+                  <div className="lg:col-span-5 border-t lg:border-t-0 border-foreground/15" />
                 </div>
 
               </div>
@@ -244,11 +239,7 @@ export default function WorkPage() {
       {/* 4. Bottom CTA Section */}
       <div className="w-full pt-16">
         <ProjectCTA
-          nextProject={{
-            slug: "daulat-finvest",
-            brand: "Daulat Finvest",
-            title: "Wealth management crafted around your portfolio"
-          }}
+          nextProject={undefined}
         />
       </div>
 

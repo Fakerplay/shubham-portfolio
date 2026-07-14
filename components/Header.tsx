@@ -17,7 +17,7 @@ export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const isScrollingRef = useRef(false);
   const lastScrollYRef = useRef(0);
   const programmaticScrollFrameRef = useRef<number | null>(null);
@@ -25,9 +25,10 @@ export default function Header() {
   const headerY = useMotionValue(0);
   const headerTransform = useMotionTemplate`translateY(${headerY}px)`;
 
-  // Initialize mute state from localStorage
+  // Initialize mute state from localStorage (default to true / silent)
   useEffect(() => {
-    const savedMute = localStorage.getItem("mute-clicks") === "true";
+    const saved = localStorage.getItem("mute-clicks");
+    const savedMute = saved === null ? true : saved === "true";
     setIsMuted(savedMute);
   }, []);
 
@@ -282,9 +283,9 @@ export default function Header() {
             {/* Audio Mute/Unmute toggle widget */}
             <button
               onClick={toggleMute}
-              className={`min-w-11 min-h-11 flex items-center justify-center rounded-md hover:bg-foreground/5 active:scale-[0.97] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 ${pathname.startsWith("/work/") ? "hidden md:flex" : "flex"}`}
-              title={isMuted ? "Unmute clicks" : "Mute clicks"}
-              aria-label={isMuted ? "Unmute clicks" : "Mute clicks"}
+              className="min-w-11 min-h-11 flex items-center justify-center rounded-md hover:bg-foreground/5 active:scale-[0.97] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 flex"
+              title={isMuted ? "Enable sound" : "Disable sound"}
+              aria-label={isMuted ? "Enable sound" : "Disable sound"}
             >
               {isMuted ? (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -301,11 +302,11 @@ export default function Header() {
             </button>
 
             <ThemeLamp />
-            <div className={`h-4 w-[1px] bg-foreground/10 ${pathname.startsWith("/work/") ? "hidden md:block" : "block"}`} />
-            <div className={pathname.startsWith("/work/") ? "hidden md:block" : "block"}>
+            <div className="h-4 w-[1px] bg-foreground/10 hidden md:block" />
+            <div className="hidden md:block">
               <LocalTime />
             </div>
-            <div className={pathname.startsWith("/work/") ? "hidden md:block" : "block"}>
+            <div className="hidden md:block">
               <ThemeDropdown />
             </div>
           </div>
