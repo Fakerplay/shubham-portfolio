@@ -786,7 +786,7 @@ export default function Home() {
             
             {/* Header */}
             <div className="flex flex-col">
-              <h2 className="font-sans font-bold text-xs uppercase tracking-widest text-foreground/40 mb-4">Experience</h2>
+              <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight uppercase mb-4">Experience</h2>
             </div>
 
             {/* Timeline Rows */}
@@ -795,52 +795,52 @@ export default function Home() {
                 {
                   company: "WizCommerce",
                   role: "Graphic Design Lead",
-                  years: "2026–Present",
-                  description: "Leading creative across product marketing, ABM campaigns, executive storytelling, podcasts, and scalable social systems."
+                  years: "2026—NOW",
+                  description: "Product marketing, executive storytelling, campaigns and scalable creative systems."
                 },
                 {
                   company: "Ecolab",
                   role: "Sr. Marketing Visual Designer",
-                  years: "2025–2026",
-                  description: "Directed global video and campaign work across launches, training, exhibitions, and enterprise communications."
+                  years: "2025—2026",
+                  description: "Global video, enterprise campaigns, launches and executive communication."
                 },
                 {
                   company: "Phyllo",
                   role: "Visual Designer",
-                  years: "2024–2025",
-                  description: "Built modular marketing systems, launch visuals, motion content, and investor storytelling for a creator-data platform."
+                  years: "2024—2025",
+                  description: "Marketing systems, motion, launch visuals and investor storytelling."
                 },
                 {
                   company: "Prachyam Studios",
                   role: "Creative Lead",
-                  years: "2021–2024",
-                  description: "Led visual direction and multidisciplinary teams across OTT campaigns, documentary films, and digital launches."
+                  years: "2021—2024",
+                  description: "Visual direction across OTT, documentary and digital launch work."
                 },
                 {
                   company: "100kmph",
                   role: "Graphic Designer",
-                  years: "2020–2021",
-                  description: "Designed merchandise, campaigns, and landing pages for D2C and mobility collaborations."
+                  years: "2020—2021",
+                  description: "Merchandise, campaigns and digital work for D2C and mobility brands."
                 }
               ].map((exp, idx) => (
                 <div 
                   key={idx} 
-                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-10 border-b border-foreground/10 gap-2 md:gap-4 font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase text-foreground/85"
+                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-10 border-b border-foreground/10 gap-2 md:gap-4"
                 >
                   {/* Year */}
-                  <div className="col-span-12 md:col-span-3 font-mono tracking-normal text-foreground/50">
+                  <div className="col-span-12 md:col-span-3 font-mono text-sm tracking-wide text-foreground/50 uppercase">
                     {exp.years}
                   </div>
                   {/* Company */}
-                  <div className="col-span-12 md:col-span-4 font-bold text-foreground">
+                  <div className="col-span-12 md:col-span-4 font-sans text-base md:text-lg font-bold tracking-widest text-foreground uppercase">
                     {exp.company}
                   </div>
                   {/* Role */}
-                  <div className="col-span-12 md:col-span-5 text-left md:text-right text-foreground/60">
+                  <div className="col-span-12 md:col-span-5 font-sans text-sm md:text-base font-semibold tracking-wider text-foreground/60 md:text-right uppercase">
                     {exp.role}
                   </div>
                   {/* Description */}
-                  <div className="col-span-12 md:col-start-4 md:col-span-9 font-sans text-sm md:text-base font-normal tracking-normal text-foreground/75 leading-relaxed mt-4 normal-case select-text">
+                  <div className="col-span-12 md:col-start-4 md:col-span-9 font-sans text-base text-foreground/75 leading-relaxed mt-3 max-w-2xl select-text">
                     {exp.description}
                   </div>
                 </div>
@@ -848,15 +848,15 @@ export default function Home() {
             </div>
 
             {/* Editorial Footer Link */}
-            <div className="pt-8">
+            <div className="pt-12">
               <a 
                 href="/resume.pdf" 
                 download 
                 onClick={() => playClickSound(0.12)}
-                className="inline-flex items-center gap-2 font-sans font-medium text-sm text-foreground/60 hover:text-foreground transition-colors duration-300 border-b border-foreground/20 hover:border-foreground/60 pb-0.5"
+                className="inline-flex items-center gap-2 font-sans font-medium text-base text-foreground/60 hover:text-foreground transition-all duration-300 border-b border-foreground/30 hover:border-foreground pb-1 cursor-pointer"
               >
                 <span>Download résumé</span>
-                <span className="text-[10px]">&darr;</span>
+                <span className="text-sm transition-transform duration-300 group-hover:translate-y-0.5">&darr;</span>
               </a>
             </div>
 
