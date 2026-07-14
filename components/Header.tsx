@@ -106,7 +106,7 @@ export default function Header() {
       rootMargin: "-25% 0px -55% 0px",
     });
 
-    const sections = ["about", "work", "capabilities", "services", "contact"];
+    const sections = ["about", "work", "experience", "capabilities", "services", "contact"];
     
     const bindSections = () => {
       sections.forEach((id) => {

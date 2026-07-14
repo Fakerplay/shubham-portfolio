@@ -779,6 +779,96 @@ export default function Home() {
           </div>
         </section>
 
+        {/* SECTION 2.5: EXPERIENCE SECTION (Editorial Timeline Ledger) */}
+        <section id="experience" className="w-full py-24 px-6 md:px-16 lg:px-24 border-t border-foreground/10">
+          <div className="max-w-7xl mx-auto w-full flex flex-col gap-12 md:gap-16">
+            
+            {/* Header */}
+            <div className="flex flex-col">
+              <span className="font-mono text-xs uppercase tracking-widest text-foreground/50">02 / Ledger</span>
+              <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight mt-3">Experience</h2>
+            </div>
+
+            {/* Timeline Rows */}
+            <div className="flex flex-col border-t border-foreground/10">
+              {[
+                {
+                  company: "WizCommerce",
+                  role: "Graphic Design Lead",
+                  years: "2026–Present",
+                  description: "Leading creative across product marketing, ABM campaigns, executive storytelling, podcasts, and scalable social systems."
+                },
+                {
+                  company: "Ecolab",
+                  role: "Sr. Marketing Visual Designer",
+                  years: "2025–2026",
+                  description: "Directed global video and campaign work across launches, training, exhibitions, and enterprise communications."
+                },
+                {
+                  company: "Phyllo",
+                  role: "Visual Designer",
+                  years: "2024–2025",
+                  description: "Built modular marketing systems, launch visuals, motion content, and investor storytelling for a creator-data platform."
+                },
+                {
+                  company: "Prachyam Studios",
+                  role: "Creative Lead",
+                  years: "2021–2024",
+                  description: "Led visual direction and multidisciplinary teams across OTT campaigns, documentary films, and digital launches."
+                },
+                {
+                  company: "100kmph",
+                  role: "Graphic Designer",
+                  years: "2020–2021",
+                  description: "Designed merchandise, campaigns, and landing pages for D2C and mobility collaborations."
+                }
+              ].map((exp, idx) => (
+                <div 
+                  key={idx} 
+                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-8 border-b border-foreground/10 gap-2 md:gap-4 hover:bg-foreground/[0.01] transition-colors duration-300 px-2 rounded-lg"
+                >
+                  <div className="col-span-12 md:col-span-4 font-serif text-xl md:text-2xl text-foreground font-light">
+                    {exp.company}
+                  </div>
+                  <div className="col-span-12 md:col-span-5 font-sans text-base text-foreground/60 md:pl-2">
+                    {exp.role}
+                  </div>
+                  <div className="col-span-12 md:col-span-3 text-left md:text-right font-mono text-sm text-foreground/45">
+                    {exp.years}
+                  </div>
+                  <div className="col-span-12 font-sans text-base text-foreground/85 leading-relaxed mt-2.5">
+                    {exp.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Editorial Footer Links */}
+            <div className="flex flex-wrap gap-4 pt-4">
+              <a 
+                href="/resume.pdf" 
+                download 
+                onClick={() => playClickSound(0.12)}
+                className="group btn-secondary px-6 py-3 rounded-full font-sans font-medium text-sm tracking-wide transition-all flex items-center gap-2 active:scale-[0.98] cursor-pointer"
+              >
+                <span>Download CV</span>
+                <span className="text-current transition-transform duration-300 group-hover:translate-y-0.5">&darr;</span>
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/shubham-shinde-design/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={() => playClickSound(0.12)}
+                className="group btn-secondary px-6 py-3 rounded-full font-sans font-medium text-sm tracking-wide transition-all flex items-center gap-2 active:scale-[0.98] cursor-pointer"
+              >
+                <span>View LinkedIn</span>
+                <span className="text-current transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">&nearr;</span>
+              </a>
+            </div>
+
+          </div>
+        </section>
+
         {/* SECTION 3: CORE CAPABILITIES & SERVICES SHOWCASE (Full Width Aligned Below Work Section) */}
         <ServicesShowcase />
 
