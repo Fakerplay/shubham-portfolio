@@ -780,29 +780,51 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SECTION 2.5: EXPERIENCE SECTION (Editorial Timeline Ledger) */}
-        <section id="experience" className="w-full py-24 border-t border-foreground/10">
-          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 w-full flex flex-col gap-12">
+        {/* SECTION 2.5: EXPERIENCE SECTION */}
+        <section id="experience" className="w-full pt-32 pb-24 md:pt-40 md:pb-32 border-t border-foreground/10">
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 w-full flex flex-col gap-16 md:gap-24">
             
-            {/* Header */}
-            <div className="flex flex-col">
-              <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight uppercase mb-4">Experience</h2>
+            {/* Header: Grid Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+              {/* Left Column: Heading (serif, clamp 64px to 108px) */}
+              <div className="lg:col-span-6">
+                <h2 className="font-serif font-light text-[clamp(56px,7vw,104px)] text-foreground leading-[1.05] tracking-tight">
+                  Experience
+                </h2>
+              </div>
+              {/* Right Column: Intro text and Download CV link */}
+              <div className="lg:col-span-6 flex flex-col gap-6 lg:pt-4">
+                <p className="font-sans text-base md:text-[18px] text-foreground/80 leading-relaxed max-w-lg">
+                  I’ve worked across startups, enterprise teams and media studios—leading brand, web and motion work.
+                </p>
+                <div>
+                  <a 
+                    href="/resume.pdf" 
+                    download 
+                    onClick={() => playClickSound(0.12)}
+                    className="inline-flex items-center gap-2 font-sans font-medium text-sm text-foreground/60 hover:text-foreground transition-all duration-300 border-b border-foreground/20 hover:border-foreground pb-0.5 cursor-pointer"
+                  >
+                    <span>Download résumé</span>
+                    <span className="text-[10px]">&darr;</span>
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* Timeline Rows */}
-            <div className="flex flex-col border-t border-foreground/10">
+            <div className="flex flex-col border-t border-foreground/10 select-none">
               {[
                 {
                   company: "WizCommerce",
                   role: "Graphic Design Lead",
-                  years: "2026—NOW",
-                  description: "Product marketing, executive storytelling, campaigns and scalable creative systems."
+                  years: "2026—Now",
+                  description: "Product marketing, campaigns, executive storytelling and scalable creative systems."
                 },
                 {
                   company: "Ecolab",
                   role: "Sr. Marketing Visual Designer",
                   years: "2025—2026",
-                  description: "Global video, enterprise campaigns, launches and executive communication."
+                  description: "Global video, launches and enterprise communication across multiple markets."
                 },
                 {
                   company: "Phyllo",
@@ -825,39 +847,26 @@ export default function Home() {
               ].map((exp, idx) => (
                 <div 
                   key={idx} 
-                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-10 border-b border-foreground/10 gap-2 md:gap-4"
+                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-10 md:py-12 border-b border-foreground/10 gap-4 md:gap-6 group/item cursor-pointer transition-colors duration-300 hover:bg-foreground/[0.015] px-4 -mx-4 rounded-xl"
                 >
-                  {/* Year */}
-                  <div className="col-span-12 md:col-span-3 font-mono text-sm tracking-wide text-foreground/50 uppercase">
+                  {/* Date (14-16px, mono or restrained sans) */}
+                  <div className="col-span-12 md:col-span-2 font-mono text-sm md:text-base text-foreground/50">
                     {exp.years}
                   </div>
-                  {/* Company */}
-                  <div className="col-span-12 md:col-span-4 font-sans text-base md:text-lg font-bold tracking-widest text-foreground uppercase">
+                  {/* Company (serif, 32-40px, title case) */}
+                  <div className="col-span-12 md:col-span-3 font-serif text-[28px] md:text-[32px] lg:text-[36px] font-light text-foreground group-hover/item:translate-x-1 transition-transform duration-300 leading-none">
                     {exp.company}
                   </div>
-                  {/* Role */}
-                  <div className="col-span-12 md:col-span-5 font-sans text-sm md:text-base font-semibold tracking-wider text-foreground/60 md:text-right uppercase">
+                  {/* Role (sans, 16-18px, medium, high contrast) */}
+                  <div className="col-span-12 md:col-span-3 font-sans text-base md:text-[18px] font-medium text-foreground tracking-tight leading-tight">
                     {exp.role}
                   </div>
-                  {/* Description */}
-                  <div className="col-span-12 md:col-start-4 md:col-span-9 font-sans text-base text-foreground/75 leading-relaxed mt-3 max-w-2xl select-text">
+                  {/* Description (16-18px, muted but readable) */}
+                  <div className="col-span-12 md:col-span-4 font-sans text-base md:text-[18px] text-foreground/70 leading-relaxed select-text normal-case">
                     {exp.description}
                   </div>
                 </div>
               ))}
-            </div>
-
-            {/* Editorial Footer Link */}
-            <div className="pt-12">
-              <a 
-                href="/resume.pdf" 
-                download 
-                onClick={() => playClickSound(0.12)}
-                className="inline-flex items-center gap-2 font-sans font-medium text-base text-foreground/60 hover:text-foreground transition-all duration-300 border-b border-foreground/30 hover:border-foreground pb-1 cursor-pointer"
-              >
-                <span>Download résumé</span>
-                <span className="text-sm transition-transform duration-300 group-hover:translate-y-0.5">&darr;</span>
-              </a>
             </div>
 
           </div>
