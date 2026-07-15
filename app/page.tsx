@@ -781,8 +781,8 @@ export default function Home() {
         </section>
 
         {/* SECTION 2.5: EXPERIENCE SECTION */}
-        <section id="experience" className="w-full pt-32 pb-24 md:pt-40 md:pb-32 border-t border-foreground/10">
-          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 w-full flex flex-col gap-16 md:gap-24">
+        <section id="experience" className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 pt-32 pb-24 md:pt-40 md:pb-32 border-t border-foreground/10">
+          <div className="max-w-[1600px] mx-auto px-6 md:px-16 lg:px-24 w-full flex flex-col gap-16 md:gap-24">
             
             {/* Header: Grid Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
