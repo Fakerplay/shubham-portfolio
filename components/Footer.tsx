@@ -406,6 +406,7 @@ export default function Footer() {
               >
                 <span>Start a conversation</span>
                 <svg 
+                  aria-hidden="true"
                   className="w-4 h-4 text-current transform group-hover:translate-x-1 transition-transform duration-300" 
                   fill="none" 
                   viewBox="0 0 24 24" 

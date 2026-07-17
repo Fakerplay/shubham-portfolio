@@ -66,6 +66,8 @@ export default function ThemeDropdown() {
     <div className="relative font-sans text-xs md:text-sm" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
         className="flex items-center justify-between w-[125px] uppercase tracking-wider font-semibold bg-transparent text-foreground hover:opacity-60 active:scale-[0.96] transition-[opacity,transform] border-none px-0 py-0 cursor-pointer"
       >
         <span>{getThemeGreeting(theme)}</span>

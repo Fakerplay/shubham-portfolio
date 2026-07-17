@@ -116,12 +116,14 @@ export default function WorkPage() {
           </h1>
         </div>
         {/* 2. Interactive Category Filter Bar */}
-        <div className="flex flex-wrap items-center gap-2 pt-6 border-t border-foreground/10">
+        <div role="tablist" aria-label="Project categories" className="flex flex-wrap items-center gap-2 pt-6 border-t border-foreground/10">
           {CATEGORIES.map((cat) => {
             const isActive = activeTab === cat;
             return (
               <button
                 key={cat}
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActiveTab(cat)}
                 className={`relative px-5 py-2.5 rounded-xl font-sans text-xs md:text-sm font-medium active:scale-[0.96] transition-[background-color,color,border-color,transform] duration-300 select-none cursor-pointer border ${
                   isActive

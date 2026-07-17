@@ -39,6 +39,7 @@ export default function ThemeLamp() {
       aria-label={isNight ? "Turn on lights (Day)" : "Turn off lights (Night)"}
     >
       <svg
+        aria-hidden="true"
         width="28"
         height="36"
         viewBox="0 0 24 32"
