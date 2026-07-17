@@ -2,9 +2,9 @@
 @config "../tailwind.config.ts";
 
 @theme {
-  --font-sans: "Google Sans", "Product Sans", var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: var(--font-exposure), Georgia, serif;
-  --font-mono: monospace;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-geist-mono), monospace;
   --color-background: var(--theme-bg);
   --color-foreground: var(--theme-text);
 }
@@ -12,10 +12,17 @@
 :root {
   --theme-bg: #F9F9F9;
   --theme-text: #111111;
-  --font-serif: var(--font-exposure), Georgia, serif;
-  --font-sans: "Google Sans", "Product Sans", var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: monospace;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
   --theme-bg-gradient: none;
+}
+
+/* Classic Typography Revert Option */
+:root[data-font-pairing="classic"] {
+  --font-sans: "Google Sans", "Product Sans", var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-exposure), Georgia, serif;
+  --font-mono: monospace;
 }
 
 :root[data-theme="auto"] {

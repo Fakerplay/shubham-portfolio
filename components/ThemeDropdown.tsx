@@ -47,7 +47,7 @@ const getThemeGreeting = (theme: string) => {
 };
 
 export default function ThemeDropdown() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, fontPairing, setFontPairing } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -83,7 +83,7 @@ export default function ThemeDropdown() {
             exit={{ opacity: 0, y: -4, scale: 0.96 }}
             transition={{ duration: 0.15, ease: EASE_OUT }}
             style={{ transformOrigin: "top right" }}
-            className="absolute right-0 mt-1 w-32 border border-foreground/10 bg-background shadow-none z-50 rounded-none overflow-hidden"
+            className="absolute right-0 mt-1 w-36 border border-foreground/10 bg-background shadow-none z-50 rounded-none overflow-hidden"
           >
             <div className="flex flex-col py-1">
               {THEMES.map((t) => {
@@ -106,6 +106,21 @@ export default function ThemeDropdown() {
                   </button>
                 );
               })}
+
+              {/* Separator line */}
+              <div className="h-[1px] bg-foreground/10 my-1" />
+
+              {/* Font Pairing Switch Toggle */}
+              <button
+                onClick={() => {
+                  setFontPairing(fontPairing === "modern" ? "classic" : "modern");
+                  setIsOpen(false);
+                }}
+                className="w-full text-left px-3 py-2 uppercase tracking-wider transition-colors duration-150 flex items-center justify-between rounded-none text-foreground/50 hover:bg-foreground/5 hover:text-foreground font-semibold text-[10px] cursor-pointer"
+              >
+                <span>{fontPairing === "modern" ? "Classic Type" : "Modern Type"}</span>
+                <span className="text-[8px]">⌥</span>
+              </button>
             </div>
           </motion.div>
         )}

@@ -1,5 +1,5 @@
 import localFont from 'next/font/local'
-import { Inter } from 'next/font/google'
+import { Inter, Geist, Geist_Mono, Newsreader } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeContext'
 import LightLeakBackground from '@/components/LightLeakBackground'
@@ -22,6 +22,25 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+})
+
+const geistSans = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist-sans',
+  display: 'swap',
+})
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  display: 'swap',
+})
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-newsreader',
+  display: 'swap',
+  style: ['normal', 'italic'],
 })
 
 const exposure = localFont({
@@ -156,7 +175,7 @@ const profileJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${exposure.variable} ${inter.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${exposure.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} ${newsreader.variable}`}>
       <head>
         <link rel="preconnect" href="https://api.open-meteo.com" />
       </head>
