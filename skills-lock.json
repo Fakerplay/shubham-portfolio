@@ -7,6 +7,12 @@
       "skillPath": "skills/better-typography/SKILL.md",
       "computedHash": "84642a2f7ad030fdcef18bf654c3cbf9e63347259a2229bc3b2e6bd9540eca27"
     },
+    "fixing-accessibility": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/fixing-accessibility/SKILL.md",
+      "computedHash": "4fa8f5a772b4eef3d28a54c136b507d070e54e2c326578f65eaf5e5a0118b38a"
+    },
     "improve-animations": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
