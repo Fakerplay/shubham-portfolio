@@ -35,7 +35,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
         <div className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full lg:w-auto flex-shrink-0 relative z-10">
           <a
             href={`mailto:${email}?subject=Discuss%20a%20project`}
-            className="group/btn btn-primary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] cursor-pointer text-center"
+            className="group/btn btn-primary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.96] cursor-pointer text-center"
           >
             <span>Discuss a project</span>
             <svg 
@@ -51,7 +51,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
 
           <a
             href={`mailto:${email}?subject=Talk%20about%20a%20role`}
-            className="group/btn btn-secondary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-medium text-sm tracking-wide transition-[background-color,border-color,transform] duration-300 active:scale-[0.97] cursor-pointer overflow-hidden text-center"
+            className="group/btn btn-secondary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-medium text-sm tracking-wide transition-[background-color,border-color,transform] duration-300 active:scale-[0.96] cursor-pointer overflow-hidden text-center"
           >
             <span>Talk about a role</span>
             <svg 

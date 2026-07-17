@@ -222,7 +222,7 @@ export default function Header() {
                   key={idx}
                   href={item.href} 
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`relative py-2.5 px-4 rounded-lg flex items-center gap-2 active:scale-[0.97] transition-[color,transform] duration-300 font-sans text-[13px] md:text-[14px] font-medium tracking-normal select-none ${
+                  className={`relative py-2.5 px-4 rounded-lg flex items-center gap-2 active:scale-[0.96] transition-[color,transform] duration-300 font-sans text-[13px] md:text-[14px] font-medium tracking-normal select-none ${
                     item.active 
                       ? 'text-white font-semibold' 
                       : 'text-zinc-300 hover:text-white'
@@ -283,7 +283,7 @@ export default function Header() {
             {/* Audio Mute/Unmute toggle widget */}
             <button
               onClick={toggleMute}
-              className="min-w-11 min-h-11 flex items-center justify-center rounded-md hover:bg-foreground/5 active:scale-[0.97] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 flex"
+              className="min-w-11 min-h-11 flex items-center justify-center rounded-md hover:bg-foreground/5 active:scale-[0.96] transition-[background-color,color,transform] duration-300 text-foreground/50 hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 flex"
               title={isMuted ? "Enable sound" : "Disable sound"}
               aria-label={isMuted ? "Enable sound" : "Disable sound"}
             >
@@ -331,7 +331,7 @@ export default function Header() {
               key={idx}
               href={item.href} 
               onClick={(e) => handleNavClick(e, item.href)}
-              className={`relative py-2 px-3 rounded-lg flex items-center gap-1.5 active:scale-[0.97] transition-[color,transform] duration-300 font-sans text-[11px] font-medium tracking-normal select-none ${
+              className={`relative py-2 px-3 rounded-lg flex items-center gap-1.5 active:scale-[0.96] transition-[color,transform] duration-300 font-sans text-[11px] font-medium tracking-normal select-none ${
                 item.active 
                   ? 'text-white font-semibold' 
                   : 'text-zinc-400 hover:text-white'

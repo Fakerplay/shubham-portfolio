@@ -119,11 +119,11 @@ export default function WorkDetail() {
       {/* Hero Header Area */}
       <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-16 md:pt-24 pb-8 flex flex-col gap-8">
         <div className="flex flex-col gap-6">
-          <h1 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05] max-w-5xl">
+          <h1 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05] max-w-5xl text-balance">
             {project.title}
           </h1>
 
-          <p className="text-xl md:text-2xl font-sans font-normal text-foreground/75 leading-[1.5] max-w-4xl select-text">
+          <p className="text-xl md:text-2xl font-sans font-normal text-foreground/75 leading-[1.5] max-w-4xl select-text text-pretty">
             {project.subtitle}
           </p>
         </div>
@@ -192,8 +192,8 @@ export default function WorkDetail() {
         {/* Group 1 & Decision 01 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision01.title}</h2>
-            <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision01.text}</p>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight text-balance">{project.decision01.title}</h2>
+            <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text text-pretty">{project.decision01.text}</p>
           </div>
           <div className="w-full flex flex-col gap-6 md:gap-8">
             {group1.map((slot, idx) => (
@@ -205,8 +205,8 @@ export default function WorkDetail() {
         {/* Group 2 & Decision 02 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision02.title}</h2>
-            <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision02.text}</p>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight text-balance">{project.decision02.title}</h2>
+            <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text text-pretty">{project.decision02.text}</p>
           </div>
           <div className="w-full flex flex-col gap-6 md:gap-8">
             {group2.map((slot, idx) => (
@@ -218,8 +218,8 @@ export default function WorkDetail() {
         {/* Group 3 & Decision 03 */}
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="max-w-7xl mx-auto w-full px-6 md:px-16 lg:px-24 flex flex-col gap-3.5">
-            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight">{project.decision03.title}</h2>
-            <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text">{project.decision03.text}</p>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-light tracking-tight text-balance">{project.decision03.title}</h2>
+            <p className="font-sans text-base md:text-lg text-foreground/75 leading-[1.6] max-w-4xl select-text text-pretty">{project.decision03.text}</p>
           </div>
           <div className="w-full flex flex-col gap-6 md:gap-8">
             {group3.map((slot, idx) => (

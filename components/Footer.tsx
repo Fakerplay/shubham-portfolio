@@ -402,7 +402,7 @@ export default function Footer() {
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
               <a
                 href={`mailto:${email}`}
-                className="group btn-primary px-8 py-4 sm:py-4.5 rounded-full font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center"
+                className="group btn-primary px-8 py-4 sm:py-4.5 rounded-full font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.96] cursor-pointer flex items-center justify-center gap-3.5 text-center"
               >
                 <span>Start a conversation</span>
                 <svg 
@@ -418,7 +418,7 @@ export default function Footer() {
 
               <Link
                 href="/#work"
-                className="btn-secondary px-8 py-4 sm:py-4.5 rounded-full font-sans font-medium text-sm sm:text-base transition-[transform,box-shadow,background-color,border-color] duration-300 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
+                className="btn-secondary px-8 py-4 sm:py-4.5 rounded-full font-sans font-medium text-sm sm:text-base transition-[transform,box-shadow,background-color,border-color] duration-300 hover:-translate-y-0.5 active:scale-[0.96] cursor-pointer"
               >
                 View work
               </Link>

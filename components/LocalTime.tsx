@@ -121,7 +121,7 @@ export default function LocalTime() {
       tabIndex={0}
       aria-label={`Local time in Pune: ${time}. Focus to load current weather.`}
     >
-      <span className="font-mono text-foreground opacity-60 font-medium hover:opacity-100 transition-opacity duration-300 block">
+      <span className="font-mono text-foreground opacity-60 font-medium hover:opacity-100 transition-opacity duration-300 block tabular-nums">
         {time}
       </span>
 
@@ -141,7 +141,7 @@ export default function LocalTime() {
             <div className="flex flex-col gap-1 text-left">
               <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">pune, india</span>
               <div className="flex items-center gap-1.5 mt-1">
-                <span className="text-xl font-bold font-mono tracking-tight text-white">{weather.temp}°C</span>
+                <span className="text-xl font-bold font-mono tracking-tight text-white tabular-nums">{weather.temp}°C</span>
                 <span className="text-lg">{weather.emoji}</span>
               </div>
               <span className="text-[11px] font-sans text-zinc-300 leading-tight">{weather.description}</span>

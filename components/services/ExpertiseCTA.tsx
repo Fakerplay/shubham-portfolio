@@ -13,7 +13,7 @@ export default function ExpertiseCTA() {
         
         {/* Left Side: Editorial CTA Headline */}
         <div className="flex flex-col gap-4 max-w-3xl">
-          <h3 className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-foreground tracking-tight leading-[1.08]">
+          <h3 className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-foreground tracking-tight leading-[1.08] text-balance">
             Have a project—or building a design team? Let&rsquo;s talk.
           </h3>
         </div>
@@ -22,11 +22,11 @@ export default function ExpertiseCTA() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 flex-shrink-0 self-start lg:self-end">
           <a
             href="mailto:shubhamshinde52@gmail.com?subject=Discuss%20a%20project"
-            className="group px-8 py-4 sm:py-4.5 rounded-full bg-zinc-900 border border-zinc-950 text-white font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-zinc-850 hover:shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.35)]"
+            className="group btn-primary px-8 py-4 sm:py-4.5 rounded-full font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.96] cursor-pointer flex items-center justify-center gap-3.5 text-center shadow-lg"
           >
             <span>Discuss a project</span>
             <svg 
-              className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform duration-300" 
+              className="w-4 h-4 text-current transform group-hover:translate-x-1 transition-transform duration-300" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor" 
@@ -38,11 +38,11 @@ export default function ExpertiseCTA() {
 
           <a
             href="mailto:shubhamshinde52@gmail.com?subject=Talk%20about%20a%20role"
-            className="group px-8 py-4 sm:py-4.5 rounded-full border border-zinc-850 hover:border-zinc-500 text-zinc-300 hover:text-white font-sans font-medium text-sm sm:text-base tracking-wide transition-[background-color,border-color,transform] duration-300 hover:bg-white/[0.04] active:scale-[0.97] cursor-pointer flex items-center justify-center gap-3.5 text-center bg-transparent"
+            className="group btn-secondary px-8 py-4 sm:py-4.5 rounded-full font-sans font-medium text-sm sm:text-base tracking-wide transition-[background-color,border-color,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.96] cursor-pointer flex items-center justify-center gap-3.5 text-center bg-transparent"
           >
             <span>Talk about a role</span>
             <svg 
-              className="w-4 h-4 text-zinc-400 transform group-hover:translate-x-1 transition-transform duration-300" 
+              className="w-4 h-4 text-current transform group-hover:translate-x-1 transition-transform duration-300" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor" 

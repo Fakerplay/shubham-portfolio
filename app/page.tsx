@@ -458,7 +458,7 @@ const ProjectCard = ({
                   ))}
                 </div>
                 {/* Qualitative Outcome supporting line */}
-                <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide">
+                <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-pretty">
                   {outcome}
                 </div>
               </div>
@@ -467,7 +467,7 @@ const ProjectCard = ({
 
           {/* Right Column: Action Only */}
           <div className="lg:col-span-5 flex flex-col justify-center items-start lg:items-end border-t lg:border-t-0 lg:border-l border-foreground/10 pt-6 lg:pt-5 lg:pl-12">
-            <Link href={`/work/${slug}`} className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 hover:border-foreground bg-transparent hover:bg-foreground hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color] duration-300 cursor-pointer">
+            <Link href={`/work/${slug}`} className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 hover:border-foreground bg-transparent hover:bg-foreground hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.96] cursor-pointer">
               <span>View case study</span>
               <span className="transition-transform duration-300 group-hover/btn:translate-x-1">&rarr;</span>
             </Link>
@@ -739,8 +739,8 @@ export default function Home() {
           {/* Perfectly Aligned Section Header */}
           <div className="w-full px-6 md:px-16 lg:px-24">
             <div className="max-w-7xl mx-auto w-full">
-              <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight">Featured Work</h2>
-              <p className="mt-3 font-sans text-sm md:text-base text-foreground/60 tracking-tight">
+              <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight text-balance">Featured Work</h2>
+              <p className="mt-3 font-sans text-sm md:text-base text-foreground/60 tracking-tight text-pretty">
                 7+ years across brand, web &amp; motion <span aria-hidden="true">&middot;</span> 50+ projects delivered
               </p>
             </div>
@@ -788,13 +788,13 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
               {/* Left Column: Heading (serif, clamp 64px to 108px) */}
               <div className="lg:col-span-6">
-                <h2 className="font-serif font-light text-[clamp(56px,7vw,104px)] text-foreground leading-[1.05] tracking-tight">
+                <h2 className="font-serif font-light text-[clamp(56px,7vw,104px)] text-foreground leading-[1.05] tracking-tight text-balance">
                   Experience
                 </h2>
               </div>
               {/* Right Column: Intro text and Download CV link */}
               <div className="lg:col-span-6 flex flex-col gap-6 lg:pt-4">
-                <p className="font-sans text-base md:text-[18px] text-foreground/80 leading-relaxed max-w-lg">
+                <p className="font-sans text-base md:text-[18px] text-foreground/80 leading-relaxed max-w-lg text-pretty">
                   I’ve worked across startups, enterprise teams and media studios—leading brand, web and motion work.
                 </p>
                 <div>
@@ -802,7 +802,7 @@ export default function Home() {
                     href="/resume.pdf" 
                     download 
                     onClick={() => playClickSound(0.12)}
-                    className="inline-flex items-center gap-2 font-sans font-medium text-sm text-foreground/60 hover:text-foreground transition-all duration-300 border-b border-foreground/20 hover:border-foreground pb-0.5 cursor-pointer"
+                    className="inline-flex items-center gap-2 font-sans font-medium text-sm text-foreground/60 hover:text-foreground transition-colors duration-300 border-b border-foreground/20 hover:border-foreground pb-0.5 cursor-pointer"
                   >
                     <span>Download résumé</span>
                     <span className="text-[10px]">&darr;</span>

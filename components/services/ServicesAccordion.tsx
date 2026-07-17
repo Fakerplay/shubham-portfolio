@@ -81,7 +81,7 @@ export default function ServicesAccordion() {
                       <span className="font-sans text-[11px] font-semibold tracking-widest uppercase text-foreground/45 block">
                         CAPABILITIES MATRIX
                       </span>
-                      <ul className="flex flex-col gap-3 font-sans text-sm md:text-base text-foreground/75 font-normal">
+                      <ul className="flex flex-col gap-3 font-sans text-sm md:text-base text-foreground/75 font-normal list-none">
                         {service.deliverables.map((item, idx) => (
                           <li key={idx} className="flex items-center gap-3">
                             <span className="font-sans font-medium text-xs text-foreground/35">0{idx + 1}</span>

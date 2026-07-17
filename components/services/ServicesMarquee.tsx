@@ -103,7 +103,7 @@ export default function ServicesMarquee() {
               <span className="font-sans font-semibold text-[11px] tracking-widest uppercase text-foreground/40 block">
                 CORE DELIVERABLES
               </span>
-              <ul className="flex flex-col gap-3.5">
+              <ul className="flex flex-col gap-3.5 list-none">
                 {currentService.deliverables.map((item, idx) => (
                   <li key={idx} className="font-sans text-sm md:text-base text-foreground/85 flex items-center gap-3.5 font-normal">
                     <span className="font-sans font-medium text-xs text-foreground/35">0{idx + 1}</span>
