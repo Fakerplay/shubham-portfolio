@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useMotionTemplate, animate } from "framer-motion";
+import { motion, useMotionValue, useMotionTemplate, animate } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ThemeDropdown from "./ThemeDropdown";

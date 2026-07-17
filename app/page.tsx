@@ -316,6 +316,7 @@ const ExpandableBio = ({ reduceMotion = false }: { reduceMotion?: boolean }) => 
           rotate: 0.5,
           boxShadow: "0 4px 10px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.05)"
         }}
+        whileTap={reduceMotion ? {} : { scale: 0.96 }}
         transition={{ layout: { duration: 0.16, ease: EASE_OUT } }}
         className="group inline-flex items-center gap-1.5 cursor-pointer font-serif text-2xl md:text-3xl text-foreground/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-foreground/30 rounded-full py-1 px-4 border border-foreground/10 hover:border-foreground/25 hover:bg-foreground/[0.05] bg-foreground/[0.02] shadow-[0_2px_5px_rgba(0,0,0,0.03)] transition-colors duration-300 select-none relative align-baseline leading-none -top-[0.02em]"
       >

@@ -66,7 +66,7 @@ export default function ThemeDropdown() {
     <div className="relative font-sans text-xs md:text-sm" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-[125px] uppercase tracking-wider font-semibold bg-transparent text-foreground hover:opacity-60 active:scale-[0.97] transition-[opacity,transform] border-none px-0 py-0 cursor-pointer"
+        className="flex items-center justify-between w-[125px] uppercase tracking-wider font-semibold bg-transparent text-foreground hover:opacity-60 active:scale-[0.96] transition-[opacity,transform] border-none px-0 py-0 cursor-pointer"
       >
         <span>{getThemeGreeting(theme)}</span>
         <span className={`transition-transform duration-200 text-[10px] ${isOpen ? "rotate-180" : ""}`}>
@@ -78,9 +78,9 @@ export default function ThemeDropdown() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0, y: -4, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, scale: 0.96 }}
             transition={{ duration: 0.15, ease: EASE_OUT }}
             style={{ transformOrigin: "top right" }}
             className="absolute right-0 mt-1 w-32 border border-foreground/10 bg-background shadow-none z-50 rounded-none overflow-hidden"

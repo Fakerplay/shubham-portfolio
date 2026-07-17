@@ -34,7 +34,7 @@ export default function ThemeLamp() {
   return (
     <button
       onClick={handleToggle}
-      className="relative min-w-11 min-h-11 text-foreground hover:opacity-85 active:scale-[0.97] transition-[opacity,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 rounded-md flex items-center justify-center cursor-pointer"
+      className="relative min-w-11 min-h-11 text-foreground hover:opacity-85 active:scale-[0.96] transition-[opacity,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 rounded-md flex items-center justify-center cursor-pointer"
       title={isNight ? "Turn on lights (Day)" : "Turn off lights (Night)"}
       aria-label={isNight ? "Turn on lights (Day)" : "Turn off lights (Night)"}
     >
@@ -75,22 +75,29 @@ export default function ThemeLamp() {
         />
 
         {/* Hanging Pull Chain String (on the right) */}
-        <line 
-          x1="16.5" 
-          y1="18" 
-          x2="16.5" 
-          y2="28" 
-          strokeWidth="1" 
-          className="opacity-70"
-        />
-        {/* Pull Chain weight (circular bead) */}
-        <circle 
-          cx="16.5" 
-          cy="28.5" 
-          r="1.5" 
-          fill="currentColor" 
-          className="opacity-90"
-        />
+        <motion.g
+          key={isNight ? "night" : "day"}
+          initial={{ y: 0 }}
+          animate={{ y: [0, 4, -1.5, 0.5, 0] }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          <line 
+            x1="16.5" 
+            y1="18" 
+            x2="16.5" 
+            y2="28" 
+            strokeWidth="1" 
+            className="opacity-70"
+          />
+          {/* Pull Chain weight (circular bead) */}
+          <circle 
+            cx="16.5" 
+            cy="28.5" 
+            r="1.5" 
+            fill="currentColor" 
+            className="opacity-90"
+          />
+        </motion.g>
 
         {/* Ambient Glow beam radiating from bulb when night mode is active */}
         <motion.polygon

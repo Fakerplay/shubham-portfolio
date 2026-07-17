@@ -24,6 +24,7 @@ export default function HandDrawnLogo() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={reduceMotion ? {} : { scale: 1.05, rotate: 3 }}
+      whileTap={reduceMotion ? {} : { scale: 0.96 }}
       className="relative cursor-pointer select-none"
       style={{ width: 58, height: 58 }}
     >

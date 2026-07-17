@@ -110,7 +110,7 @@ export default function WorkPage() {
       {/* 1. Hero Header & Editorial Introduction */}
       <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 flex flex-col gap-8 mb-16">
         <div className="flex flex-col gap-4">
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground leading-[1.05]">
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground leading-[1.05] text-balance">
             Selected Work Across <br className="hidden sm:inline" />
             <span className="italic font-normal text-foreground/90">Brand, Web &amp; Motion.</span>
           </h1>
@@ -123,7 +123,7 @@ export default function WorkPage() {
               <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
-                className={`relative px-5 py-2.5 rounded-xl font-sans text-xs md:text-sm font-medium active:scale-[0.97] transition-[background-color,color,border-color,transform] duration-300 select-none cursor-pointer border ${
+                className={`relative px-5 py-2.5 rounded-xl font-sans text-xs md:text-sm font-medium active:scale-[0.96] transition-[background-color,color,border-color,transform] duration-300 select-none cursor-pointer border ${
                   isActive
                     ? "bg-foreground text-background border-transparent shadow-md font-semibold"
                     : "bg-foreground/[0.03] text-foreground/70 border-foreground/15 hover:bg-foreground/[0.08] hover:text-foreground"
@@ -167,7 +167,7 @@ export default function WorkPage() {
                 </div>
 
                 <Link href={`/work/${project.slug}`} prefetch={false} className="hover:opacity-85 transition-opacity">
-                  <h2 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
+                  <h2 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05] text-balance">
                     {project.title}
                   </h2>
                 </Link>
@@ -220,7 +220,7 @@ export default function WorkPage() {
                         ))}
                       </div>
                       {/* Qualitative Outcome supporting line */}
-                      <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-left">
+                      <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-left text-pretty">
                         {project.outcome}
                       </div>
                     </div>
