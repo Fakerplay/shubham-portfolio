@@ -118,7 +118,7 @@ export default function ThemeDropdown() {
                   setFontPairing(fontPairing === "modern" ? "classic" : "modern");
                   setIsOpen(false);
                 }}
-                className="w-full text-left px-3 py-2 uppercase tracking-wider transition-colors duration-150 flex items-center justify-between rounded-none text-foreground/50 hover:bg-foreground/5 hover:text-foreground font-semibold text-[10px] cursor-pointer"
+                className="w-full text-left px-3 py-2 uppercase tracking-wider transition-colors duration-150 flex items-center justify-between rounded-none text-foreground/70 hover:bg-foreground/5 hover:text-foreground font-semibold text-[10px] cursor-pointer"
               >
                 <span>{fontPairing === "modern" ? "Classic Type" : "Modern Type"}</span>
                 <span className="text-[8px]">⌥</span>

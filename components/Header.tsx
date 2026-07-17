@@ -333,7 +333,7 @@ export default function Header() {
               key={idx}
               href={item.href} 
               onClick={(e) => handleNavClick(e, item.href)}
-              className={`relative py-2 px-3 rounded-lg flex items-center gap-1.5 active:scale-[0.96] transition-[color,transform] duration-300 font-sans text-[11px] font-medium tracking-normal select-none ${
+              className={`relative py-2 px-3 rounded-lg flex items-center gap-1.5 active:scale-[0.96] transition-[color,transform] duration-300 font-sans text-[11px] font-medium tracking-normal select-none after:absolute after:-inset-y-2.5 after:inset-x-0 ${
                 item.active 
                   ? 'text-white font-semibold' 
                   : 'text-zinc-400 hover:text-white'
