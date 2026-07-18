@@ -682,17 +682,7 @@ export default function Home() {
             {/* Paragraph 1 */}
             <div className="flex flex-col gap-1">
               <LineReveal delay={0.3} reduceMotion={reduceMotion}>
-                I’m <span className="font-semibold text-foreground">Shubham Shinde</span>{" "}
-                <span className="inline-flex items-center w-8 h-8 rounded-md overflow-hidden border border-foreground/15 align-baseline leading-none mx-1.5 relative select-none -top-[0.05em]">
-                  <Image
-                    src="/images/avatar.jpg"
-                    alt="Shubham Shinde"
-                    fill
-                    sizes="32px"
-                    className="object-cover grayscale"
-                    priority
-                  />
-                </span>, a <KeywordPill text="visual storyteller" delay={0.3} reduceMotion={reduceMotion} />
+                I’m <span className="font-semibold text-foreground">Shubham Shinde</span>, a <KeywordPill text="visual storyteller" delay={0.3} reduceMotion={reduceMotion} />
               </LineReveal>
               <LineReveal delay={0.45} reduceMotion={reduceMotion}>
                 building <KeywordPill text="brand systems" delay={0.4} reduceMotion={reduceMotion} />,{" "}
