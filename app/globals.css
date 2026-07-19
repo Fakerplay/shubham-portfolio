@@ -73,6 +73,9 @@ html {
   background-image: var(--theme-bg-gradient);
   background-attachment: fixed;
   transition: background-color 0.5s ease;
+  font-variant-ligatures: common-ligatures;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
 }
 
 .bg-noise {
