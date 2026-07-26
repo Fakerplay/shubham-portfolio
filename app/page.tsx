@@ -384,6 +384,7 @@ interface ProjectProps {
   video?: string;
   outcome: string;
   tags?: string[];
+  status?: string;
   index?: number;
   total?: number;
   reduceMotion?: boolean;
@@ -391,10 +392,17 @@ interface ProjectProps {
 
 // 6. ProjectCard Component (Full-Width Cinematic Cover Showcase with Editorial Hierarchy)
 const ProjectCard = ({ 
-  slug, brand, title, image, video, outcome, tags
+  slug, brand, title, image, video, outcome, tags, status, description
 }: ProjectProps) => {
+  const ariaLabel = `View ${brand} case study`;
+
   return (
-    <div className="w-full px-6 md:px-16 lg:px-24 flex flex-col group select-none">
+    <Link 
+      href={`/work/${slug}`} 
+      prefetch={false} 
+      className="w-full px-6 md:px-16 lg:px-24 flex flex-col group select-none hover:opacity-[0.98] transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-foreground/30 rounded-3xl"
+      aria-label={ariaLabel}
+    >
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-12">
         
         {/* Top Header: Brand Label + Massive Headline */}
@@ -405,78 +413,70 @@ const ProjectCard = ({
             </span>
           </div>
 
-          <Link href={`/work/${slug}`} prefetch={false} className="hover:opacity-85 transition-opacity">
-            <h3 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
-              {title}
-            </h3>
-          </Link>
+          <h3 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05]">
+            {title}
+          </h3>
         </div>
 
         {/* Centerpiece: Full-Width Cinematic Cover Showcase */}
-        <Link href={`/work/${slug}`} prefetch={false} className="block w-full">
-          <div className="relative w-full aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden border border-foreground/15 shadow-2xl bg-foreground/[0.02]">
-            {video || image?.endsWith(".mp4") || image?.endsWith(".webm") ? (
-              <LazyVideo
-                src={video || image}
-                poster={image?.endsWith(".mp4") || image?.endsWith(".webm") ? undefined : image}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
-              />
-            ) : (
-              <Image 
-                src={image} 
-                alt={title} 
-                fill 
-                quality={85}
-                sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1280px) calc(100vw - 128px), 1280px"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
-              />
-            )}
-            {/* Subtle overlay gradient on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            
-            {/* Sleek floating interactive badge */}
-            <div className="absolute bottom-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none">
-              <div className="px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-md text-white font-sans text-xs font-medium tracking-wide border border-white/20 flex items-center gap-2 shadow-lg">
-                <span>View case study</span>
-                <span>&rarr;</span>
-              </div>
-            </div>
-          </div>
-        </Link>
+        <div className="relative w-full aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden border border-foreground/15 shadow-2xl bg-foreground/[0.02]">
+          {video || image?.endsWith(".mp4") || image?.endsWith(".webm") ? (
+            <LazyVideo
+              src={video || image}
+              poster={image?.endsWith(".mp4") || image?.endsWith(".webm") ? undefined : image}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
+            />
+          ) : (
+            <Image 
+              src={image} 
+              alt={brand} 
+              fill 
+              quality={85}
+              sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1280px) calc(100vw - 128px), 1280px"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
+            />
+          )}
+          {/* Subtle overlay gradient on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        </div>
 
         {/* Bottom Editorial Content & Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 pt-2 items-start">
           {/* Left Column: Project Categories & Qualitative Outcome */}
           <div className="lg:col-span-7 flex flex-col justify-between h-full gap-5">
-            {tags && tags.length > 0 && (
-              <div className="flex flex-col gap-3 pt-5 border-t border-foreground/15">
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-base md:text-lg font-sans font-normal text-foreground/90 tracking-tight">
-                  {tags.map((tag: string, idx: number) => (
-                    <span key={idx} className="inline-flex items-center gap-x-3">
-                      <span>{tag}</span>
-                      {idx < tags.length - 1 && <span className="text-foreground/35 font-light select-none">/</span>}
-                    </span>
-                  ))}
-                </div>
-                {/* Qualitative Outcome supporting line */}
-                <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-pretty">
-                  {outcome}
-                </div>
+            <div className="flex flex-col gap-3 pt-5 border-t border-foreground/15">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-base md:text-lg font-sans font-normal text-foreground/90 tracking-tight">
+                {status && (
+                  <span className="font-semibold text-foreground">{status}</span>
+                )}
+                {status && tags && tags.length > 0 && (
+                  <span className="text-foreground/35 font-light select-none">&middot;</span>
+                )}
+                {tags && tags.length > 0 && tags.map((tag: string, idx: number) => (
+                  <span key={idx} className="inline-flex items-center gap-x-3">
+                    <span>{tag}</span>
+                    {idx < tags.length - 1 && <span className="text-foreground/35 font-light select-none">/</span>}
+                  </span>
+                ))}
               </div>
-            )}
+              {/* Qualitative Outcome supporting line */}
+              <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-pretty">
+                {outcome}
+              </div>
+            </div>
           </div>
 
           {/* Right Column: Action Only */}
-          <div className="lg:col-span-5 flex flex-col justify-center items-start lg:items-end border-t lg:border-t-0 lg:border-l border-foreground/10 pt-6 lg:pt-5 lg:pl-12">
-            <Link href={`/work/${slug}`} className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 hover:border-foreground bg-transparent hover:bg-foreground hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.96] cursor-pointer">
+          <div className="lg:col-span-5 flex flex-col justify-center items-start lg:items-end border-t lg:border-t-0 lg:border-l border-foreground/10 pt-6 lg:pt-5 lg:pl-12 w-full">
+            <div className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 group-hover:border-foreground bg-transparent group-hover:bg-foreground group-hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.96] cursor-pointer">
               <span>View case study</span>
               <span className="transition-transform duration-300 group-hover/btn:translate-x-1">&rarr;</span>
-            </Link>
+            </div>
           </div>
         </div>
 
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -598,62 +598,67 @@ export default function Home() {
   const projects = [
     {
       slug: "daulat-finvest",
-      brand: "Daulat Finvest",
-      logoColor: "#171717", // Elegant dark tone
-      year: "2024 - Present",
+      brand: "Daulat Wealth Management",
+      logoColor: "#171717",
+      year: "2026",
       title: "Wealth management crafted around your portfolio",
       video: "/videos/daulat-cover.mp4",
       image: "/images/project-1-cover.jpg",
-      description: "Designed a clearer wealth management experience for portfolio tracking, performance, and advisor communication.",
-      tags: ["Website Design", "Development", "Fintech"],
-      outcome: "Unified digital wealth experience"
+      description: "Repositioning a founder-led wealth management firm through a more credible, human and portfolio-first digital experience.",
+      status: "Client project",
+      tags: ["Website Strategy", "Website Design", "Development"],
+      outcome: "Created a trusted digital experience for founder-led advisory."
     },
     {
-      slug: "solaris",
-      brand: "Solaris",
-      logoColor: "#f59e0b", // Radiant amber gold
-      year: "2024 - 2025",
-      title: "A fintech identity shaped by light, precision, and possibility",
-      video: "/videos/solaris-2.mp4",
-      image: "/images/solaris-cover.png",
-      description: "Built the Solaris identity across brand, 3D, digital, and investor communications.",
-      tags: ["Brand Identity", "Creative Direction", "3D Visuals", "Fintech"],
-      outcome: "Unified brand-to-product visual system"
-    },
-    {
-      slug: "optiv",
-      brand: "Optiv",
-      logoColor: "#6366f1", // Sleek indigo/violet architectural tone
+      slug: "solace",
+      brand: "Solace AI",
+      logoColor: "#111111",
       year: "2025",
-      title: "Making complex technology feel clear and approachable",
-      video: "/videos/Cover_Optiv_1080.mp4",
-      image: "/images/optiv/About.png",
-      description: "Created a scalable Optiv identity across logo, digital, physical, and campaign touchpoints.",
-      tags: ["Brand Identity", "Logo Design", "Visual System", "Creative Direction"],
-      outcome: "Scalable cross-channel identity system"
+      title: "Solace AI Brand Identity and Website",
+      image: "/images/solace/Solace Cover.png",
+      description: "Building brand identity and website design for a calm and premium AI lifestyle ecosystem.",
+      status: "Client project",
+      tags: ["Brand Identity", "Website Design", "Creative Direction"],
+      outcome: "Delivered a distinctive premium brand identity and launching site."
     },
     {
       slug: "studio-vistara",
       brand: "Studio Vistara",
-      logoColor: "#a8a29e", // Warm stone & earthy architectural tone
-      year: "2025 - Present",
-      title: "An architectural identity built from structure, material, and calm",
+      logoColor: "#10b981",
+      year: "2025",
+      title: "Studio Vistara Architectural Identity",
       video: "/videos/studio-vistara-1.mp4",
       image: "/images/studio-vistara-cover.png",
-      description: "Translated Studio Vistara’s spatial sensibility into a tactile, adaptable identity system.",
-      tags: ["Brand Identity", "Typography System", "Stationery & Packaging", "Creative Direction"],
-      outcome: "Cohesive tactile and digital identity"
+      description: "Translating Pune architecture studio's spatial sensibility into a tactile, adaptable brand identity and launching site.",
+      status: "Client project",
+      tags: ["Brand Identity", "Website Design", "Creative Direction"],
+      outcome: "Established the launch identity and tactile digital presence."
     },
     {
-      slug: "solace",
-      brand: "Solace",
-      logoColor: "#111111", // Sleek luxury charcoal/black accent
+      slug: "solaris",
+      brand: "Solaris",
+      logoColor: "#f59e0b",
+      year: "2024–2025",
+      title: "A fintech identity shaped by light, precision, and possibility",
+      video: "/videos/solaris-2.mp4",
+      image: "/images/solaris-cover.png",
+      description: "Independent brand concept exploring crystalline forms, solar geometry and amber lighting.",
+      status: "Independent concept",
+      tags: ["Brand Strategy", "Identity Design", "Art Direction"],
+      outcome: "Created for portfolio exploration and visual design research."
+    },
+    {
+      slug: "optiv",
+      brand: "Optiv",
+      logoColor: "#111111",
       year: "2025",
-      title: "Quiet confidence for a modern wellness brand",
-      image: "/images/solace/Solace Cover.png",
-      description: "Crafted a serene, highly sophisticated brand identity and premium packaging design ecosystem for Solace, bridging organic geometry with luxury editorial typography.",
-      tags: ["Brand Identity", "Packaging Design", "Creative Direction", "Visual System"],
-      outcome: "Scalable packaging and brand system"
+      title: "Optiv Brand Concept Proposal",
+      video: "/videos/Cover_Optiv_1080.mp4",
+      image: "/images/optiv/About.png",
+      description: "Brand strategy and digital applications concept proposal pitched to a prospective client.",
+      status: "Concept proposal",
+      tags: ["Brand Strategy", "Identity Design", "Digital Applications"],
+      outcome: "Developed as a pitch concept for prospective client evaluation."
     }
   ];
 
@@ -724,148 +729,204 @@ export default function Home() {
         </section>
       </div>
 
-      {/* SECTION 2: WORK (Selected Featured Projects inside Subtle Surface Band) */}
-        <section id="work" className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 py-24 md:py-32 bg-foreground/[0.025] dark:bg-white/[0.025] border-y border-foreground/10 flex flex-col gap-16 md:gap-24">
-          
-          {/* Perfectly Aligned Section Header */}
-          <div className="w-full px-6 md:px-16 lg:px-24">
-            <div className="max-w-7xl mx-auto w-full">
-              <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight text-balance">Featured Work</h2>
-              <p className="mt-3 font-sans text-sm md:text-base text-foreground/60 tracking-tight text-pretty">
-                7+ years across brand, web &amp; motion <span aria-hidden="true">&middot;</span> 50+ projects delivered
-              </p>
+      {/* SECTION 1.5: CAPABILITIES (Compact Positioning Signal & Core Capabilities) */}
+      <section id="capabilities" className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 py-20 border-t border-foreground/10 bg-background select-none z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+            
+            {/* Left Column: Heading & Concise Industry Line (compact positioning signal) */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              <h2 className="font-serif font-light text-3xl md:text-5xl text-foreground leading-[1.05] tracking-tight">
+                Capabilities
+              </h2>
+              {/* Industry Line (compact positioning signal) */}
+              <div className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-foreground/50 leading-relaxed">
+                B2B SaaS &middot; Financial Services &middot; Media &amp; Entertainment
+              </div>
             </div>
-          </div>
 
-          {/* Full-Width Client Logos Marquee Row */}
-          <div className="w-full overflow-hidden py-8 border-y border-foreground/10 bg-foreground/[0.015] select-none">
-            <div className="animate-marquee hover:[animation-play-state:paused] flex items-center py-2 opacity-60 hover:opacity-85 transition-opacity duration-300 pointer-events-auto min-w-max">
-              {[1, 2, 3, 4].map((groupNum) => (
-                <div key={groupNum} className="flex gap-20 pr-20 items-center flex-shrink-0">
-                  {CLIENT_LOGOS.map((logo, lIdx) => (
-                    <div key={`${groupNum}-${lIdx}`} className="flex-shrink-0 flex items-center">
-                      <Image 
-                        src={logo.src} 
-                        alt={`${logo.name} Logo`} 
-                        width={logo.width} 
-                        height={logo.height} 
-                        className={`${logo.className} w-auto object-contain pointer-events-none select-none`} 
-                        style={{
-                          filter: isDark ? "brightness(0) invert(1)" : "brightness(0)",
-                          width: "auto",
-                        }}
-                      />
-                    </div>
-                  ))}
+            {/* Right Column: List of 7 Capabilities in visual language of experience grid */}
+            <div className="lg:col-span-7 flex flex-col border-t border-foreground/10 divide-y divide-foreground/10">
+              {[
+                "Brand identity and visual systems",
+                "Campaign and product-marketing design",
+                "Websites and landing pages",
+                "Creative direction and art direction",
+                "Motion and launch content",
+                "Executive and investor presentations",
+                "Design-team guidance and creative workflows"
+              ].map((cap, cIdx) => (
+                <div 
+                  key={cIdx} 
+                  className="py-5 font-sans text-base md:text-lg font-medium text-foreground/85 flex items-baseline justify-between transition-colors duration-300 hover:text-foreground hover:bg-foreground/[0.005] px-2 -mx-2 rounded-lg"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="font-mono text-[10px] md:text-xs text-foreground/45 font-normal">
+                      {(cIdx + 1).toString().padStart(2, "0")}
+                    </span>
+                    <span>{cap}</span>
+                  </div>
+                  <span className="font-sans text-foreground/30 text-sm font-light select-none">↳</span>
                 </div>
               ))}
             </div>
+
           </div>
-          
-          <div className="flex flex-col gap-36 md:gap-48 mt-4">
-            {projects.map((proj, idx) => (
-              <div key={idx} className={`featured-project-card flex flex-col ${idx < projects.length - 1 ? 'border-b border-foreground/10 pb-32 md:pb-44' : ''}`}>
-                <ProjectCard {...proj} index={idx + 1} total={projects.length} reduceMotion={reduceMotion} />
+        </div>
+      </section>
+
+      {/* SECTION 2: WORK (Selected Featured Projects inside Subtle Surface Band) */}
+      <section id="work" className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 py-24 md:py-32 bg-foreground/[0.025] dark:bg-white/[0.025] border-y border-foreground/10 flex flex-col gap-16 md:gap-24">
+        
+        {/* Perfectly Aligned Section Header */}
+        <div className="w-full px-6 md:px-16 lg:px-24">
+          <div className="max-w-7xl mx-auto w-full">
+            <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight text-balance">Featured Work</h2>
+            <p className="mt-3 font-sans text-sm md:text-base text-foreground/60 tracking-tight text-pretty">
+              6+ years across brand, web &amp; motion <span aria-hidden="true">&middot;</span> 50+ projects delivered
+            </p>
+          </div>
+        </div>
+
+        {/* Full-Width Client Logos Marquee Row */}
+        <div className="w-full overflow-hidden py-8 border-y border-foreground/10 bg-foreground/[0.015] select-none">
+          <div className="animate-marquee hover:[animation-play-state:paused] flex items-center py-2 opacity-60 hover:opacity-85 transition-opacity duration-300 pointer-events-auto min-w-max">
+            {[1, 2, 3, 4].map((groupNum) => (
+              <div 
+                key={groupNum} 
+                className="flex gap-20 pr-20 items-center flex-shrink-0"
+                aria-hidden={groupNum > 1 ? "true" : undefined}
+              >
+                {CLIENT_LOGOS.map((logo, lIdx) => (
+                  <div key={`${groupNum}-${lIdx}`} className="flex-shrink-0 flex items-center">
+                    <Image 
+                      src={logo.src} 
+                      alt={`${logo.name} Logo`} 
+                      width={logo.width} 
+                      height={logo.height} 
+                      className={`${logo.className} w-auto object-contain pointer-events-none select-none`} 
+                      style={{
+                        filter: isDark ? "brightness(0) invert(1)" : "brightness(0)",
+                        width: "auto",
+                      }}
+                    />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-        </section>
+        </div>
 
-        {/* SECTION 2.5: EXPERIENCE SECTION */}
-        <section id="experience" className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 pt-32 pb-24 md:pt-40 md:pb-32 border-t border-foreground/10">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-16 lg:px-24 w-full flex flex-col gap-16 md:gap-24">
-            
-            {/* Header: Grid Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-              {/* Left Column: Heading (serif, clamp 64px to 108px) */}
-              <div className="lg:col-span-6">
-                <h2 className="font-serif font-light text-[clamp(56px,7vw,104px)] text-foreground leading-[1.05] tracking-tight text-balance">
-                  Experience
-                </h2>
-              </div>
-              {/* Right Column: Intro text and Download CV link */}
-              <div className="lg:col-span-6 flex flex-col gap-6 lg:pt-4">
-                <p className="font-sans text-base md:text-[18px] text-foreground/80 leading-relaxed max-w-lg text-pretty">
-                  I’ve worked across startups, enterprise teams and media studios—leading brand, web and motion work.
-                </p>
-                <div>
-                  <a 
-                    href="/resume.pdf" 
-                    download 
-                    onClick={() => playClickSound(0.12)}
-                    className="inline-flex items-center gap-2 font-sans font-medium text-sm text-foreground/60 hover:text-foreground transition-colors duration-300 border-b border-foreground/20 hover:border-foreground pb-0.5 cursor-pointer"
-                  >
-                    <span>Download résumé</span>
-                    <span className="text-[10px]">&darr;</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Timeline Rows */}
-            <div className="flex flex-col border-t border-foreground/10 select-none">
-              {[
-                {
-                  company: "WizCommerce",
-                  role: "Graphic Design Lead",
-                  years: "2026—Now",
-                  description: "Product marketing, campaigns, executive storytelling and scalable creative systems."
-                },
-                {
-                  company: "Ecolab",
-                  role: "Sr. Marketing Visual Designer",
-                  years: "2025—2026",
-                  description: "Global video, launches and enterprise communication across multiple markets."
-                },
-                {
-                  company: "Phyllo",
-                  role: "Visual Designer",
-                  years: "2024—2025",
-                  description: "Marketing systems, motion, launch visuals and investor storytelling."
-                },
-                {
-                  company: "Prachyam Studios",
-                  role: "Creative Lead",
-                  years: "2021—2024",
-                  description: "Visual direction across OTT, documentary and digital launch work."
-                },
-                {
-                  company: "100kmph",
-                  role: "Graphic Designer",
-                  years: "2020—2021",
-                  description: "Merchandise, campaigns and digital work for D2C and mobility brands."
-                }
-              ].map((exp, idx) => (
-                <div 
-                  key={idx} 
-                  className="grid grid-cols-1 md:grid-cols-12 items-baseline py-10 md:py-12 border-b border-foreground/10 gap-4 md:gap-6 group/item cursor-pointer transition-colors duration-300 hover:bg-foreground/[0.015] px-4 -mx-4 rounded-xl"
-                >
-                  {/* Date (14-16px, mono or restrained sans) */}
-                  <div className="col-span-12 md:col-span-2 font-mono text-sm md:text-base text-foreground/50">
-                    {exp.years}
-                  </div>
-                  {/* Company (serif, 32-40px, title case) */}
-                  <div className="col-span-12 md:col-span-3 font-serif text-[28px] md:text-[32px] lg:text-[36px] font-light text-foreground group-hover/item:translate-x-1 transition-transform duration-300 leading-none">
-                    {exp.company}
-                  </div>
-                  {/* Role (sans, 16-18px, medium, high contrast) */}
-                  <div className="col-span-12 md:col-span-3 font-sans text-base md:text-[18px] font-medium text-foreground tracking-tight leading-tight">
-                    {exp.role}
-                  </div>
-                  {/* Description (16-18px, muted but readable) */}
-                  <div className="col-span-12 md:col-span-4 font-sans text-base md:text-[18px] text-foreground/70 leading-relaxed select-text normal-case">
-                    {exp.description}
-                  </div>
-                </div>
-              ))}
-            </div>
-
+        {/* Logo Strip Clarification */}
+        <div className="w-full px-6 md:px-16 lg:px-24 -mt-8 md:-mt-12">
+          <div className="max-w-7xl mx-auto w-full text-center">
+            <p className="font-sans text-[11px] md:text-xs text-foreground/45 max-w-2xl mx-auto tracking-normal leading-relaxed">
+              Selected brands and organisations I have contributed to through full-time roles, client engagements and collaborations.
+            </p>
           </div>
-        </section>
+        </div>
+        
+        <div className="flex flex-col gap-36 md:gap-48 mt-4">
+          {projects.map((proj, idx) => (
+            <div key={idx} className={`featured-project-card flex flex-col ${idx < projects.length - 1 ? 'border-b border-foreground/10 pb-32 md:pb-44' : ''}`}>
+              <ProjectCard {...proj} index={idx + 1} total={projects.length} reduceMotion={reduceMotion} />
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* SECTION 3: CORE CAPABILITIES & SERVICES SHOWCASE (Full Width Aligned Below Work Section) */}
-        <ServicesShowcase />
+      {/* SECTION 2.5: EXPERIENCE SECTION */}
+      <section id="experience" className="scroll-mt-24 w-[100vw] relative left-1/2 -translate-x-1/2 pt-32 pb-24 md:pt-40 md:pb-32 border-t border-foreground/10">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16 lg:px-24 w-full flex flex-col gap-16 md:gap-24">
+          
+          {/* Header: Grid Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+            {/* Left Column: Heading */}
+            <div className="lg:col-span-6">
+              <h2 className="font-serif font-light text-[clamp(56px,7vw,104px)] text-foreground leading-[1.05] tracking-tight text-balance">
+                Experience
+              </h2>
+            </div>
+            {/* Right Column: Intro text and Download CV link */}
+            <div className="lg:col-span-6 flex flex-col gap-6 lg:pt-4">
+              <p className="font-sans text-base md:text-[18px] text-foreground/80 leading-relaxed max-w-lg text-pretty">
+                I’ve worked across B2B SaaS, financial services and media studios—leading brand systems, campaigns, websites and creative direction.
+              </p>
+              <div>
+                <a 
+                  href="/resume.pdf" 
+                  download 
+                  onClick={() => playClickSound(0.12)}
+                  className="inline-flex items-center gap-2 font-sans font-medium text-sm text-foreground/60 hover:text-foreground transition-colors duration-300 border-b border-foreground/20 hover:border-foreground pb-0.5 cursor-pointer"
+                >
+                  <span>Download résumé</span>
+                  <span className="text-[10px]">&darr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline Rows */}
+          <div className="flex flex-col border-t border-foreground/10 select-none">
+            {[
+              {
+                company: "WizCommerce",
+                role: "Graphic Design Lead",
+                years: "April 2026–Present",
+                description: "Focus: B2B e-commerce, landing pages, product marketing, ABM campaigns, executive presentations, social video workflows, and collaboration across marketing, product and sales."
+              },
+              {
+                company: "Ecolab",
+                role: "Sr. Marketing Visual Designer",
+                years: "June 2025–April 2026",
+                description: "Focus: Global enterprise marketing, Ecolab Pest Intelligence North American launch, 30+ videos, exhibitions, training, and stakeholder management across the US, Europe and IMEA."
+              },
+              {
+                company: "Phyllo",
+                role: "Visual Designer",
+                years: "October 2024–June 2025",
+                description: "Focus: B2B SaaS marketing design system, product-launch campaigns, investor decks, sales communication, motion-led content, and AI-assisted production workflows."
+              },
+              {
+                company: "Prachyam Studios",
+                role: "Creative Lead",
+                years: "April 2022–October 2024",
+                description: "Focus: OTT and documentary productions, visual direction, title design, motion graphics, government and cultural projects, and management of a five-member creative team."
+              },
+              {
+                company: "100kmph",
+                role: "Graphic Designer",
+                years: "June 2020–November 2021",
+                description: "Focus: B2C e-commerce, D2C merchandise, automotive campaigns for KTM Pro XP, Ather, Mahindra THAR and XUV700, and more than 1,000 units sold."
+              }
+            ].map((exp, idx) => (
+              <div 
+                key={idx} 
+                className="grid grid-cols-1 md:grid-cols-12 items-baseline py-10 md:py-12 border-b border-foreground/10 gap-4 md:gap-6 group/item cursor-pointer transition-colors duration-300 hover:bg-foreground/[0.015] px-4 -mx-4 rounded-xl"
+              >
+                {/* Date */}
+                <div className="col-span-12 md:col-span-2 font-mono text-sm md:text-base text-foreground/50">
+                  {exp.years}
+                </div>
+                {/* Company */}
+                <div className="col-span-12 md:col-span-3 font-serif text-[28px] md:text-[32px] lg:text-[36px] font-light text-foreground group-hover/item:translate-x-1 transition-transform duration-300 leading-none">
+                  {exp.company}
+                </div>
+                {/* Role */}
+                <div className="col-span-12 md:col-span-3 font-sans text-base md:text-[18px] font-medium text-foreground tracking-tight leading-tight">
+                  {exp.role}
+                </div>
+                {/* Description */}
+                <div className="col-span-12 md:col-span-4 font-sans text-base md:text-[18px] text-foreground/70 leading-relaxed select-text normal-case">
+                  {exp.description}
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
 
     </div>
-  )
+  );
 }

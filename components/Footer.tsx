@@ -107,6 +107,52 @@ export default function Footer() {
   const shouldReduceMotion = useReducedMotion();
   const email = "shubhamshinde52@gmail.com";
 
+  // Form State
+  const [formOpen, setFormOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    companyWebsite: "",
+    requirements: "",
+    challenges: "",
+    timeline: "",
+    budget: "",
+    referral: "",
+    honeypot: ""
+  });
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [formError, setFormError] = useState("");
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus('loading');
+    setFormError("");
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setFormStatus('success');
+      } else {
+        setFormStatus('error');
+        setFormError(data.error || "Required fields are missing or invalid.");
+      }
+    } catch (err) {
+      setFormStatus('error');
+      setFormError("A connection error occurred. Please try again.");
+    }
+  };
+
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
     navigator.clipboard.writeText(email);
@@ -250,10 +296,10 @@ export default function Footer() {
                     </div>
                   </div>
 
-                  {/* Front Lip / Folder Flap (Refined, gossamer-light optical frosted glass) */}
+                  {/* Front Lip / Folder Frosted Glass */}
                   <div className="relative z-10 w-full h-[68%] sm:h-[72%] rounded-t-[16px] sm:rounded-t-[20px] rounded-b-[22px] sm:rounded-b-[26px] backdrop-blur-xl bg-white/[0.18] dark:bg-black/[0.35] border-t border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] p-6 sm:p-8 flex flex-col justify-end">
                     
-                    {/* Decorative Gear / Settings icon on right edge */}
+                    {/* Decorative Star Icon */}
                     <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-8 w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white/95 group-hover:rotate-180 transition-transform duration-500 ease-out shadow-none">
                       <span className="text-sm sm:text-base font-bold">✦</span>
                     </div>
@@ -266,7 +312,7 @@ export default function Footer() {
                 </div>
               </motion.div>
             ) : (
-              /* STATE B: Feather-Light, Architectural Glass Cards (`isUnpacked === true`) */
+              /* STATE B: Unpacked Glass Cards */
               <motion.div
                 key="unpacked-cards-deck"
                 initial="hidden"
@@ -283,14 +329,14 @@ export default function Footer() {
                 >
                   <button
                     onClick={() => setIsUnpacked(false)}
-                    className="group font-mono text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full backdrop-blur-xl bg-white/[0.12] border border-white/25 text-white hover:border-amber-400 hover:bg-white/20 transition-[background-color,border-color,transform] duration-300 flex items-center gap-2 shadow-sm active:scale-95"
+                    className="group font-mono text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full backdrop-blur-xl bg-white/[0.12] border border-white/25 text-white hover:border-amber-400 hover:bg-white/20 transition-[background-color,border-color,transform] duration-300 flex items-center gap-2 shadow-sm active:scale-95 cursor-pointer"
                   >
                     <span className="text-amber-500 transform group-hover:rotate-90 transition-transform duration-300">✕</span>
                     <span>Fold Notes Back Into Folder</span>
                   </button>
                 </motion.div>
 
-                {/* 6 Popped-Out Fanned Cards (Crystal clear `bg-white/[0.03]`, taut `rounded-[20px] sm:rounded-[22px]`, buttery spring hover) */}
+                {/* Unpacked Cards list */}
                 <motion.div
                   variants={containerVariants}
                   className="w-full flex flex-wrap items-center justify-center gap-6 sm:gap-8 px-4 sm:px-8 max-w-[1600px] mx-auto"
@@ -303,50 +349,21 @@ export default function Footer() {
                         key={card.id}
                         custom={card}
                         variants={cardVariants}
-                        whileHover={
-                          shouldReduceMotion
-                            ? {}
-                            : {
-                                y: card.offsetY - 32,
-                                rotate: 0,
-                                scale: 1.05,
-                                transition: {
-                                  type: "spring" as const,
-                                  damping: 16,
-                                  stiffness: 220,
-                                  mass: 0.6,
-                                },
-                              }
-                        }
-                        whileTap={
-                          shouldReduceMotion
-                            ? {}
-                            : { scale: 0.98, transition: { duration: 0.1 } }
-                        }
                         onMouseEnter={() => setActiveCardId(card.id)}
                         onMouseLeave={() => setActiveCardId(null)}
                         tabIndex={0}
-                        role="article"
-                        aria-label={`Editorial note: ${card.text}`}
-                        className={`group relative w-full sm:w-[320px] md:w-[340px] lg:w-[355px] xl:w-[370px] h-[270px] sm:h-[290px] md:h-[310px] rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 flex flex-col justify-between cursor-pointer flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-white/30 focus:rotate-0 backdrop-blur-[24px] bg-white/[0.04] border border-white/[0.18] overflow-hidden will-change-transform ${
-                          card.desktopMarginClass
-                        } ${isHovered ? "!z-50 shadow-[0_24px_60px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.4)] border-white/30" : "shadow-[0_12px_40px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)]"}`}
+                        className={`group w-[280px] sm:w-[310px] md:w-[330px] aspect-[3/4] rounded-[22px] p-6 sm:p-7 flex flex-col justify-between border relative overflow-hidden transition-[border-color,box-shadow] duration-500 will-change-transform bg-white/[0.03] select-none border-white/10 ${card.desktopMarginClass}`}
                         style={{
-                          transformOrigin: "center center",
-                          zIndex: isHovered ? 50 : card.zIndex,
+                          zIndex: isHovered ? 100 : card.zIndex,
                         }}
                       >
-                        {/* 1. Subtle, delicate internal bottom ambient glow (Transitions on GPU) */}
-                        <div className={`absolute -bottom-12 inset-x-0 h-28 bg-gradient-to-t ${card.gradientClass} opacity-20 group-hover:opacity-65 blur-[28px] pointer-events-none transition-opacity duration-300 ease-out`} />
+                        {/* Interactive Gradient Background */}
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-tr ${card.gradientClass} opacity-0 group-hover:opacity-[0.09] transition-opacity duration-700 ease-out pointer-events-none z-0`}
+                        />
 
-                        {/* 2. SPECULAR GLARE & LIGHT REFLECTION */}
-                        <div className="absolute inset-0 rounded-[24px] sm:rounded-[28px] bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none" />
-
-                        {/* 3. SUBTLE GRID OVERLAY */}
-                        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none rounded-[24px] sm:rounded-[28px]" />
-
-                        {/* 4. Top Row: Label badge & 5x5 dots matrix representation */}
-                        <div className="flex items-center justify-between w-full relative z-10">
+                        {/* Top Metadata Row */}
+                        <div className="h-8 flex items-start justify-between relative z-10 w-full">
                           <span className="font-mono text-[9px] font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full bg-white/[0.08] text-white/80 border border-white/10">
                             {card.label}
                           </span>
@@ -357,19 +374,14 @@ export default function Footer() {
                           </div>
                         </div>
 
-                        {/* 5. Center Divider Pattern (Wave-pattern SVG divider matching reference) */}
-                        <div className="w-full relative z-10 my-1 flex items-center justify-center">
-                          <div className="w-full h-3 opacity-20 bg-[repeat-x] bg-center bg-[size:12px_6px] bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 12 6%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221%22%3E%3Cpath d=%22M0 3 C3 0, 3 6, 6 3 C9 0, 9 6, 12 3%22/%3E%3C/svg%3E')]" />
-                        </div>
-
-                        {/* 6. Center Main Content Copy */}
+                        {/* Center Main Content Copy */}
                         <div className="flex-1 flex flex-col justify-center relative z-10 text-left px-1">
                           <p className="font-sans font-medium text-[16px] sm:text-[18px] md:text-[20px] leading-[1.35] tracking-tight text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]">
                             {card.text}
                           </p>
                         </div>
 
-                        {/* 7. Bottom Bar: Reveal Tag */}
+                        {/* Bottom Bar: Reveal Tag */}
                         <div className="h-8 flex items-end justify-start relative z-10 w-full">
                           <span className="font-mono text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-white/10 text-white/90 flex items-center gap-1.5 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-[opacity,transform] duration-300 ease-out whitespace-nowrap shadow-none">
                             <span>↳</span>
@@ -385,49 +397,307 @@ export default function Footer() {
           </AnimatePresence>
         </div>
 
-        {!pathname.startsWith("/work") && (
+        {/* 2. DYNAMIC PROJECT ENQUIRY FLOW SECTION */}
+        <section id="contact" className="scroll-mt-24 w-full max-w-4xl mx-auto px-6 relative z-10 flex flex-col gap-10">
+          
           <motion.div
             variants={headlineVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
-            className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6"
+            className="flex flex-col gap-6"
           >
-            <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-normal tracking-tight text-white leading-[1.04]">
-              Building a team or <br className="hidden sm:inline" />
-              building a brand? <br className="hidden sm:inline" />
-              <span className="italic font-light">Let&rsquo;s talk.</span>
+            {/* Availability Badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-400 w-fit select-none">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="uppercase tracking-wider">Currently available for new projects.</span>
+            </div>
+
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-light leading-[1.15] tracking-tight">
+              Building a brand, launching a product or improving how your company communicates?
             </h2>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10">
-              <a
-                href={`mailto:${email}`}
-                className="group btn-primary px-8 py-4 sm:py-4.5 rounded-full font-sans font-semibold text-sm sm:text-base tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.96] cursor-pointer flex items-center justify-center gap-3.5 text-center"
-              >
-                <span>Start a conversation</span>
-                <svg 
-                  aria-hidden="true"
-                  className="w-4 h-4 text-current transform group-hover:translate-x-1 transition-transform duration-300" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor" 
-                  strokeWidth="2.5"
+            {/* SLA indicator */}
+            <p className="font-sans text-xs md:text-sm text-white/50 tracking-normal leading-relaxed -mt-2 select-none">
+              I usually reply within four working hours.
+            </p>
+
+            {/* Main Action Buttons */}
+            {formStatus !== 'success' && (
+              <div className="flex flex-wrap items-center gap-4 mt-6">
+                <button
+                  onClick={() => setFormOpen(!formOpen)}
+                  className="group/btn btn-primary px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.96] cursor-pointer flex items-center justify-center gap-3 text-center bg-white text-black border-transparent"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
+                  <span>Tell me about the project</span>
+                  <span className={`transition-transform duration-300 ${formOpen ? 'rotate-90' : ''}`}>&rarr;</span>
+                </button>
 
-              <Link
-                href="/#work"
-                className="btn-secondary px-8 py-4 sm:py-4.5 rounded-full font-sans font-medium text-sm sm:text-base transition-[transform,box-shadow,background-color,border-color] duration-300 hover:-translate-y-0.5 active:scale-[0.96] cursor-pointer"
-              >
-                View work
-              </Link>
-            </div>
+                <a
+                  href={`mailto:${email}?subject=Hiring%20for%20a%20design-leadership%20role`}
+                  className="btn-secondary px-8 py-4 rounded-full font-sans font-medium text-sm transition-[transform,box-shadow,background-color,border-color] duration-300 hover:-translate-y-0.5 active:scale-[0.96] cursor-pointer text-white/80 hover:text-white border border-white/20 bg-white/5 hover:bg-white/10"
+                >
+                  Hiring for a design-leadership role? Get in touch.
+                </a>
+              </div>
+            )}
           </motion.div>
-        )}
 
-        {/* 3. BAJGART-INSPIRED ARCHITECTURAL BOTTOM PILL BAR & COPYRIGHT */}
+          <AnimatePresence>
+            {formOpen && formStatus !== 'success' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="overflow-hidden w-full border-t border-white/10 pt-10"
+              >
+                <form onSubmit={handleFormSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans">
+                  
+                  {/* Honeypot Field */}
+                  <input
+                    type="text"
+                    name="honeypot"
+                    value={formData.honeypot}
+                    onChange={handleInputChange}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+
+                  {/* Name field */}
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="form-name" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      Your Name <span className="text-emerald-400">*</span>
+                    </label>
+                    <input
+                      id="form-name"
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="e.g. Emily Campbell"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* Email field */}
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="form-email" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      Work Email <span className="text-emerald-400">*</span>
+                    </label>
+                    <input
+                      id="form-email"
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="e.g. emily@company.com"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* Company field */}
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="form-company" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      Company Name <span className="text-emerald-400">*</span>
+                    </label>
+                    <input
+                      id="form-company"
+                      type="text"
+                      name="company"
+                      required
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      placeholder="e.g. WizCommerce"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* Company Website field */}
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="form-company-website" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      Company Website <span className="text-white/40">(Optional)</span>
+                    </label>
+                    <input
+                      id="form-company-website"
+                      type="text"
+                      name="companyWebsite"
+                      value={formData.companyWebsite}
+                      onChange={handleInputChange}
+                      placeholder="e.g. www.company.com"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* Textarea: Requirements */}
+                  <div className="col-span-1 md:col-span-2 flex flex-col gap-2.5">
+                    <label htmlFor="form-requirements" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      What do you need? <span className="text-emerald-400">*</span>
+                    </label>
+                    <textarea
+                      id="form-requirements"
+                      name="requirements"
+                      required
+                      rows={4}
+                      value={formData.requirements}
+                      onChange={handleInputChange}
+                      placeholder="Describe your design needs: branding, website, campaign creatives..."
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors resize-y min-h-[100px]"
+                    />
+                  </div>
+
+                  {/* Textarea: Challenges */}
+                  <div className="col-span-1 md:col-span-2 flex flex-col gap-2.5">
+                    <label htmlFor="form-challenges" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      What is currently not working? <span className="text-emerald-400">*</span>
+                    </label>
+                    <textarea
+                      id="form-challenges"
+                      name="challenges"
+                      required
+                      rows={3}
+                      value={formData.challenges}
+                      onChange={handleInputChange}
+                      placeholder="What visual, technical, or strategic challenges does your brand currently face?"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors resize-y min-h-[80px]"
+                    />
+                  </div>
+
+                  {/* Select: Timeline */}
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="form-timeline" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      Approximate Timeline <span className="text-emerald-400">*</span>
+                    </label>
+                    <select
+                      id="form-timeline"
+                      name="timeline"
+                      required
+                      value={formData.timeline}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#03150d] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors appearance-none cursor-pointer"
+                    >
+                      <option value="">Select option</option>
+                      <option value="Under 1 month">Under 1 month</option>
+                      <option value="1–3 months">1–3 months</option>
+                      <option value="3–6 months">3–6 months</option>
+                      <option value="6+ months">6+ months</option>
+                      <option value="Not sure yet">Not sure yet</option>
+                    </select>
+                  </div>
+
+                  {/* Select: Budget */}
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="form-budget" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      Project Budget <span className="text-emerald-400">*</span>
+                    </label>
+                    <select
+                      id="form-budget"
+                      name="budget"
+                      required
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#03150d] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors appearance-none cursor-pointer"
+                    >
+                      <option value="">Select range</option>
+                      <option value="Under US$1,500">Under US$1,500</option>
+                      <option value="US$1,500–3,000">US$1,500–3,000</option>
+                      <option value="US$3,000–6,000">US$3,000–6,000</option>
+                      <option value="US$6,000–10,000">US$6,000–10,000</option>
+                      <option value="US$10,000+">US$10,000+</option>
+                      <option value="Not sure yet">Not sure yet</option>
+                    </select>
+                  </div>
+
+                  {/* Select: Referral Source */}
+                  <div className="flex flex-col gap-2.5 col-span-1 md:col-span-2">
+                    <label htmlFor="form-referral" className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                      How did you find me? <span className="text-white/40">(Optional)</span>
+                    </label>
+                    <select
+                      id="form-referral"
+                      name="referral"
+                      value={formData.referral}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#03150d] border border-white/10 hover:border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3.5 text-sm font-sans focus:outline-none transition-colors appearance-none cursor-pointer"
+                    >
+                      <option value="">Select source</option>
+                      <option value="LinkedIn">LinkedIn</option>
+                      <option value="Behance">Behance</option>
+                      <option value="Search Engine">Search Engine</option>
+                      <option value="Recommendation / Word of Mouth">Recommendation / Word of Mouth</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  {/* Error messaging state */}
+                  {formStatus === 'error' && (
+                    <div className="col-span-1 md:col-span-2 p-4 rounded-xl border border-red-500/35 bg-red-500/5 text-red-300 text-sm font-medium">
+                      {formError}
+                    </div>
+                  )}
+
+                  {/* Submit buttons */}
+                  <div className="col-span-1 md:col-span-2 pt-4 flex justify-end">
+                    <button
+                      type="submit"
+                      disabled={formStatus === 'loading'}
+                      className="px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-white/95 active:scale-[0.97] transition-all disabled:opacity-50 select-none cursor-pointer text-sm tracking-wide flex items-center gap-3"
+                    >
+                      {formStatus === 'loading' ? (
+                        <>
+                          <svg className="animate-spin h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <span>Sending enquiry...</span>
+                        </>
+                      ) : (
+                        <span>Submit enquiry</span>
+                      )}
+                    </button>
+                  </div>
+
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Success Call to Action State Card */}
+          <AnimatePresence>
+            {formStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="w-full border border-emerald-500/25 bg-emerald-950/20 backdrop-blur-md rounded-3xl p-8 md:p-12 flex flex-col gap-6 items-start"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                  <h3 className="font-serif text-2xl md:text-3xl text-white font-medium">
+                    Thank you!
+                  </h3>
+                </div>
+                <p className="font-sans text-sm md:text-base text-white/80 leading-relaxed max-w-xl">
+                  Your enquiry has been successfully submitted. I usually reply within four working hours. In the meantime, you can schedule a call directly.
+                </p>
+                <a
+                  href="https://calendly.com/shubhamshinde52/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold rounded-full transition-[background-color,transform] duration-300 active:scale-[0.97] cursor-pointer text-sm tracking-wide shadow-lg shadow-emerald-500/20"
+                >
+                  <span>Schedule a 30-minute call ↗</span>
+                </a>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+        </section>
+
+        {/* 3. BOTTOM PILL BAR & APPROVED SOCIALS */}
         <div className="w-full border-t border-white/10 pt-8 mt-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 text-xs sm:text-sm font-sans">
             
@@ -437,31 +707,23 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/shubham-shinde-design/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium"
+                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium cursor-pointer"
               >
                 LinkedIn
               </a>
               <a
-                href="https://www.behance.net/shubhamshinde"
+                href="https://behance.net/shubhamshinde"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium"
+                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium cursor-pointer"
               >
                 Behance
               </a>
-              <a
-                href="https://www.instagram.com/5hinde/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium"
-              >
-                Instagram
-              </a>
             </div>
 
-            {/* Center: Location & One-Click Copy Email */}
+            {/* Center: Location & Email */}
             <div className="text-center font-normal text-white/75 flex flex-wrap items-center justify-center gap-2">
-              <span>Based in Pune &bull; Working worldwide &bull;</span>
+              <span>Based in Bengaluru, India &bull; Working worldwide &bull;</span>
               <a
                 href={`mailto:${email}`}
                 className="text-white hover:underline font-semibold transition-colors"
@@ -488,7 +750,7 @@ export default function Footer() {
               </button>
             </div>
 
-            {/* Right: Start a project + Up Scroll Pill Buttons */}
+            {/* Right: Email & Up Scroll Buttons */}
             <div className="flex items-center gap-3">
               <a
                 href={`mailto:${email}`}
@@ -511,7 +773,7 @@ export default function Footer() {
 
           {/* Final Studio Copyright Line */}
           <div className="max-w-7xl mx-auto pt-6 mt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] sm:text-xs font-sans font-light text-white/50 text-center sm:text-left">
-            <span>&copy; 2026 Shubham Shinde. Brand, web &amp; motion designer.</span>
+            <span>&copy; 2026 Shubham Shinde. Brand, campaigns &amp; creative direction.</span>
             <span className="italic font-serif text-white/45">
               Taste is not decoration &bull; It is decision-making.
             </span>

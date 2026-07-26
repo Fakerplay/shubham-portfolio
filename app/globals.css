@@ -224,3 +224,27 @@ body {
   color: var(--btn-secondary-hover-text) !important;
   border-color: var(--btn-secondary-hover-bg) !important;
 }
+
+/* Accessibility: prefers-reduced-motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+
+/* Accessibility: Visible keyboard focus outline fallback */
+*:focus-visible {
+  outline: 2px solid currentColor !important;
+  outline-offset: 4px !important;
+}

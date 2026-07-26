@@ -129,23 +129,65 @@ export default function WorkDetail() {
         </div>
 
         {/* Factual Metadata Row */}
-        <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-12 md:gap-y-4 py-8 border-y border-foreground/15 text-[15px] font-sans font-normal text-foreground/85">
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/45">Client &mdash;</span>
-            <span className="text-foreground">{project.client}</span>
+        <div className="flex flex-col gap-6 py-8 border-y border-foreground/15">
+          <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-12 md:gap-y-4 text-[15px] font-sans font-normal text-foreground/85">
+            <div className="flex items-center gap-2">
+              <span className="text-foreground/45">Project Status &mdash;</span>
+              <span className="text-foreground">{project.status}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-foreground/45">Client &mdash;</span>
+              <span className="text-foreground">{project.client}</span>
+            </div>
+            {project.industry && (
+              <div className="flex items-center gap-2">
+                <span className="text-foreground/45">Industry &mdash;</span>
+                <span className="text-foreground">{project.industry}</span>
+              </div>
+            )}
+            <div className="flex items-center gap-2">
+              <span className="text-foreground/45">Role &mdash;</span>
+              <span className="text-foreground">{project.role}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-foreground/45">Timeline &mdash;</span>
+              <span className="text-foreground">{project.timeline}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-foreground/45">Services &mdash;</span>
+              <span className="text-foreground">{project.tags.join(" · ")}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-foreground/45">Launch Status &mdash;</span>
+              <span className="text-foreground">{project.outcome}</span>
+            </div>
+            {project.liveUrl && (
+              <div className="flex items-center gap-2">
+                <span className="text-foreground/45">Live Website &mdash;</span>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground hover:opacity-85 transition-opacity inline-flex items-center gap-1 font-semibold group/link"
+                >
+                  <span>Visit live website</span>
+                  <span className="inline-block transform transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5">↗</span>
+                </a>
+              </div>
+            )}
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/45">Role &mdash;</span>
-            <span className="text-foreground">{project.role}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/45">Timeline &mdash;</span>
-            <span className="text-foreground">{project.timeline}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/45">Outcome &mdash;</span>
-            <span className="text-foreground">{project.outcome}</span>
-          </div>
+
+          {/* Dynamic disclaimers for concept exploration projects */}
+          {project.slug === "solaris" && (
+            <div className="p-4 rounded-xl bg-foreground/[0.02] border border-foreground/15 text-foreground/75 text-sm font-sans font-normal leading-relaxed">
+              Independent concept project created for portfolio exploration.
+            </div>
+          )}
+          {project.slug === "optiv" && (
+            <div className="p-4 rounded-xl bg-foreground/[0.02] border border-foreground/15 text-foreground/75 text-sm font-sans font-normal leading-relaxed">
+              Concept proposal developed for a prospective client.
+            </div>
+          )}
         </div>
 
         {/* Combined Opening Narrative & Scope Line */}
@@ -236,7 +278,7 @@ export default function WorkDetail() {
       </div>
 
       {/* Footer / Shared CTA */}
-      <ProjectCTA nextProject={project.nextProject} />
+      <ProjectCTA slug={project.slug} nextProject={project.nextProject} />
     </div>
   );
 }

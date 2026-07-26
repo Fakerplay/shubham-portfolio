@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 interface ProjectCTAProps {
+  slug?: string;
   nextProject?: {
     slug: string;
     brand: string;
@@ -9,8 +10,24 @@ interface ProjectCTAProps {
   };
 }
 
-export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
+export default function ProjectCTA({ slug, nextProject }: ProjectCTAProps) {
   const email = "shubhamshinde52@gmail.com";
+
+  const getContextHeadline = (projectSlug?: string) => {
+    switch (projectSlug) {
+      case "daulat-finvest":
+        return "Need a trust-led brand and website for a financial-services business?";
+      case "solace":
+        return "Launching an AI product that needs a clearer brand and digital presence?";
+      case "studio-vistara":
+        return "Launching a new studio or professional-services brand?";
+      case "solaris":
+      case "optiv":
+        return "Need a distinctive brand direction for a complex product?";
+      default:
+        return "Building a brand, launching a product or improving how your company communicates?";
+    }
+  };
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pt-20 pb-28 flex flex-col gap-20">
@@ -19,7 +36,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
       <div className="relative overflow-hidden rounded-[32px] bg-foreground/[0.03] border border-foreground/15 p-8 md:p-16 text-foreground shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group transition-colors duration-500">
         {/* Subtle Ambient Glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl pointer-events-none group-hover:bg-foreground/10 transition-colors duration-700" />
-
+ 
         {/* Left Side: Editorial Pitch */}
         <div className="flex flex-col gap-6 max-w-xl relative z-10">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-foreground/[0.05] border border-foreground/15 text-xs font-mono text-foreground/80 w-fit">
@@ -27,17 +44,17 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
             <span className="uppercase tracking-wider">Available for select projects and roles</span>
           </div>
           <h3 className="font-serif text-3xl md:text-5xl font-light leading-[1.2] tracking-tight text-foreground">
-            Building a team or building a brand? Let&rsquo;s talk.
+            {getContextHeadline(slug)}
           </h3>
         </div>
-
-        {/* Right Side: Action Trigger Buttons (Branched Audiences) */}
+ 
+        {/* Right Side: Action Trigger Buttons (Primary Hierarchy) */}
         <div className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full lg:w-auto flex-shrink-0 relative z-10">
-          <a
-            href={`mailto:${email}?subject=Discuss%20a%20project`}
+          <Link
+            href="/#contact"
             className="group/btn btn-primary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.96] cursor-pointer text-center"
           >
-            <span>Discuss a project</span>
+            <span>Tell me about the project</span>
             <svg 
               className="w-4 h-4 text-current transform group-hover/btn:translate-x-1 transition-transform duration-300" 
               fill="none" 
@@ -47,33 +64,24 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
-          </a>
-
+          </Link>
+ 
           <a
-            href={`mailto:${email}?subject=Talk%20about%20a%20role`}
-            className="group/btn btn-secondary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-medium text-sm tracking-wide transition-[background-color,border-color,transform] duration-300 active:scale-[0.96] cursor-pointer overflow-hidden text-center"
+            href={`mailto:${email}?subject=Hiring%20for%20a%20design-leadership%20role`}
+            className="group/btn btn-secondary inline-flex items-center justify-center gap-3.5 px-8 py-4 rounded-full font-sans font-medium text-sm tracking-wide transition-[background-color,border-color,transform] duration-300 active:scale-[0.96] cursor-pointer overflow-hidden text-center bg-transparent"
           >
-            <span>Talk about a role</span>
-            <svg 
-              className="w-4 h-4 text-current transform group-hover/btn:translate-x-1 transition-transform duration-300" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor" 
-              strokeWidth="2.5"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
+            <span>Hiring for a design-leadership role? Get in touch.</span>
           </a>
         </div>
       </div>
-
+ 
       {/* Next Case Study Preview Banner */}
       {nextProject && (
         <div className="pt-8 border-t border-foreground/15 flex flex-col gap-6">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-foreground/50">
             MORE WORK
           </span>
-
+ 
           <Link
             href={`/work/${nextProject.slug}`}
             className="group/next block rounded-2xl p-6 md:p-10 border border-foreground/15 hover:border-foreground/40 bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-[background-color,border-color] duration-500 relative overflow-hidden"
@@ -87,7 +95,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
                   {nextProject.brand} <span className="text-foreground/40 font-sans text-2xl md:text-4xl">&mdash; {nextProject.title}</span>
                 </h4>
               </div>
-
+ 
               <div className="w-14 h-14 rounded-full border border-foreground/20 group-hover/next:border-foreground group-hover/next:bg-foreground group-hover/next:text-background flex items-center justify-center transition-[color,background-color,border-color] duration-500 text-lg flex-shrink-0">
                 &rarr;
               </div>
@@ -95,7 +103,7 @@ export default function ProjectCTA({ nextProject }: ProjectCTAProps) {
           </Link>
         </div>
       )}
-
+ 
     </section>
   );
 }

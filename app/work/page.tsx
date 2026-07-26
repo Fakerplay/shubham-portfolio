@@ -20,72 +20,78 @@ interface ProjectItem {
   description: string;
   tags: string[];
   outcome: string;
+  status?: string;
 }
 
 const ALL_PROJECTS: ProjectItem[] = [
   {
     slug: "daulat-finvest",
-    brand: "Daulat Finvest",
-    logoColor: "#10b981", // Emerald accent
+    brand: "Daulat Wealth Management",
+    logoColor: "#171717",
     year: "2026",
     title: "Wealth management crafted around your portfolio",
-    category: ["All Projects", "Fintech & Wealth", "UI/UX & Systems", "Creative Direction"],
+    category: ["All Projects", "Fintech & Wealth", "Brand Identity", "UI/UX & Systems"],
     video: "/videos/daulat-cover.mp4",
-    image: "/images/daulat-thumb.jpg",
-    description: "Designed a clearer wealth management experience for portfolio tracking, performance, and advisor communication.",
-    tags: ["Product Design", "UI/UX Systems", "Wealth Management", "Creative Direction"],
-    outcome: "Unified digital wealth experience"
+    image: "/images/project-1-cover.jpg",
+    description: "Repositioning a founder-led wealth management firm through a more credible, human and portfolio-first digital experience.",
+    tags: ["Website Strategy", "Website Design", "Development"],
+    outcome: "Created a trusted digital experience for founder-led advisory.",
+    status: "Client project"
+  },
+  {
+    slug: "solace",
+    brand: "Solace AI",
+    logoColor: "#111111",
+    year: "2025",
+    title: "Quiet confidence for a modern wellness brand",
+    category: ["All Projects", "Brand Identity", "Creative Direction"],
+    image: "/images/solace/Solace Cover.png",
+    description: "Building brand identity and website design for a calm and premium AI lifestyle ecosystem.",
+    tags: ["Brand Identity", "Website Design", "Creative Direction"],
+    outcome: "Delivered a distinctive premium brand identity and launching site.",
+    status: "Client project"
+  },
+  {
+    slug: "studio-vistara",
+    brand: "Studio Vistara",
+    logoColor: "#a8a29e",
+    year: "2025",
+    title: "An architectural identity built from structure, material, and calm",
+    category: ["All Projects", "Brand Identity", "Creative Direction"],
+    video: "/videos/studio-vistara-1.mp4",
+    image: "/images/studio-vistara-cover.png",
+    description: "Translating Pune architecture studio's spatial sensibility into a tactile, adaptable brand identity and launching site.",
+    tags: ["Brand Identity", "Website Design", "Creative Direction"],
+    outcome: "Established the launch identity and tactile digital presence.",
+    status: "Client project"
   },
   {
     slug: "solaris",
     brand: "Solaris",
-    logoColor: "#f59e0b", // Radiant amber gold
-    year: "2024 - 2025",
+    logoColor: "#f59e0b",
+    year: "2024–2025",
     title: "A fintech identity shaped by light, precision, and possibility",
     category: ["All Projects", "Fintech & Wealth", "Brand Identity", "Creative Direction"],
     video: "/videos/solaris-2.mp4",
     image: "/images/solaris-cover.png",
-    description: "Built the Solaris identity across brand, 3D, digital, and investor communications.",
-    tags: ["Brand Identity", "Creative Direction", "3D Visuals", "Fintech"],
-    outcome: "Unified brand-to-product visual system"
+    description: "Independent brand concept exploring crystalline forms, solar geometry and amber lighting.",
+    tags: ["Brand Strategy", "Identity Design", "Art Direction"],
+    outcome: "Created for portfolio exploration and visual design research.",
+    status: "Independent concept"
   },
   {
     slug: "optiv",
     brand: "Optiv",
-    logoColor: "#6366f1", // Sleek indigo/violet architectural tone
+    logoColor: "#6366f1",
     year: "2025",
     title: "Making complex technology feel clear and approachable",
     category: ["All Projects", "Brand Identity", "Creative Direction"],
     video: "/videos/Cover_Optiv_1080.mp4",
     image: "/images/optiv/About.png",
-    description: "Created a scalable Optiv identity across logo, digital, physical, and campaign touchpoints.",
-    tags: ["Brand Identity", "Logo Design", "Visual System", "Creative Direction"],
-    outcome: "Scalable cross-channel identity system"
-  },
-  {
-    slug: "studio-vistara",
-    brand: "Studio Vistara",
-    logoColor: "#a8a29e", // Warm stone & earthy architectural tone
-    year: "2025 - Present",
-    title: "An architectural identity built from structure, material, and calm",
-    category: ["All Projects", "Brand Identity", "Creative Direction"],
-    video: "/videos/studio-vistara-1.mp4",
-    image: "/images/studio-vistara-cover.png",
-    description: "Translated Studio Vistara’s spatial sensibility into a tactile, adaptable identity system.",
-    tags: ["Brand Identity", "Typography System", "Stationery & Packaging", "Creative Direction"],
-    outcome: "Cohesive tactile and digital identity"
-  },
-  {
-    slug: "solace",
-    brand: "Solace",
-    logoColor: "#111111", // Sleek luxury charcoal/black accent
-    year: "2025",
-    title: "Quiet confidence for a modern wellness brand",
-    category: ["All Projects", "Brand Identity", "Creative Direction"],
-    image: "/images/solace/Solace Cover.png",
-    description: "Crafted a serene, highly sophisticated brand identity and premium packaging design ecosystem for Solace, bridging organic geometry with luxury editorial typography.",
-    tags: ["Brand Identity", "Packaging Design", "Creative Direction", "Visual System"],
-    outcome: "Scalable packaging and brand system"
+    description: "Brand strategy and digital applications concept proposal pitched to a prospective client.",
+    tags: ["Brand Strategy", "Identity Design", "Digital Applications"],
+    outcome: "Developed as a pitch concept for prospective client evaluation.",
+    status: "Concept proposal"
   }
 ];
 
@@ -149,33 +155,36 @@ export default function WorkPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.5, ease: EASE_OUT, delay: index * 0.06 }}
-              className="w-full px-6 md:px-16 lg:px-24 flex flex-col group select-none"
+              className="w-full"
             >
-              <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-12">
-                
-                {/* Top Header: Brand Label + Massive Headline */}
-                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 border-b border-foreground/10 pb-6">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs text-emerald-400 font-bold">
-                      0{index + 1}
-                    </span>
-                    <span className="font-sans font-semibold tracking-wider text-sm md:text-base uppercase text-foreground/75">
-                      {project.brand}
+              <Link 
+                href={`/work/${project.slug}`} 
+                prefetch={false} 
+                className="w-full px-6 md:px-16 lg:px-24 flex flex-col group select-none hover:opacity-[0.98] transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-foreground/30 rounded-3xl"
+                aria-label={`View ${project.brand} case study`}
+              >
+                <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-12">
+                  
+                  {/* Top Header: Brand Label + Year */}
+                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 border-b border-foreground/10 pb-6">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-xs text-emerald-400 font-bold">
+                        0{index + 1}
+                      </span>
+                      <span className="font-sans font-semibold tracking-wider text-sm md:text-base uppercase text-foreground/75">
+                        {project.brand}
+                      </span>
+                    </div>
+                    <span className="font-mono text-xs md:text-sm text-foreground/50">
+                      {project.year}
                     </span>
                   </div>
-                  <span className="font-mono text-xs md:text-sm text-foreground/50">
-                    {project.year}
-                  </span>
-                </div>
 
-                <Link href={`/work/${project.slug}`} prefetch={false} className="hover:opacity-85 transition-opacity">
                   <h2 className="font-serif font-light text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[1.05] text-balance">
                     {project.title}
                   </h2>
-                </Link>
 
-                {/* Centerpiece: Full-Width Cinematic Cover Showcase */}
-                <Link href={`/work/${project.slug}`} prefetch={false} className="block w-full">
+                  {/* Centerpiece: Full-Width Cinematic Cover Showcase */}
                   <div className="relative w-full aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden border border-foreground/15 shadow-2xl bg-foreground/[0.02]">
                     {project.video || project.image?.endsWith(".mp4") || project.image?.endsWith(".webm") ? (
                       <LazyVideo
@@ -186,53 +195,53 @@ export default function WorkPage() {
                     ) : (
                       <Image 
                         src={project.image} 
-                        alt={project.title} 
+                        alt={project.brand} 
                         fill 
                         quality={85}
                         sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1280px) calc(100vw - 128px), 1280px"
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]" 
                       />
                     )}
-                    
                     {/* Overlay gradient on hover */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    
-                    {/* Sleek floating interactive badge */}
-                    <div className="absolute bottom-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none">
-                      <div className="px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-md text-white font-sans text-xs font-medium tracking-wide border border-white/20 flex items-center gap-2 shadow-lg">
-                        <span>Explore Case Study</span>
-                        <span>&rarr;</span>
+                  </div>
+
+                  {/* Bottom Editorial Content & Stats */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 pt-2 items-start">
+                    <div className="lg:col-span-7 flex flex-col justify-between h-full gap-5">
+                      <div className="flex flex-col gap-3 pt-5 border-t border-foreground/15">
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-base md:text-lg font-sans font-normal text-foreground/90 tracking-tight">
+                          {project.status && (
+                            <span className="font-semibold text-foreground">{project.status}</span>
+                          )}
+                          {project.status && project.tags && project.tags.length > 0 && (
+                            <span className="text-foreground/35 font-light select-none">&middot;</span>
+                          )}
+                          {project.tags && project.tags.length > 0 && project.tags.map((tag: string, idx: number) => (
+                            <span key={idx} className="inline-flex items-center gap-x-3">
+                              <span>{tag}</span>
+                              {idx < project.tags.length - 1 && <span className="text-foreground/35 font-light select-none">/</span>}
+                            </span>
+                          ))}
+                        </div>
+                        {/* Qualitative Outcome supporting line */}
+                        <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-left text-pretty">
+                          {project.outcome}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column: CTA */}
+                    <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-foreground/10 pt-6 lg:pt-5 lg:pl-12 w-full flex items-start lg:justify-end">
+                      <div className="group/btn inline-flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/25 group-hover:border-foreground bg-transparent group-hover:bg-foreground group-hover:text-background text-foreground font-sans font-medium text-sm tracking-wide transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.96] cursor-pointer">
+                        <span>View case study</span>
+                        <span className="transition-transform duration-300 group-hover/btn:translate-x-1">&rarr;</span>
                       </div>
                     </div>
                   </div>
-                </Link>
 
-                {/* Bottom Editorial Content & Stats */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 pt-2 items-start">
-                  <div className="lg:col-span-7 flex flex-col justify-between h-full gap-5">
-                    <div className="flex flex-col gap-3 pt-5 border-t border-foreground/15">
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {project.tags.map((tag, tIdx) => (
-                          <span 
-                            key={tIdx} 
-                            className="px-3.5 py-1.5 rounded-lg bg-foreground/[0.04] border border-foreground/15 text-xs font-sans font-medium text-foreground/85 transition-colors duration-300 hover:bg-foreground/10"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      {/* Qualitative Outcome supporting line */}
-                      <div className="text-sm font-sans text-foreground/60 font-medium tracking-wide text-left text-pretty">
-                        {project.outcome}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Clean empty spacing */}
-                  <div className="lg:col-span-5 border-t lg:border-t-0 border-foreground/15" />
                 </div>
-
-              </div>
+              </Link>
             </motion.div>
           ))}
         </AnimatePresence>

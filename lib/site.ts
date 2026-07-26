@@ -1,13 +1,12 @@
 export const SITE_URL = "https://ssspace.vercel.app";
 export const SITE_NAME = "Shubham Shinde";
-export const SITE_TITLE = "Shubham Shinde | Brand, Web & Motion Designer";
+export const SITE_TITLE = "Shubham Shinde — Design Lead | Brand, Campaigns & Creative Direction";
 export const SITE_DESCRIPTION =
-  "Portfolio of Shubham Shinde, a Pune-based brand, web and motion designer with 7+ years of experience across 50+ projects for founders and creative teams.";
+  "Design Lead with 6+ years of experience across B2B SaaS, financial services and media, specialising in brand systems, campaigns, websites and creative direction.";
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/shubham-shinde-design/",
   behance: "https://www.behance.net/shubhamshinde",
-  instagram: "https://www.instagram.com/5hinde/",
 } as const;
 
 export const DEFAULT_SHARE_IMAGE = "/images/project-1-cover.jpg";
