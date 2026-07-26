@@ -131,39 +131,15 @@ export default function WorkDetail() {
         {/* Factual Metadata Row */}
         <div className="flex flex-col gap-6 py-8 border-y border-foreground/15">
           <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-12 md:gap-y-4 text-[15px] font-sans font-normal text-foreground/85">
-            <div className="flex items-center gap-2">
-              <span className="text-foreground/45">Project Status &mdash;</span>
-              <span className="text-foreground">{project.status}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-foreground/45">Client &mdash;</span>
-              <span className="text-foreground">{project.client}</span>
-            </div>
+            <div className="text-foreground">{project.client}</div>
             {project.industry && (
-              <div className="flex items-center gap-2">
-                <span className="text-foreground/45">Industry &mdash;</span>
-                <span className="text-foreground">{project.industry}</span>
-              </div>
+              <div className="text-foreground">{project.industry}</div>
             )}
-            <div className="flex items-center gap-2">
-              <span className="text-foreground/45">Role &mdash;</span>
-              <span className="text-foreground">{project.role}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-foreground/45">Timeline &mdash;</span>
-              <span className="text-foreground">{project.timeline}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-foreground/45">Services &mdash;</span>
-              <span className="text-foreground">{project.tags.join(" · ")}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-foreground/45">Launch Status &mdash;</span>
-              <span className="text-foreground">{project.outcome}</span>
-            </div>
+            <div className="text-foreground">{project.role}</div>
+            <div className="text-foreground">{project.timeline}</div>
+            <div className="text-foreground">{project.tags.join(" · ")}</div>
             {project.liveUrl && (
-              <div className="flex items-center gap-2">
-                <span className="text-foreground/45">Live Website &mdash;</span>
+              <div>
                 <a
                   href={project.liveUrl}
                   target="_blank"
