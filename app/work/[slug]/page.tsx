@@ -130,28 +130,29 @@ export default function WorkDetail() {
 
         {/* Factual Metadata Row */}
         <div className="flex flex-col gap-6 py-8 border-y border-foreground/15">
-          <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-12 md:gap-y-4 text-[15px] font-sans font-normal text-foreground/85">
-            <div className="text-foreground">{project.client}</div>
+          <ul className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-12 md:gap-y-4 text-[15px] font-sans font-normal text-foreground/85 list-none p-0 m-0">
+            <li className="text-foreground">{project.client}</li>
             {project.industry && (
-              <div className="text-foreground">{project.industry}</div>
+              <li className="text-foreground">{project.industry}</li>
             )}
-            <div className="text-foreground">{project.role}</div>
-            <div className="text-foreground">{project.timeline}</div>
-            <div className="text-foreground">{project.tags.join(" · ")}</div>
+            <li className="text-foreground">{project.role}</li>
+            <li className="text-foreground">{project.timeline}</li>
+            <li className="text-foreground">{project.tags.join(" · ")}</li>
             {project.liveUrl && (
-              <div>
+              <li>
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-foreground hover:opacity-85 transition-opacity inline-flex items-center gap-1 font-semibold group/link"
+                  aria-label={`Visit live website for ${project.brand} (opens in a new tab)`}
                 >
                   <span>Visit live website</span>
-                  <span className="inline-block transform transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5">↗</span>
+                  <span aria-hidden="true" className="inline-block transform transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5">↗</span>
                 </a>
-              </div>
+              </li>
             )}
-          </div>
+          </ul>
 
           {/* Dynamic disclaimers for concept exploration projects */}
           {project.slug === "solaris" && (
