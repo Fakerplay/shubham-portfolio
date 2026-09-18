@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import StructuredData from '@/components/StructuredData'
 import { DETAILED_PROJECTS } from '@/data/projects'
 import {
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: WorkLayoutProps): Promise<Met
   const url = absoluteUrl(`/work/${project.slug}`);
 
   return {
-    title: pageTitle,
+    title: { absolute: pageTitle },
     description,
     alternates: { canonical: url },
     openGraph: {
@@ -59,7 +60,7 @@ export default async function WorkDetailLayout({ children, params }: WorkLayoutP
   const { slug } = await params;
   const project = DETAILED_PROJECTS[slug];
 
-  if (!project) return children;
+  if (!project) notFound();
 
   const url = absoluteUrl(`/work/${project.slug}`);
   

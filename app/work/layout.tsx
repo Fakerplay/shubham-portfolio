@@ -6,7 +6,7 @@ import {
 } from '@/lib/site'
 
 const description =
-  'Selected brand identity, web, motion, and creative direction work by Shubham Shinde, a Pune-based multidisciplinary designer with 7+ years of experience.'
+  'Brand identity, website and motion design case studies by Shubham Shinde, a Bengaluru-based design lead with 6+ years of experience. Client work and concepts.'
 
 export const metadata: Metadata = {
   title: {

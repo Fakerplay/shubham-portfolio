@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { EASE_OUT } from "@/lib/motion";
+import { SITE_LOCATION } from "@/lib/site";
 
 interface Weather {
   temp: number;
@@ -10,7 +11,7 @@ interface Weather {
   emoji: string;
 }
 
-const WEATHER_CACHE_KEY = "portfolio-pune-weather";
+const WEATHER_CACHE_KEY = "portfolio-bengaluru-weather";
 const WEATHER_CACHE_TTL = 15 * 60 * 1000;
 
 export default function LocalTime() {
@@ -58,7 +59,7 @@ export default function LocalTime() {
         sessionStorage.removeItem(WEATHER_CACHE_KEY);
       }
 
-      fetch("https://api.open-meteo.com/v1/forecast?latitude=18.5204&longitude=73.8567&current_weather=true", {
+      fetch("https://api.open-meteo.com/v1/forecast?latitude=12.9716&longitude=77.5946&current_weather=true", {
         signal: controller.signal,
       })
         .then((res) => {
@@ -119,7 +120,7 @@ export default function LocalTime() {
       onFocus={() => setIsHovered(true)}
       onBlur={() => setIsHovered(false)}
       tabIndex={0}
-      aria-label={`Local time in Pune: ${time}. Focus to load current weather.`}
+      aria-label={`Local time in ${SITE_LOCATION}: ${time}. Focus to load current weather.`}
     >
       <span className="font-mono text-foreground opacity-60 font-medium hover:opacity-100 transition-opacity duration-300 block tabular-nums">
         {time}
@@ -139,7 +140,7 @@ export default function LocalTime() {
             }}
           >
             <div className="flex flex-col gap-1 text-left">
-              <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">pune, india</span>
+              <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">{SITE_LOCATION}</span>
               <div className="flex items-center gap-1.5 mt-1">
                 <span className="text-xl font-bold font-mono tracking-tight text-white tabular-nums">{weather.temp}°C</span>
                 <span className="text-lg">{weather.emoji}</span>

@@ -10,10 +10,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { EASE_OUT, EASE_IN_OUT } from '@/lib/motion'
 import LazyVideo from '@/components/LazyVideo'
+import { SITE_LOCATION } from '@/lib/site'
 
 const ServicesShowcase = dynamic(() => import('@/components/services/ServicesShowcase'), { ssr: false })
 
-const getPuneHour = () => {
+const getLocalHour = () => {
   try {
     const formatter = new Intl.DateTimeFormat("en-US", {
       timeZone: "Asia/Kolkata",
@@ -28,7 +29,7 @@ const getPuneHour = () => {
 
 const getResolvedTheme = (theme: string) => {
   if (theme !== "auto") return theme;
-  const hour = getPuneHour();
+  const hour = getLocalHour();
   if (hour >= 5 && hour < 12) return "morning";
   if (hour >= 12 && hour < 17) return "day";
   if (hour >= 17 && hour < 22) return "evening";
@@ -743,6 +744,12 @@ export default function Home() {
               <div className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-foreground/50 leading-relaxed">
                 B2B SaaS &middot; Financial Services &middot; Media &amp; Entertainment
               </div>
+              <p className="font-sans text-sm text-foreground/70 leading-relaxed">
+                Based in {SITE_LOCATION}. Working with founders, marketing teams and hiring teams worldwide.
+              </p>
+              <Link href="/services/brand-web-design" className="font-sans text-sm font-medium underline underline-offset-4 hover:text-foreground/70">
+                Brand identity &amp; website design services →
+              </Link>
             </div>
 
             {/* Right Column: List of 7 Capabilities in visual language of experience grid */}
