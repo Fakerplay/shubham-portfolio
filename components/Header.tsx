@@ -131,6 +131,7 @@ export default function Header() {
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
     playClickSound(0.12);
     if (href === "/work" || href.startsWith("/work")) {
@@ -221,7 +222,7 @@ export default function Header() {
               {navItems.map((item, idx) => (
                 <Link 
                   key={idx}
-                  href={item.href} 
+                  href={item.href.startsWith("#") && pathname !== "/" ? `/${item.href}` : item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative py-2.5 px-4 rounded-lg flex items-center gap-2 active:scale-[0.96] transition-[color,transform] duration-300 font-sans text-[13px] md:text-[14px] font-medium tracking-normal select-none ${
                     item.active 
@@ -331,7 +332,7 @@ export default function Header() {
           {navItems.map((item, idx) => (
             <Link 
               key={idx}
-              href={item.href} 
+              href={item.href.startsWith("#") && pathname !== "/" ? `/${item.href}` : item.href}
               onClick={(e) => handleNavClick(e, item.href)}
               className={`relative py-2 px-3 rounded-lg flex items-center gap-1.5 active:scale-[0.96] transition-[color,transform] duration-300 font-sans text-[11px] font-medium tracking-normal select-none after:absolute after:-inset-y-2.5 after:inset-x-0 ${
                 item.active 
@@ -376,7 +377,7 @@ export default function Header() {
         {navItems.map((item, idx) => (
           <Link
             key={idx}
-            href={item.href}
+            href={item.href.startsWith("#") && pathname !== "/" ? `/${item.href}` : item.href}
             onClick={(e) => handleNavClick(e, item.href)}
             className="group relative flex items-center justify-center w-11 h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 rounded-full"
             title={`Scroll to ${item.label}`}

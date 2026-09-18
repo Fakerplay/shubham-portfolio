@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import LightLeakBackground from "@/components/LightLeakBackground";
 import { EASE_OUT } from "@/lib/motion";
+import { SITE_LOCATION, SOCIAL_LINKS } from "@/lib/site";
 
 interface StudioCard {
   id: string;
@@ -704,7 +705,7 @@ export default function Footer() {
             {/* Left: Social Navigation Pills */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
               <a
-                href="https://www.linkedin.com/in/shubham-shinde-design/"
+                href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium cursor-pointer"
@@ -712,18 +713,18 @@ export default function Footer() {
                 LinkedIn
               </a>
               <a
-                href="https://behance.net/shubhamshinde"
+                href={SOCIAL_LINKS.behance}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-full border border-white/15 hover:border-white/60 hover:bg-white/[0.04] transition-[color,background-color,border-color] duration-300 text-white/80 hover:text-white font-medium cursor-pointer"
               >
-                Behance
+                More projects on Behance
               </a>
             </div>
 
             {/* Center: Location & Email */}
             <div className="text-center font-normal text-white/75 flex flex-wrap items-center justify-center gap-2">
-              <span>Based in Bengaluru, India &bull; Working worldwide &bull;</span>
+              <span>Based in {SITE_LOCATION} &bull; Working worldwide &bull;</span>
               <a
                 href={`mailto:${email}`}
                 className="text-white hover:underline font-semibold transition-colors"

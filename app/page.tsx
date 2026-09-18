@@ -10,10 +10,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { EASE_OUT, EASE_IN_OUT } from '@/lib/motion'
 import LazyVideo from '@/components/LazyVideo'
+import { SITE_LOCATION } from '@/lib/site'
 
 const ServicesShowcase = dynamic(() => import('@/components/services/ServicesShowcase'), { ssr: false })
 
-const getPuneHour = () => {
+const getLocalHour = () => {
   try {
     const formatter = new Intl.DateTimeFormat("en-US", {
       timeZone: "Asia/Kolkata",
@@ -28,7 +29,7 @@ const getPuneHour = () => {
 
 const getResolvedTheme = (theme: string) => {
   if (theme !== "auto") return theme;
-  const hour = getPuneHour();
+  const hour = getLocalHour();
   if (hour >= 5 && hour < 12) return "morning";
   if (hour >= 12 && hour < 17) return "day";
   if (hour >= 17 && hour < 22) return "evening";
@@ -180,13 +181,16 @@ const SplitFlapWord = ({ reduceMotion = false }: { reduceMotion?: boolean }) => 
   }, [triggerEffect]);
 
   return (
-    <span
-      ref={containerRef}
-      data-final={targetText}
-      onMouseEnter={triggerEffect}
-      className="inline-flex gap-[1.5px] mx-1 align-baseline leading-none select-none cursor-pointer filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.35)] transition-[filter] duration-300 relative -top-[0.06em]"
-      title="Hover to flip"
-    />
+    <span role="img" aria-label="momentum">
+      <span
+        ref={containerRef}
+        aria-hidden="true"
+        data-final={targetText}
+        onMouseEnter={triggerEffect}
+        className="inline-flex gap-[1.5px] mx-1 align-baseline leading-none select-none cursor-pointer filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.35)] transition-[filter] duration-300 relative -top-[0.06em]"
+        title="Hover to flip"
+      >{targetText}</span>
+    </span>
   );
 };
 
@@ -670,7 +674,7 @@ export default function Home() {
         {/* SECTION 1: ABOUT (Intro Text Section) */}
         <section id="about" className="scroll-mt-24 flex flex-col">
           {/* Hello Greeting (serif header matching the reference photo) */}
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-12 text-foreground font-light select-none">
+          <p className="font-serif text-4xl md:text-5xl lg:text-6xl mb-8 text-foreground font-light select-none">
             <motion.span
               variants={helloVariants}
               initial="hidden"
@@ -679,6 +683,9 @@ export default function Home() {
             >
               Hello.
             </motion.span>
+          </p>
+          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-10 text-foreground font-light leading-tight text-balance max-w-3xl">
+            Brand &amp; web designer in Bengaluru.
           </h1>
 
           {/* Editorial Bio Content styled exactly like reference Emily Campbell layout */}
@@ -687,7 +694,7 @@ export default function Home() {
             {/* Paragraph 1 */}
             <div className="flex flex-col gap-1">
               <LineReveal delay={0.3} reduceMotion={reduceMotion}>
-                I’m <span className="font-semibold text-foreground">Shubham Shinde</span>, a <KeywordPill text="visual storyteller" delay={0.3} reduceMotion={reduceMotion} />
+                I’m <span className="font-semibold text-foreground">Shubham Shinde</span>, a <KeywordPill text="design lead" delay={0.3} reduceMotion={reduceMotion} />
               </LineReveal>
               <LineReveal delay={0.45} reduceMotion={reduceMotion}>
                 building <KeywordPill text="brand systems" delay={0.4} reduceMotion={reduceMotion} />,{" "}
@@ -699,10 +706,10 @@ export default function Home() {
             {/* Paragraph 2 */}
             <div className="flex flex-col gap-1">
               <LineReveal delay={0.7} reduceMotion={reduceMotion}>
-                I help startups and growing brands
+                I help startups and growing brands build
               </LineReveal>
               <LineReveal delay={0.85} reduceMotion={reduceMotion}>
-                in <SplitFlapWord reduceMotion={reduceMotion} /> shape identities, websites, and visuals people remember.
+                <SplitFlapWord reduceMotion={reduceMotion} /> through identities, websites, and visuals people remember.
               </LineReveal>
             </div>
 
@@ -743,6 +750,12 @@ export default function Home() {
               <div className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-foreground/50 leading-relaxed">
                 B2B SaaS &middot; Financial Services &middot; Media &amp; Entertainment
               </div>
+              <p className="font-sans text-sm text-foreground/70 leading-relaxed">
+                Based in {SITE_LOCATION}. Working with founders, marketing teams and hiring teams worldwide.
+              </p>
+              <Link href="/services/brand-web-design" className="font-sans text-sm font-medium underline underline-offset-4 hover:text-foreground/70">
+                Brand identity &amp; website design services →
+              </Link>
             </div>
 
             {/* Right Column: List of 7 Capabilities in visual language of experience grid */}

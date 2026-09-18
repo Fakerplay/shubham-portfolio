@@ -23,6 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
       images: Object.values(DETAILED_PROJECTS).map((project) => absoluteUrl(project.image)),
     },
+    {
+      url: absoluteUrl('/services/brand-web-design'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     ...projectRoutes,
   ]
 }

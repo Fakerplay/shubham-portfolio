@@ -12,6 +12,7 @@ import {
   DEFAULT_SHARE_IMAGE,
   SITE_DESCRIPTION,
   SITE_NAME,
+  SITE_LOCATION,
   SITE_TITLE,
   SITE_URL,
   SOCIAL_LINKS,
@@ -72,6 +73,9 @@ export const metadata: Metadata = {
   creator: SITE_NAME,
   publisher: SITE_NAME,
   category: 'design',
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+  },
   referrer: 'origin-when-cross-origin',
   alternates: {
     canonical: '/',
@@ -156,10 +160,10 @@ const profileJsonLd = {
       url: SITE_URL,
       image: absoluteUrl('/images/avatar.jpg'),
       description: SITE_DESCRIPTION,
-      jobTitle: 'Brand, Web & Motion Designer',
+      jobTitle: 'Design Lead — Brand, Web & Creative Direction',
       homeLocation: {
         '@type': 'Place',
-        name: 'Pune, India',
+        name: SITE_LOCATION,
       },
       knowsAbout: [
         'Brand identity',
