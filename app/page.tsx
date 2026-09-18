@@ -181,16 +181,13 @@ const SplitFlapWord = ({ reduceMotion = false }: { reduceMotion?: boolean }) => 
   }, [triggerEffect]);
 
   return (
-    <span role="img" aria-label="momentum">
-      <span
-        ref={containerRef}
-        aria-hidden="true"
-        data-final={targetText}
-        onMouseEnter={triggerEffect}
-        className="inline-flex gap-[1.5px] mx-1 align-baseline leading-none select-none cursor-pointer filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.35)] transition-[filter] duration-300 relative -top-[0.06em]"
-        title="Hover to flip"
-      >{targetText}</span>
-    </span>
+    <span
+      ref={containerRef}
+      data-final={targetText}
+      onMouseEnter={triggerEffect}
+      className="inline-flex gap-[1.5px] mx-1 align-baseline leading-none select-none cursor-pointer filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.35)] transition-[filter] duration-300 relative -top-[0.06em]"
+      title="Hover to flip"
+    />
   );
 };
 
@@ -674,7 +671,7 @@ export default function Home() {
         {/* SECTION 1: ABOUT (Intro Text Section) */}
         <section id="about" className="scroll-mt-24 flex flex-col">
           {/* Hello Greeting (serif header matching the reference photo) */}
-          <p className="font-serif text-4xl md:text-5xl lg:text-6xl mb-8 text-foreground font-light select-none">
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-12 text-foreground font-light select-none">
             <motion.span
               variants={helloVariants}
               initial="hidden"
@@ -683,9 +680,6 @@ export default function Home() {
             >
               Hello.
             </motion.span>
-          </p>
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-10 text-foreground font-light leading-tight text-balance max-w-3xl">
-            Brand &amp; web designer in Bengaluru.
           </h1>
 
           {/* Editorial Bio Content styled exactly like reference Emily Campbell layout */}
@@ -694,7 +688,7 @@ export default function Home() {
             {/* Paragraph 1 */}
             <div className="flex flex-col gap-1">
               <LineReveal delay={0.3} reduceMotion={reduceMotion}>
-                I’m <span className="font-semibold text-foreground">Shubham Shinde</span>, a <KeywordPill text="design lead" delay={0.3} reduceMotion={reduceMotion} />
+                I’m <span className="font-semibold text-foreground">Shubham Shinde</span>, a <KeywordPill text="visual storyteller" delay={0.3} reduceMotion={reduceMotion} />
               </LineReveal>
               <LineReveal delay={0.45} reduceMotion={reduceMotion}>
                 building <KeywordPill text="brand systems" delay={0.4} reduceMotion={reduceMotion} />,{" "}
@@ -706,10 +700,10 @@ export default function Home() {
             {/* Paragraph 2 */}
             <div className="flex flex-col gap-1">
               <LineReveal delay={0.7} reduceMotion={reduceMotion}>
-                I help startups and growing brands build
+                I help startups and growing brands
               </LineReveal>
               <LineReveal delay={0.85} reduceMotion={reduceMotion}>
-                <SplitFlapWord reduceMotion={reduceMotion} /> through identities, websites, and visuals people remember.
+                in <SplitFlapWord reduceMotion={reduceMotion} /> shape identities, websites, and visuals people remember.
               </LineReveal>
             </div>
 
