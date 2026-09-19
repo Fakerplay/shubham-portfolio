@@ -51,15 +51,15 @@ export default function BrandWebDesignPage() {
         <span aria-hidden="true"> / </span>
         <span>Brand &amp; web design</span>
       </nav>
-      <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light leading-[1.1] tracking-tight max-w-4xl text-balance">
+      <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light leading-[1.1] tracking-tight text-balance">
         Brand identity &amp; website design in Bengaluru.
       </h1>
-      <p className="mt-8 max-w-3xl font-serif text-xl md:text-2xl leading-relaxed">
+      <p className="mt-8 font-serif text-xl md:text-2xl leading-relaxed">
         I’m Shubham Shinde, a design lead based in {SITE_LOCATION}, working worldwide.
         I help startups and growing businesses turn their positioning into identities,
         websites and launch materials that work together.
       </p>
-      <p className="mt-5 max-w-3xl font-sans text-base leading-relaxed text-foreground/75">
+      <p className="mt-5 font-sans text-base leading-relaxed text-foreground/75">
         My experience spans B2B SaaS, financial services and media—from product-marketing
         campaigns and landing pages to brand systems and creative direction. I work with
         founders and marketing teams who need a clear visual direction and the practical
@@ -89,7 +89,7 @@ export default function BrandWebDesignPage() {
         <h2 className="font-serif text-3xl md:text-4xl font-light">See the work behind the services.</h2>
         <div className="mt-8 divide-y divide-foreground/15">
           {work.map((project) => (
-            <div key={project.slug} className="py-6 max-w-3xl">
+            <div key={project.slug} className="py-6">
               <h3 className="font-serif text-2xl">
                 <Link href={`/work/${project.slug}`} className="underline underline-offset-4 hover:text-foreground/70">{project.name} →</Link>
               </h3>
@@ -102,7 +102,7 @@ export default function BrandWebDesignPage() {
         </a>
       </section>
 
-      <section className="mt-16 border-t border-foreground/15 pt-10 max-w-3xl">
+      <section className="mt-16 border-t border-foreground/15 pt-10">
         <h2 className="font-serif text-3xl md:text-4xl font-light">What are you building?</h2>
         <p className="mt-6 font-sans leading-relaxed text-foreground/75">
           Share what your business does, who you need to reach, and whether you need an
