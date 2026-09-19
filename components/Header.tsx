@@ -203,7 +203,7 @@ export default function Header() {
         style={{ transform: headerTransform }}
         className="fixed top-0 left-0 right-0 w-full z-50 select-none"
       >
-        <div className="max-w-7xl mx-auto w-full flex justify-between items-center p-6 md:p-12 text-xs md:text-sm font-semibold tracking-tight relative">
+        <div className="max-w-7xl mx-auto w-full flex justify-between items-center px-6 md:px-16 lg:px-24 py-6 md:py-12 text-xs md:text-sm font-semibold tracking-tight relative">
           
           {/* Left Column: Logo & Inline Navigation (Aligned on left, with full skeuomorphic tactility) */}
           <div className="flex-1 flex items-center justify-start gap-8 z-20">

@@ -237,7 +237,7 @@ export default function Footer() {
         <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-emerald-950/20 blur-[180px]" />
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10 flex flex-col gap-16 md:gap-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 relative z-10 flex flex-col gap-16 md:gap-24">
         
         {/* 1. INTERACTIVE FOLDER ENVELOPE / POP-OUT STUDIO NOTES DECK */}
         <div id="notes" className="w-full min-h-[440px] sm:min-h-[500px] flex items-center justify-center pt-10 pb-16">
@@ -399,7 +399,7 @@ export default function Footer() {
         </div>
 
         {/* 2. DYNAMIC PROJECT ENQUIRY FLOW SECTION */}
-        <section id="contact" className="scroll-mt-24 w-full max-w-4xl mx-auto px-6 relative z-10 flex flex-col gap-10">
+        <section id="contact" className="scroll-mt-24 w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 relative z-10 flex flex-col gap-10">
           
           <motion.div
             variants={headlineVariants}
