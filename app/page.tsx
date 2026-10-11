@@ -727,6 +727,28 @@ export default function Home() {
               <ExpandableBio reduceMotion={reduceMotion} />
             </motion.div>
           </div>
+
+          <section aria-labelledby="about-highlights-heading" className="mb-20">
+            <h2 id="about-highlights-heading" className="font-mono text-xs uppercase tracking-widest text-foreground/60 mb-8">
+              Experience in numbers
+            </h2>
+            <dl className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 border-y border-foreground/10 py-8 md:py-10">
+              {[
+                { value: "7", label: "Years of experience" },
+                { value: "50+", label: "Brands worked with" },
+                { value: "100+", label: "Projects executed" },
+              ].map((stat) => (
+                <div key={stat.label} className="flex flex-col gap-3">
+                  <dt className="font-sans text-sm md:text-base text-foreground/70">
+                    {stat.label}
+                  </dt>
+                  <dd className="order-first font-serif font-light text-5xl md:text-6xl leading-none tracking-tight text-foreground tabular-nums">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
         </section>
       </div>
 
@@ -790,7 +812,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto w-full">
             <h2 className="font-serif text-3xl md:text-5xl text-foreground font-normal tracking-tight text-balance">Featured Work</h2>
             <p className="mt-3 font-sans text-sm md:text-base text-foreground/60 tracking-tight text-pretty">
-              6+ years across brand, web &amp; motion <span aria-hidden="true">&middot;</span> 50+ projects delivered
+              7 years across brand, web &amp; motion <span aria-hidden="true">&middot;</span> 50+ brands worked with <span aria-hidden="true">&middot;</span> 100+ projects executed
             </p>
           </div>
         </div>
